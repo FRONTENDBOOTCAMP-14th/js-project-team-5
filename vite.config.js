@@ -7,7 +7,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: path.resolve(__dirname, 'index.html'),
-        ...vitelib.findAllHtmlFiles(path.resolve(__dirname, 'src')),
+        ...findAllHtmlFiles(path.resolve(__dirname, 'src')),
       },
     },
   },
