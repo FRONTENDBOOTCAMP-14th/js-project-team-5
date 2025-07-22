@@ -1,9 +1,9 @@
-/* 본 저작물은 '한국기계연구원'에서 '2022년'작성하여 공공누리 제1유형으로 개방한 '한국기계연구원 서체'를 이용하였으며,
+/* 본 저작물은 '한국기계연구원'에서 '2022년' 작성하여 공공누리 제1유형으로 개방한 '한국기계연구원 서체'를 이용하였으며,
 해당 저작물은 '한국기계연구원, www.kimm.re.kr/webfont'에서 무료로 다운받으실 수 있습니다. */
 
 @font-face {
   font-family: 'KIMM';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2');
+  src: url('/fonts/KIMM_Bold.woff2') format('woff2'), url('/fonts/KIMM_Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: 'KIMM';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Light.woff2');
+  src: url('/fonts/KIMM_Light.woff2') format('woff2'), url('/fonts/KIMM_Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
