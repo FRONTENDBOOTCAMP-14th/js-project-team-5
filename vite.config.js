@@ -1,31 +1,6 @@
 import { defineConfig } from 'vite';
 import path from 'path';
-import fs from 'fs';
-
-// findAllHtmlFiles 함수 정의 추가
-function findAllHtmlFiles(directory) {
-  const htmlFiles = {};
-
-  function scanDirectory(dir) {
-    const files = fs.readdirSync(dir);
-
-    for (const file of files) {
-      const filePath = path.join(dir, file);
-      const stat = fs.statSync(filePath);
-
-      if (stat.isDirectory()) {
-        scanDirectory(filePath);
-      } else if (file.endsWith('.html')) {
-        // 키 이름을 경로에서 추출 (확장자 제외)
-        const key = path.relative(__dirname, filePath).replace('.html', '');
-        htmlFiles[key] = filePath;
-      }
-    }
-  }
-
-  scanDirectory(directory);
-  return htmlFiles;
-}
+import { findAllHtmlFiles } from './src/scripts/customLib.js';
 
 export default defineConfig({
   build: {
