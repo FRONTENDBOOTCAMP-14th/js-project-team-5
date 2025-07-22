@@ -5,13 +5,27 @@
     <link rel="icon" href="/assets/icons/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
-    <title>모달 컴포넌트 페이지</title>
+    <title>모달 컴포넌트</title>
     <link rel="stylesheet" href="/src/styles/common/index.css" />
     <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/components/modal/modal.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-    <h1>모달 컴포넌트 페이지</h1>
     <!-- 컴포넌트 마크업을 작성하세요 -->
+    <h1>모달 컴포넌트</h1>
+    <div class="modal-container">
+      <dialog class="modal" open>
+        <div class="modal-inner">
+          <h2 class="modal-title">모달 제목</h2>
+          <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+          <div class="modal-content">
+            <div class="modal-content-inner">
+              <!-- 모달 컨텐츠 삽입 -->
+            </div>
+          </div>
+        </div>
+      </dialog>
+    </div>
   </body>
 </html>
