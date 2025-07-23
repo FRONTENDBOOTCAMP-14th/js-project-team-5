@@ -56,8 +56,9 @@
           <div class="modal-content">
             <!-- 모달 콘텐츠 삽입 -->
             <form id="nickname-register-form">
+              <label for="nickname-input" class="sr-only">닉네임</label>
               <!-- 닉네임 입력 필드 -->
-              <input type="text" name="nickname" maxlength="10" placeholder="최대 10자" required autocomplete="off" />
+              <input type="text" id="nickname-input" name="nickname" maxlength="10" placeholder="최대 10자" required autocomplete="off" />
               <!-- 닉네임 중복 여부 확인 메시지 -->
               <p class="nickname-check-message">이미 사용 중인 닉네임입니다.</p>
               <div class="modal-button-container">

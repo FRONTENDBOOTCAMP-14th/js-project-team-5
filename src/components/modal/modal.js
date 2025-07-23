@@ -26,7 +26,7 @@
       form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const input = form.querySelector('input[name="nickname"]');
+        const input = form.querySelector('#nickname-input');
         const nickname = input?.value.trim();
 
         if (nickname) {
