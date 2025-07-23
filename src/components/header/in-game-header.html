@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
+    <title>헤더 컴포넌트</title>
+    <link rel="icon" href="/assets/icons/favicon.ico" />
+    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/src/components/header/in-game-header.css" />
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/components/header/in-game-header.js"></script>
+  </head>
+  <body>
+    <h1>헤더 컴포넌트</h1>
+    <h2>인게임 헤더 컴포넌트</h2>
+
+    <div class="status-bar">
+      <div class="score-info">
+        <span>점수: 0</span>
+        <span>시간: 60초</span>
+      </div>
+
+      <div class="icon-group">
+        <button id="soundToggleBtn" class="icon-button" aria-label="사운드 켜기">
+          <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드 아이콘" />
+        </button>
+        <button class="icon-button" aria-label="일시정지">
+          <img src="/assets/icons/pause.svg" alt="일시정지 아이콘" />
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
