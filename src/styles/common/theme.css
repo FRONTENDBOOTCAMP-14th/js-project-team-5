@@ -1,53 +1,53 @@
 :root {
-    /* 🎨 기본 색상 */
-  --primary-blue:         #0F1E69;   /* 딥 네이비 블루 */
-  --primary-indigo:       #434ABD;   /* 인디고 블루 */
-  --primary-cyan:         #459FA2;   /* 청록색 */
-  --primary-black:        #000000;   /* 블랙 */
-  --primary-white:        #FFFFFF;   /* 화이트 */
+  /* :art: 기본 색상 */
+  --primary-blue: #09165a; /* 딥 네이비 블루 */
+  --primary-indigo: #434abd; /* 인디고 블루 */
+  --primary-cyan: #459fa2; /* 청록색 */
+  --primary-black: #000000; /* 블랙 */
+  --primary-white: #ffffff; /* 화이트 */
 
-  /* 🔹 블루 / 청록 계열 */
-  --blue-100:             #DBE0FF;   /* 연한 하늘색 */
-  --blue-200:             #B196FC;   /* 라벤더 */
-  --blue-300:             #6EEDFC;   /* 밝은 청록 */
-  --blue-400:             #ABF6FD;   /* 아주 밝은 민트 */
-  --blue-500:             #6881F8;   /* 선명한 블루퍼플 */
-  --blue-900:             #001C2F;   /* 다크 네이비 */
+  /* :small_blue_diamond: 블루 / 청록 계열 */
+  --blue-100: #dbe0ff; /* 연한 하늘색 */
+  --blue-200: #b196fc; /* 라벤더 */
+  --blue-300: #6eedfc; /* 밝은 청록 */
+  --blue-400: #abf6fd; /* 아주 밝은 민트 */
+  --blue-500: #6881f8; /* 선명한 블루퍼플 */
+  --blue-900: #001c2f; /* 다크 네이비 */
 
-  /* 🔸 레드 / 핑크 계열 */
-  --red-100:              #FFDBDC;   /* 연한 코랄 핑크 */
-  --red-200:              #FBB6B5;   /* 살구빛 핑크 */
-  --red-300:              #E8DCDE;   /* 회핑크 */
-  --red-400:              #D13032;   /* 강렬한 레드 */
-  --pink-500:             #FF38AF;   /* 마젠타 핑크 */
+  /* :small_orange_diamond: 레드 / 핑크 계열 */
+  --red-100: #ffdbdc; /* 연한 코랄 핑크 */
+  --red-200: #fbb6b5; /* 살구빛 핑크 */
+  --red-300: #e8dcde; /* 회핑크 */
+  --red-400: #d13032; /* 강렬한 레드 */
+  --pink-500: #ff38af; /* 마젠타 핑크 */
 
-  /* ⚪ 그레이 계열 */
-  --gray-100:             #E3E1E1;   /* 아주 밝은 회색 */
-  --gray-200:             #DFDFDF;   /* 라이트 그레이 */
-  --gray-300:             #C4C7C3;   /* 회청빛 회색 */
-  --gray-400:             #777777;   /* 중간 회색 */
-  --gray-500:             #21393A;   /* 딥 블루그레이 */
-  --gray-600:             #2A2125;   /* 거의 블랙에 가까운 퍼플그레이 */
+  /* :white_circle: 그레이 계열 */
+  --gray-100: #e3e1e1; /* 아주 밝은 회색 */
+  --gray-200: #dfdfdf; /* 라이트 그레이 */
+  --gray-300: #c4c7c3; /* 회청빛 회색 */
+  --gray-400: #777777; /* 중간 회색 */
+  --gray-500: #21393a; /* 딥 블루그레이 */
+  --gray-600: #2a2125; /* 거의 블랙에 가까운 퍼플그레이 */
 
-    /* 🎯 아이콘 관련 */
-  --icon-size: 55px;            /* 아이콘 크기 */
-  --icon-font-size: 24px;       /* 아이콘 내부 폰트 크기 */
+  /* :dart: 아이콘 관련 */
+  --icon-size: 3.4375rem; /* 아이콘 크기 */ /*55px*/
+  --icon-font-size: 1.5rem; /* 아이콘 내부 폰트 크기 */ /*24px*/
 
-  /* 📏 라인/테두리 두께 */
-  --line-weight: 6px;           /* 테두리, 구분선 굵기 */
+  /* :straight_ruler: 라인/테두리 두께 */
+  --line-weight: 0.375rem; /* 테두리, 구분선 굵기 */ /*6px*/
 
-  /* 🖥 패널 및 제목 텍스트 */
-  --panel-font-size: 48.5px;    /* UI 패널 큰 텍스트 */
-  --title-font-size: 48px;      /* 제목 텍스트 */
-  
-    /* 🖥 텍스트 크기 */
-  --text-70: 70px;
-  --text-62: 62px;
-  --text-50: 50px;
-  --text-48: 48px;
-  --text-40: 40px;
-  --text-32: 32px;
-  --text-24: 24px;
-  --text-23: 23px;
-  --text-16: 16px;
+  /* :desktop: 패널 및 제목 텍스트 */
+  --panel-font-size: 3.0313rem; /* UI 패널 큰 텍스트 */ /*48.5008px*/
+  --title-font-size: 3rem; /* 제목 텍스트 */ /*48px*/
+
+  /* :desktop: 텍스트 크기 */
+  --text-70: 4.375rem; /*70px*/
+  --text-62: 3.875rem; /*62px*/
+  --text-50: 3.125rem; /*50px*/
+  --text-48: 3rem; /*48px*/
+  --text-40: 2.5rem; /*40px*/
+  --text-32: 2rem; /*32px*/
+  --text-24: 1.5rem; /*24px*/
+  --text-23: 1.4375rem; /*23px*/
+  --text-16: 1rem; /*16px*/
 }
