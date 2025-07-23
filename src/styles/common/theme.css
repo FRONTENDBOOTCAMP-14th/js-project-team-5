@@ -30,24 +30,24 @@
   --gray-600: #2a2125; /* 거의 블랙에 가까운 퍼플그레이 */
 
   /* 🎯 아이콘 관련 */
-  --icon-size: 55px; /* 아이콘 크기 */
-  --icon-font-size: 24px; /* 아이콘 내부 폰트 크기 */
+  --icon-size: 3.4375rem; /* 아이콘 크기 */ /*55px*/
+  --icon-font-size: 1.5rem; /* 아이콘 내부 폰트 크기 */ /*24px*/
 
   /* 📏 라인/테두리 두께 */
-  --line-weight: 6px; /* 테두리, 구분선 굵기 */
+  --line-weight: 0.375rem; /* 테두리, 구분선 굵기 */ /*6px*/
 
   /* 🖥 패널 및 제목 텍스트 */
-  --panel-font-size: 48.5px; /* UI 패널 큰 텍스트 */
-  --title-font-size: 48px; /* 제목 텍스트 */
+  --panel-font-size: 3.0313rem; /* UI 패널 큰 텍스트 */ /*48.5008px*/
+  --title-font-size: 3rem; /* 제목 텍스트 */ /*48px*/
 
   /* 🖥 텍스트 크기 */
-  --text-70: 70px;
-  --text-62: 62px;
-  --text-50: 50px;
-  --text-48: 48px;
-  --text-40: 40px;
-  --text-32: 32px;
-  --text-24: 24px;
-  --text-23: 23px;
-  --text-16: 16px;
+  --text-70: 4.375rem; /*70px*/
+  --text-62: 3.875rem; /*62px*/
+  --text-50: 3.125rem; /*50px*/
+  --text-48: 3rem; /*48px*/
+  --text-40: 2.5rem; /*40px*/
+  --text-32: 2rem; /*32px*/
+  --text-24: 1.5rem; /*24px*/
+  --text-23: 1.4375rem; /*23px*/
+  --text-16: 1rem; /*16px*/
 }
