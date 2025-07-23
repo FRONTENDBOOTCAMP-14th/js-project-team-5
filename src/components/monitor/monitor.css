@@ -1,0 +1,21 @@
+body,
+html {
+  height: 100%;
+}
+.main-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-indigo);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.monitor-frame {
+  width: 100rem;
+  height: 50rem;
+  border: 1.875rem solid var(--gray-600);
+  border-radius: 1.25rem;
+  box-sizing: content-box;
+}
