@@ -21,7 +21,7 @@
     });
 
     // 닉네임 입력 폼 처리 (존재하는 경우만)
-    const form = dialog.querySelector('form');
+    const form = dialog.querySelector('#nickname-register-form');
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
