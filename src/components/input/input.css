@@ -1,0 +1,20 @@
+.game-body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* 하단 정렬 */
+  inline-size: 100%;
+  padding-top: 4rem; /* 상단 여백 */
+  padding-block-end: 2.5rem;
+  box-sizing: border-box;
+}
+
+.typing-input {
+  inline-size: 21.25rem;       
+  block-size: 3.25rem;        
+  text-align: center;
+  border: 0.125rem solid #333; 
+  border-radius: 0.5rem;     
+  outline: none;
+  background-color: white;
+}
