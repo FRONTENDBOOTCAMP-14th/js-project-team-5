@@ -34,7 +34,6 @@
   position: relative;
 }
 
-/* 공통 콘텐츠 영역 */
 .modal-title {
   font-size: var(--text-48);
   color: var(--primary-black);
@@ -52,7 +51,10 @@
   text-align: center;
 }
 
-.modal[data-type='common'] .modal-inner {
+/* 🔷 설명, 점수판, 설명 모달 */
+.modal[data-type='description'] .modal-inner,
+.modal[data-type='scoreboard'] .modal-inner,
+.modal[data-type='settings'] .modal-inner {
   --modal-width: 65rem;
   --modal-height: 41.5625rem;
   --modal-spacing: 4.6875rem;
@@ -62,14 +64,17 @@
   padding: var(--modal-spacing);
 
   border: 6px solid var(--primary-black);
-
-  .modal-close-button {
-    position: absolute;
-    top: var(--modal-spacing, 60px);
-    right: var(--modal-spacing, 60px);
-  }
 }
 
+.modal[data-type='description'] .modal-close-button,
+.modal[data-type='scoreboard'] .modal-close-button,
+.modal[data-type='settings'] .modal-close-button {
+  position: absolute;
+  top: var(--modal-spacing);
+  right: var(--modal-spacing);
+}
+
+/* 🔷 일시정지 모달 */
 .modal[data-type='pause'] .modal-inner {
   --modal-width: 47.1875rem;
   --modal-height: 35.9375rem;
@@ -80,12 +85,13 @@
   padding: var(--modal-spacing);
 
   border: 6px solid var(--blue-200);
-
-  .modal-title {
-    font-size: var(--text-32);
-  }
 }
 
+.modal[data-type='pause'] .modal-title {
+  font-size: var(--text-32);
+}
+
+/* 🔷 닉네임 등록 모달 */
 .modal[data-type='register'] .modal-inner {
   --modal-width: 56.25rem;
   --modal-height: 37.5rem;
@@ -96,60 +102,59 @@
   padding: var(--modal-spacing);
 
   border: none;
+}
 
-  form {
-    width: 100%;
-    height: 100%;
+.modal[data-type='register'] form {
+  width: 100%;
+  height: 100%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
 
-    padding-top: 5.625rem;
-    row-gap: 2.1875rem;
+  padding-top: 5.625rem;
+  row-gap: 2.1875rem;
+}
 
-    input {
-      width: 100%;
-      height: 7.8125rem;
+.modal[data-type='register'] input {
+  width: 100%;
+  height: 7.8125rem;
 
-      text-align: center;
-      font-size: var(--text-32);
-      font-weight: 700;
-      color: var(--primary-black);
+  text-align: center;
+  font-size: var(--text-32);
+  font-weight: 700;
+  color: var(--primary-black);
 
-      border: 2px solid var(--primary-black);
-      border-radius: 1rem;
-    }
+  border: 2px solid var(--primary-black);
+  border-radius: 1rem;
+}
 
-    .nickname-check-message {
-      font-size: var(--text-24);
-    }
+.modal[data-type='register'] .nickname-check-message {
+  font-size: var(--text-24);
+}
 
-    .modal-button-container {
-      width: 100%;
-      display: flex;
-      flex-direction: row-reverse; /* ← DOM 순서는 유지하고 시각 순서만 반전 */
-      justify-content: space-between;
-      /* gap: 1rem; */
-    }
+.modal[data-type='register'] .modal-button-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
 
-    .register-submit-button,
-    .modal-close-button {
-      width: 20.3125rem;
-      height: 4.0625rem;
-      border-radius: 1rem;
-      font-size: var(--text-23);
-      font-weight: 700;
-      color: var(--primary-black);
-    }
+.modal[data-type='register'] .register-submit-button,
+.modal[data-type='register'] .modal-close-button {
+  width: 20.3125rem;
+  height: 4.0625rem;
+  border-radius: 1rem;
+  font-size: var(--text-23);
+  font-weight: 700;
+  color: var(--primary-black);
+}
 
-    .register-submit-button {
-      background-color: var(--blue-100);
-    }
+.modal[data-type='register'] .register-submit-button {
+  background-color: var(--blue-100);
+}
 
-    .modal-close-button {
-      background-color: var(--gray-200);
-    }
-  }
+.modal[data-type='register'] .modal-close-button {
+  background-color: var(--gray-200);
 }

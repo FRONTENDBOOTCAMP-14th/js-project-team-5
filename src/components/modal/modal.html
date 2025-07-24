@@ -14,18 +14,41 @@
   </head>
   <body data-game="quiz">
     <h1>모달 컴포넌트</h1>
-    <!-- 게임 설명, 점수판, 설정에 쓰이는 모달 -->
+    <!-- 게임 설명에 쓰이는 모달 -->
     <div class="modal-container">
-      <button class="modal-open" data-type="common" data-subtype="description">공통 모달 열기(게임 설명)</button>
-      <button class="modal-open" data-type="common" data-subtype="scoreboard">공통 모달 열기(점수판)</button>
-      <button class="modal-open" data-type="common" data-subtype="settings">공통 모달 열기(설정)</button>
-      <dialog class="modal" data-type="common">
+      <button class="modal-open" data-type="description">게임 설명 모달 열기(테스트용)</button>
+      <dialog class="modal" data-type="description">
         <div class="modal-inner">
-          <h2 class="modal-title">모달 제목</h2>
+          <h2 class="modal-title">게임 설명</h2>
           <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
           <div class="modal-content">
             <!-- 모달 콘텐츠 삽입 -->
-            <!-- 게임 설명 or 점수판 or 설정 콘텐츠 js로 처리-->
+          </div>
+        </div>
+      </dialog>
+    </div>
+    <!-- 점수판에 쓰이는 모달 -->
+    <div class="modal-container">
+      <button class="modal-open" data-type="scoreboard">점수판 모달 열기(테스트용)</button>
+      <dialog class="modal" data-type="scoreboard">
+        <div class="modal-inner">
+          <h2 class="modal-title">점수판</h2>
+          <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+          <div class="modal-content">
+            <!-- 모달 콘텐츠 삽입 -->
+          </div>
+        </div>
+      </dialog>
+    </div>
+    <!-- 설정에 쓰이는 모달 -->
+    <div class="modal-container">
+      <button class="modal-open" data-type="settings">설정 모달 열기 (테스트용)</button>
+      <dialog class="modal" data-type="settings">
+        <div class="modal-inner">
+          <h2 class="modal-title">설정</h2>
+          <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+          <div class="modal-content">
+            <!-- 모달 콘텐츠 삽입 -->
           </div>
         </div>
       </dialog>

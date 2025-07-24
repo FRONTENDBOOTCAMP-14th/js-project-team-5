@@ -4,22 +4,17 @@
  * 2) /data/game-info.json에서 설명 문자열 fetch
  * 3) **강조**·줄바꿈을 HTML 요소로 변환해 .modal-content에 삽입
  *
- * @param {HTMLDialogElement} dialog - data‑subtype="description" 모달
+ * @param {HTMLDialogElement} dialog - description 모달
  */
 export function handleDescriptionModal(dialog) {
-  // 1. 모달의 subtype을 확인
-  const subtype = dialog.dataset.subtype;
-
-  if (!subtype || subtype !== 'description') return;
-
-  // 2. 게임 타입 확인 (acidrain, defense, whack, quiz)
+  // 1. 게임 타입 확인 (acidrain, defense, whack, quiz)
   const gameType = document.body.dataset.game;
   if (!gameType) {
     console.warn('게임 타입이 지정되지 않았습니다.');
     return;
   }
 
-  // 3. 설명 텍스트가 담긴 JSON 파일 경로 (정적 파일로 fetch 요청)
+  // 2. 설명 텍스트가 담긴 JSON 파일 경로 (정적 파일로 fetch 요청)
   // game-info.json의 파일 위치가 public/data/game-info.json이기 때문에 정적 파일이라 fetch로 불러옴
   const GAME_INFO_URL = `/data/game-info.json`;
   fetch(GAME_INFO_URL)
@@ -28,27 +23,27 @@ export function handleDescriptionModal(dialog) {
       return response.json();
     })
     .then((gameInfo) => {
-      // 4. 불러온 JSON에서 현재 게임 타입에 해당하는 설명 텍스트 추출
+      // 3. 불러온 JSON에서 현재 게임 타입에 해당하는 설명 텍스트 추출
       const descriptionText = gameInfo[gameType];
       if (!descriptionText) {
         console.warn(`게임 타입 "${gameType}"에 대한 설명이 없습니다.`);
         return;
       }
 
-      // 5. 모달 내부 콘텐츠 삽입 대상 요소 찾기
+      // 4. 모달 내부 콘텐츠 삽입 대상 요소 찾기
       const contentEl = dialog.querySelector('.modal-content');
       if (!contentEl) {
         console.warn('모달 콘텐츠 요소를 찾을 수 없습니다.');
         return;
       }
 
-      // 6. 기존 내용 비우기 (다이얼로그를 열때마다 내용이 쌓이지 않도록)
+      // 5. 기존 내용 비우기 (다이얼로그를 열때마다 내용이 쌓이지 않도록)
       contentEl.replaceChildren();
 
-      // 7. 가져온 게임 설명 텍스트를 \n\n을 기준으로 단락 나누기
+      // 6. 가져온 게임 설명 텍스트를 \n\n을 기준으로 단락 나누기
       const paragraphs = descriptionText.split('\n\n');
 
-      // 8. 각 단락을 <p>로 감싸고, 내부 줄바꿈(\n)은 <br>로 처리
+      // 7. 각 단락을 <p>로 감싸고, 내부 줄바꿈(\n)은 <br>로 처리
       paragraphs.forEach((paragraph, index) => {
         const p = document.createElement('p');
         p.style.fontSize = '1.5rem';
@@ -73,7 +68,7 @@ export function handleDescriptionModal(dialog) {
       });
     })
     .catch((error) => {
-      // 9. fetch 또는 JSON 파싱 중 에러 발생 시 로그 출력
+      // 8. fetch 또는 JSON 파싱 중 에러 발생 시 로그 출력
       console.error('게임 설명 파일을 불러오는 중 오류 발생:', error);
       return;
     });

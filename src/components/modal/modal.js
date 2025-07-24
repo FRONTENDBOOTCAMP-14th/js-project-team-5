@@ -1,4 +1,6 @@
-import { handleCommonModal } from './common-modal.js';
+import { handleDescriptionModal } from './description.js';
+import { handleScoreboardModal } from './scoreboard.js';
+import { handleSettingsModal } from './settings.js';
 import { handlePauseModal } from './pause-modal.js';
 import { handleRegisterModal } from './register-modal.js';
 
@@ -6,9 +8,8 @@ const modalOpenButtons = document.querySelectorAll('.modal-open');
 
 // 모든 모달 열기 버튼 처리
 modalOpenButtons.forEach((button) => {
-  // 우선 data-type이 있는 경우
+  // data-type이 있는 경우
   const type = button.dataset.type;
-  const subtype = button.dataset.subtype;
 
   if (!type) return;
 
@@ -18,17 +19,18 @@ modalOpenButtons.forEach((button) => {
 
   // 열기 이벤트
   button.addEventListener('click', () => {
-    // 공통 모달일 경우 subtype 처리
-    if (type === 'common' && subtype) {
-      dialog.dataset.subtype = subtype;
-    }
-
     dialog.showModal();
 
     // 타입에 따른 JS 분기 처리
     switch (type) {
-      case 'common':
-        handleCommonModal(dialog, subtype);
+      case 'description':
+        handleDescriptionModal(dialog);
+        break;
+      case 'scoreboard':
+        handleScoreboardModal(dialog);
+        break;
+      case 'settings':
+        handleSettingsModal(dialog);
         break;
       case 'pause':
         handlePauseModal(dialog);
