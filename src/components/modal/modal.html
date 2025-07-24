@@ -9,8 +9,13 @@
     <link rel="stylesheet" href="/src/styles/common/index.css" />
     <link rel="stylesheet" href="/fonts/KIMM.css" />
     <link rel="stylesheet" href="/src/components/modal/modal.css" />
+    <link rel="stylesheet" href="/src/components/button/button.css" />
+    <link rel="stylesheet" href="/src/components/slider/slider.css" />
     <script type="module" src="/src/main.js"></script>
     <script type="module" src="/src/components/modal/modal.js"></script>
+    <script type="module" src="/src/components/button/button.js"></script>
+    <script type="module" src="/src/components/slider/slider.js"></script>
+    <script type="module" src="/src/components/slider/slider.css"></script>
   </head>
   <body data-game="quiz">
     <h1>모달 컴포넌트</h1>
@@ -49,6 +54,39 @@
           <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
           <div class="modal-content">
             <!-- 모달 콘텐츠 삽입 -->
+            <div class="wrapper mode">
+              <span class="text">모드 선택</span>
+              <div class="divider"></div>
+              <div class="toggle-radio">
+                <input type="radio" id="normal" name="mode" checked />
+                <label for="normal" class="btn normal">일반 모드</label>
+                <input type="radio" id="dev" name="mode" />
+                <label for="dev" class="btn dev">개발자 모드</label>
+              </div>
+            </div>
+            <div class="wrapper">
+              <span class="text">BGM</span>
+              <div class="divider"></div>
+              <div class="bgm-slider-custom">
+                <div class="progress-bg">
+                  <div class="progress-fill"></div>
+                </div>
+                <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="bgm-range" />
+              </div>
+              <audio hidden id="test-audio" src="/assets/audio/bgm/main-XRayVision-Slynk.mp3" controls></audio>
+            </div>
+            <div class="wrapper">
+              <span class="text">효과음</span>
+              <div class="divider"></div>
+              <div class="bgm-slider-custom">
+                <div class="progress-bg">
+                  <div class="progress-fill"></div>
+                </div>
+                <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="effect-range" />
+              </div>
+              <audio hidden id="effect-audio" src="/assets/audio/bgm/main-XRayVision-Slynk.mp3" controls></audio>
+            </div>
+            <a href="/" class="exit-button">게임 종료</a>
           </div>
         </div>
       </dialog>

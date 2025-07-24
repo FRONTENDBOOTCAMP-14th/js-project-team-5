@@ -74,6 +74,7 @@
   right: var(--modal-spacing);
 }
 
+/* 🔷 점수판 모달 */
 .modal[data-type='scoreboard'] .modal-content {
   justify-content: start;
   margin-top: 6.1875rem;
@@ -109,6 +110,30 @@
   }
   .scoreboard-table tr:last-child td:last-child {
     border-bottom-right-radius: 1rem;
+  }
+}
+
+/* 🔷 설정 모달 */
+.modal[data-type='settings'] .mode {
+  padding-right: 1.8125rem;
+}
+
+.modal[data-type='settings'] .exit-button {
+  width: 9.375rem;
+  height: 3.125rem;
+
+  margin-top: 0.3125rem;
+
+  font-weight: 700;
+  font-size: var(--text-24);
+  color: var(--primary-black);
+  align-content: center;
+
+  /* 임시 호버 스타일 */
+  &:hover {
+    background-color: var(--red-200);
+    border: 0.0625rem solid var(--primary-black);
+    border-radius: 3.125rem;
   }
 }
 
