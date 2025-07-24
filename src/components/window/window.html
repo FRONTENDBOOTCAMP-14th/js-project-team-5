@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>윈도우 XP</title>
+    <script type="module" src="/src/main.js"></script>
+    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/src/components/window/window.css" />
+  </head>
+  <body>
+    <audio id="bg-audio" src="/public/assets/audio/bgm/window-start.mp3" style="display: none"></audio>
+    <div class="window-container">
+      <img class="window-start-image" src="/public/assets/icons/window-start.jpg" alt="" />
+      <div class="window-screen-wrapper">
+        <div class="window-screen-main">
+          <div class="window-icon-item" data-role="new-tab" data-set="https://google.com/"><img class="window-icon-imgage" src="/public/assets/icons/window-icon1.png" alt="" /><span class="window-icon-name">Internet Explorer</span></div>
+          <div class="window-icon-item" data-role="error"><img class="window-icon-imgage" src="/public/assets/icons/window-icon2.png" alt="" /><span class="window-icon-name">내 네트워크 환경</span></div>
+          <div class="window-icon-item" data-role="error"><img class="window-icon-imgage" src="/public/assets/icons/window-icon3.png" alt="" /><span class="window-icon-name">탐색기</span></div>
+          <div class="window-icon-item" data-role="error"><img class="window-icon-imgage" src="/public/assets/icons/window-icon4.png" alt="" /><span class="window-icon-name">내 컴퓨터</span></div>
+          <div class="window-icon-item" data-role="error"><img class="window-icon-imgage" src="/public/assets/icons/window-icon5.png" alt="" /><span class="window-icon-name">내 문서</span></div>
+          <div class="window-icon-item" data-role="new-page"><img class="window-icon-imgage" src="/public/assets/icons/window-icon6.png" alt="" /><span class="window-icon-name">타자의 세계</span></div>
+          <div class="window-icon-item" data-role="new-tab" data-set="https://github.com/FRONTENDBOOTCAMP-14th/js-project-team-5"><img class="window-icon-imgage" src="/public/assets/icons/window-icon7.png" alt="" /><span class="window-icon-name">Github</span></div>
+          <div class="window-icon-item" data-role="new-tab" data-set="https://www.notion.so/5-23273873401a80d4b880cf222f6105ff"><img class="window-icon-imgage" src="/public/assets/icons/window-icon8.png" alt="" /><span class="window-icon-name">노션</span></div>
+          <div class="window-icon-item" data-role="new-tab" data-set=""><img class="window-icon-imgage" src="/public/assets/icons/window-icon9.png" alt="" /><span class="window-icon-name">팀원 소개</span></div>
+          <div class="window-icon-item" data-role="error"><img class="window-icon-imgage" src="/public/assets/icons/window-icon10.png" alt="" /><span class="window-icon-name">휴지통</span></div>
+        </div>
+        <div class="window-under-toolbar">
+          <div class="toolbar-left">
+            <button class="start-button">
+              <span>start</span>
+            </button>
+          </div>
+          <div class="toolbar-right">
+            <img src="/icons/network.png" class="sys-icon" />
+            <img src="/icons/volume.png" class="sys-icon" />
+            <div class="toolbar-time" id="toolbar-time">11:08 AM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/public/scripts/window/controlWindow.js"></script>
+  </body>
+</html>
