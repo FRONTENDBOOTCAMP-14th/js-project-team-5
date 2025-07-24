@@ -18,15 +18,12 @@ export function handleCommonModal(dialogEl, subtype) {
 
   switch (subtype) {
     case 'description':
-      console.log(subtype);
       handleDescriptionModal(dialogEl);
       break;
     case 'scoreboard':
-      console.log(subtype);
       handleScoreboardModal(dialogEl);
       break;
     case 'settings':
-      console.log(subtype);
       handleSettingsModal(dialogEl);
       break;
     default:
