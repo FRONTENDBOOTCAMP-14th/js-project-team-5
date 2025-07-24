@@ -1,39 +1,50 @@
-{
-  const modalContainers = document.querySelectorAll('.modal-container');
+import { handleCommonModal } from './common-modal.js';
+import { handlePauseModal } from './pause-modal.js';
+import { handleRegisterModal } from './register-modal.js';
 
-  modalContainers.forEach((container) => {
-    const openButton = container.querySelector('.modal-open');
-    const dialog = container.querySelector('dialog.modal');
+const modalOpenButtons = document.querySelectorAll('.modal-open');
 
-    if (!openButton || !dialog) return;
+// 모든 모달 열기 버튼 처리
+modalOpenButtons.forEach((button) => {
+  // 우선 data-type이 있는 경우
+  const type = button.dataset.type;
+  const subtype = button.dataset.subtype;
 
-    // 모달 열기 버튼
-    openButton.addEventListener('click', () => {
-      dialog.showModal();
-    });
+  if (!type) return;
 
-    // 모달 닫기 버튼 (이벤트 위임)
-    dialog.addEventListener('click', (e) => {
-      const closeButton = e.target.closest('.modal-close-button');
-      if (closeButton) {
-        dialog.close();
-      }
-    });
+  // 해당 타입의 모달 찾기
+  const dialog = document.querySelector(`dialog.modal[data-type="${type}"]`);
+  if (!dialog) return;
 
-    // 닉네임 입력 폼 처리 (존재하는 경우만)
-    const form = dialog.querySelector('#nickname-register-form');
-    if (form) {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
+  // 열기 이벤트
+  button.addEventListener('click', () => {
+    // 공통 모달일 경우 subtype 처리
+    if (type === 'common' && subtype) {
+      dialog.dataset.subtype = subtype;
+    }
 
-        const input = form.querySelector('#nickname-input');
-        const nickname = input?.value.trim();
+    dialog.showModal();
 
-        if (nickname) {
-          form.reset();
-          dialog.close();
-        }
-      });
+    // 타입에 따른 JS 분기 처리
+    switch (type) {
+      case 'common':
+        handleCommonModal(dialog, subtype);
+        break;
+      case 'pause':
+        handlePauseModal(dialog);
+        break;
+      case 'register':
+        handleRegisterModal(dialog);
+        break;
     }
   });
-}
+
+  // 닫기 버튼 처리 (한 번만 바인딩)
+  if (!dialog.dataset.closeBound) {
+    dialog.addEventListener('click', (e) => {
+      const closeBtn = e.target.closest('.modal-close-button');
+      if (closeBtn) dialog.close();
+    });
+    dialog.dataset.closeBound = 'true';
+  }
+});

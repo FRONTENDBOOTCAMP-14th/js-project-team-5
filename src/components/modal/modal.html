@@ -13,26 +13,26 @@
     <script type="module" src="/src/components/modal/modal.js"></script>
   </head>
   <body>
-    <!-- 컴포넌트 마크업을 작성하세요 -->
     <h1>모달 컴포넌트</h1>
     <!-- 게임 설명, 점수판, 설정에 쓰이는 모달 -->
     <div class="modal-container">
-      <button class="modal-open" data-target="common">공통 모달 열기(테스트용)</button>
+      <button class="modal-open" data-type="common" data-subtype="description">공통 모달 열기(게임 설명)</button>
+      <button class="modal-open" data-type="common" data-subtype="scoreboard">공통 모달 열기(점수판)</button>
+      <button class="modal-open" data-type="common" data-subtype="settings">공통 모달 열기(설정)</button>
       <dialog class="modal" data-type="common">
         <div class="modal-inner">
           <h2 class="modal-title">모달 제목</h2>
           <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
           <div class="modal-content">
             <!-- 모달 콘텐츠 삽입 -->
-            <!-- 게임 설명 or 점수판 or 설정 콘텐츠 -->
-            <p>테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.</p>
+            <!-- 게임 설명 or 점수판 or 설정 콘텐츠 js로 처리-->
           </div>
         </div>
       </dialog>
     </div>
     <!-- 게임 일시정지 모달 -->
     <div class="modal-container">
-      <button class="modal-open" data-target="pause">게임 일시정지 테스트용 버튼</button>
+      <button class="modal-open" data-type="pause">게임 일시정지 테스트용 버튼</button>
       <dialog class="modal" data-type="pause">
         <div class="modal-inner">
           <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
@@ -49,7 +49,7 @@
     </div>
     <!-- 닉네임 입력 모달 -->
     <div class="modal-container">
-      <button class="modal-open" data-target="register">닉네임 입력 모달 테스트 버튼</button>
+      <button class="modal-open" data-type="register">닉네임 입력 모달 테스트 버튼</button>
       <dialog class="modal" data-type="register">
         <div class="modal-inner">
           <h2 class="modal-title">닉네임을 입력해 주세요!</h2>
