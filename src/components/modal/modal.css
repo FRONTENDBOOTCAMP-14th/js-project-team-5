@@ -74,6 +74,44 @@
   right: var(--modal-spacing);
 }
 
+.modal[data-type='scoreboard'] .modal-content {
+  justify-content: start;
+  margin-top: 6.1875rem;
+
+  .scoreboard-table {
+    width: 31.25rem;
+    height: 20.625rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: var(--text-16);
+    border: 1px solid var(--primary-black);
+    border-radius: 1.1rem;
+  }
+
+  .scoreboard-table td {
+    /* padding: 1rem 1.5rem; */
+    border-spacing: 0;
+    border: 1px solid var(--primary-black);
+    font-weight: 600;
+  }
+
+  /* 첫 행 - 위쪽 모서리 둥글게 */
+  .scoreboard-table tr:first-child td:first-child {
+    border-top-left-radius: 1rem;
+  }
+  .scoreboard-table tr:first-child td:last-child {
+    border-top-right-radius: 1rem;
+  }
+
+  /* 마지막 행 - 아래쪽 모서리 둥글게 */
+  .scoreboard-table tr:last-child td:first-child {
+    border-bottom-left-radius: 1rem;
+  }
+  .scoreboard-table tr:last-child td:last-child {
+    border-bottom-right-radius: 1rem;
+  }
+}
+
 /* 🔷 일시정지 모달 */
 .modal[data-type='pause'] .modal-inner {
   --modal-width: 47.1875rem;
