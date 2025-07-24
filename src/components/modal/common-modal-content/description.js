@@ -1,3 +1,11 @@
+/**
+ * 게임 설명 모달을 열 때 내용을 채워 넣는다.
+ * 1) <body data-game=""> 값으로 게임 타입 확인
+ * 2) /data/game-info.json에서 설명 문자열 fetch
+ * 3) **강조**·줄바꿈을 HTML 요소로 변환해 .modal-content에 삽입
+ *
+ * @param {HTMLDialogElement} dialog - data‑subtype="description" 모달
+ */
 export function handleDescriptionModal(dialog) {
   // 1. 모달의 subtype을 확인
   const subtype = dialog.dataset.subtype;
@@ -69,27 +77,27 @@ export function handleDescriptionModal(dialog) {
       console.error('게임 설명 파일을 불러오는 중 오류 발생:', error);
       return;
     });
+}
 
-  /**
-   * 텍스트 내의 **강조 텍스트**를 <strong> 요소로 변환하여 DocumentFragment로 반환하는 함수
-   *
-   * @param {string} text - **로 감싸진 강조 구문이 포함된 텍스트
-   * @returns {DocumentFragment} - 강조 구문이 <strong> 요소로 감싸져 포함된 DocumentFragment
-   */
-  function parseEmphasisText(text) {
-    const fragment = document.createDocumentFragment();
-    const parts = text.split(/(\*\*.*?\*\*)/);
+/**
+ * 텍스트 내의 **강조 텍스트**를 <strong> 요소로 변환하여 DocumentFragment로 반환하는 함수
+ *
+ * @param {string} text - **로 감싸진 강조 구문이 포함된 텍스트
+ * @returns {DocumentFragment} - 강조 구문이 <strong> 요소로 감싸져 포함된 DocumentFragment
+ */
+function parseEmphasisText(text) {
+  const fragment = document.createDocumentFragment();
+  const parts = text.split(/(\*\*.*?\*\*)/);
 
-    parts.forEach((part) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        const strong = document.createElement('strong');
-        strong.textContent = part.slice(2, -2);
-        fragment.appendChild(strong);
-      } else {
-        fragment.appendChild(document.createTextNode(part));
-      }
-    });
+  parts.forEach((part) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      const strong = document.createElement('strong');
+      strong.textContent = part.slice(2, -2);
+      fragment.appendChild(strong);
+    } else {
+      fragment.appendChild(document.createTextNode(part));
+    }
+  });
 
-    return fragment;
-  }
+  return fragment;
 }
