@@ -150,7 +150,20 @@
   border: 6px solid var(--blue-200);
 }
 
+.modal[data-type='pause'] .modal-content {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  row-gap: 1.625rem;
+}
+
 .modal[data-type='pause'] .modal-title {
+  line-height: 2;
   font-size: var(--text-32);
 }
 
