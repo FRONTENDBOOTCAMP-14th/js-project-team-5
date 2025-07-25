@@ -19,7 +19,6 @@ export function handleDescriptionModal(dialog) {
   const GAME_INFO_URL = `/data/game-info.json`;
   fetch(GAME_INFO_URL)
     .then((response) => {
-      console.log('게임 설명 파일을 불러오는 중:', GAME_INFO_URL);
       return response.json();
     })
     .then((gameInfo) => {
