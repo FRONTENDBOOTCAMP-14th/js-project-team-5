@@ -1,0 +1,106 @@
+/*전체 뷰포트 설정*/
+
+body {
+  font-family: 'KIMM', Arial, sans-serif;
+  inline-size: 100vw;
+  block-size: 100vh;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/*메인 영역*/
+
+.main-start {
+  position: relative;
+  inline-size: 1600px;
+  block-size: 800px;
+  background: url('/public/assets/images/start-main-background.png') center / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-start__title {
+  font-size: 7rem;
+  font-weight: 900;
+  color: #ff38af;
+text-shadow: 
+  -6px -6px 0 #000, -6px -5px 0 #000, -6px -4px 0 #000, -6px -3px 0 #000, -6px -2px 0 #000, -6px -1px 0 #000, -6px 0px 0 #000, -6px 1px 0 #000, -6px 2px 0 #000, -6px 3px 0 #000, -6px 4px 0 #000, -6px 5px 0 #000, -6px 6px 0 #000,
+  -5px -6px 0 #000, -5px -5px 0 #000, -5px -4px 0 #000, -5px -3px 0 #000, -5px -2px 0 #000, -5px -1px 0 #000, -5px 0px 0 #000, -5px 1px 0 #000, -5px 2px 0 #000, -5px 3px 0 #000, -5px 4px 0 #000, -5px 5px 0 #000, -5px 6px 0 #000,
+  -4px -6px 0 #000, -4px -5px 0 #000, -4px -4px 0 #000, -4px -3px 0 #000, -4px -2px 0 #000, -4px -1px 0 #000, -4px 0px 0 #000, -4px 1px 0 #000, -4px 2px 0 #000, -4px 3px 0 #000, -4px 4px 0 #000, -4px 5px 0 #000, -4px 6px 0 #000,
+  -3px -6px 0 #000, -3px -5px 0 #000, -3px -4px 0 #000, -3px -3px 0 #000, -3px -2px 0 #000, -3px -1px 0 #000, -3px 0px 0 #000, -3px 1px 0 #000, -3px 2px 0 #000, -3px 3px 0 #000, -3px 4px 0 #000, -3px 5px 0 #000, -3px 6px 0 #000,
+  -2px -6px 0 #000, -2px -5px 0 #000, -2px -4px 0 #000, -2px -3px 0 #000, -2px -2px 0 #000, -2px -1px 0 #000, -2px 0px 0 #000, -2px 1px 0 #000, -2px 2px 0 #000, -2px 3px 0 #000, -2px 4px 0 #000, -2px 5px 0 #000, -2px 6px 0 #000,
+  -1px -6px 0 #000, -1px -5px 0 #000, -1px -4px 0 #000, -1px -3px 0 #000, -1px -2px 0 #000, -1px -1px 0 #000, -1px 0px 0 #000, -1px 1px 0 #000, -1px 2px 0 #000, -1px 3px 0 #000, -1px 4px 0 #000, -1px 5px 0 #000, -1px 6px 0 #000,
+   0px -6px 0 #000,  0px -5px 0 #000,  0px -4px 0 #000,  0px -3px 0 #000,  0px -2px 0 #000,  0px -1px 0 #000,  0px 1px 0 #000,  0px 2px 0 #000,  0px 3px 0 #000,  0px 4px 0 #000,  0px 5px 0 #000,  0px 6px 0 #000,
+   1px -6px 0 #000,  1px -5px 0 #000,  1px -4px 0 #000,  1px -3px 0 #000,  1px -2px 0 #000,  1px -1px 0 #000,  1px 0px 0 #000,  1px 1px 0 #000,  1px 2px 0 #000,  1px 3px 0 #000,  1px 4px 0 #000,  1px 5px 0 #000,  1px 6px 0 #000,
+   2px -6px 0 #000,  2px -5px 0 #000,  2px -4px 0 #000,  2px -3px 0 #000,  2px -2px 0 #000,  2px -1px 0 #000,  2px 0px 0 #000,  2px 1px 0 #000,  2px 2px 0 #000,  2px 3px 0 #000,  2px 4px 0 #000,  2px 5px 0 #000,  2px 6px 0 #000,
+   3px -6px 0 #000,  3px -5px 0 #000,  3px -4px 0 #000,  3px -3px 0 #000,  3px -2px 0 #000,  3px -1px 0 #000,  3px 0px 0 #000,  3px 1px 0 #000,  3px 2px 0 #000,  3px 3px 0 #000,  3px 4px 0 #000,  3px 5px 0 #000,  3px 6px 0 #000,
+   4px -6px 0 #000,  4px -5px 0 #000,  4px -4px 0 #000,  4px -3px 0 #000,  4px -2px 0 #000,  4px -1px 0 #000,  4px 0px 0 #000,  4px 1px 0 #000,  4px 2px 0 #000,  4px 3px 0 #000,  4px 4px 0 #000,  4px 5px 0 #000,  4px 6px 0 #000,
+   5px -6px 0 #000,  5px -5px 0 #000,  5px -4px 0 #000,  5px -3px 0 #000,  5px -2px 0 #000,  5px -1px 0 #000,  5px 0px 0 #000,  5px 1px 0 #000,  5px 2px 0 #000,  5px 3px 0 #000,  5px 4px 0 #000,  5px 5px 0 #000,  5px 6px 0 #000,
+   6px -6px 0 #000,  6px -5px 0 #000,  6px -4px 0 #000,  6px -3px 0 #000,  6px -2px 0 #000,  6px -1px 0 #000,  6px 0px 0 #000,  6px 1px 0 #000,  6px 2px 0 #000,  6px 3px 0 #000,  6px 4px 0 #000,  6px 5px 0 #000,  6px 6px 0 #000,
+     2px 2px 70px #ff3694;
+  
+     
+  }
+
+
+/* 부제목 - 둥실 애니메이션  */
+.main-start__subtitle {
+  padding-block-start: 3rem;
+  font-size: 2rem;
+  color: #ff82ff;
+  /* 두꺼운 검정 외곽선 */
+  text-shadow:
+    -4px -4px 0 #000, -4px -3px 0 #000, -4px -2px 0 #000, -4px -1px 0 #000, -4px  0px 0 #000, -4px  1px 0 #000, -4px  2px 0 #000, -4px  3px 0 #000, -4px  4px 0 #000,
+    -3px -4px 0 #000, -3px -3px 0 #000, -3px -2px 0 #000, -3px -1px 0 #000, -3px  0px 0 #000, -3px  1px 0 #000, -3px  2px 0 #000, -3px  3px 0 #000, -3px  4px 0 #000,
+    -2px -4px 0 #000, -2px -3px 0 #000, -2px -2px 0 #000, -2px -1px 0 #000, -2px  0px 0 #000, -2px  1px 0 #000, -2px  2px 0 #000, -2px  3px 0 #000, -2px  4px 0 #000,
+    -1px -4px 0 #000, -1px -3px 0 #000, -1px -2px 0 #000, -1px -1px 0 #000, -1px  0px 0 #000, -1px  1px 0 #000, -1px  2px 0 #000, -1px  3px 0 #000, -1px  4px 0 #000,
+     0px -4px 0 #000,  0px -3px 0 #000,  0px -2px 0 #000,  0px -1px 0 #000,  0px  1px 0 #000,  0px  2px 0 #000,  0px  3px 0 #000,  0px  4px 0 #000,
+     1px -4px 0 #000,  1px -3px 0 #000,  1px -2px 0 #000,  1px -1px 0 #000,  1px  0px 0 #000,  1px  1px 0 #000,  1px  2px 0 #000,  1px  3px 0 #000,  1px  4px 0 #000,
+     2px -4px 0 #000,  2px -3px 0 #000,  2px -2px 0 #000,  2px -1px 0 #000,  2px  0px 0 #000,  2px  1px 0 #000,  2px  2px 0 #000,  2px  3px 0 #000,  2px  4px 0 #000,
+     3px -4px 0 #000,  3px -3px 0 #000,  3px -2px 0 #000,  3px -1px 0 #000,  3px  0px 0 #000,  3px  1px 0 #000,  3px  2px 0 #000,  3px  3px 0 #000,  3px  4px 0 #000,
+     4px -4px 0 #000,  4px -3px 0 #000,  4px -2px 0 #000,  4px -1px 0 #000,  4px  0px 0 #000,  4px  1px 0 #000,  4px  2px 0 #000,  4px  3px 0 #000,  4px  4px 0 #000,
+
+    /* 마지막 네온 느낌 glow */
+    2px 2px 600px #ff3694;
+
+  /* 깜박깜박 애니메이션 */
+  animation: blinkText 0.9s step-start infinite;
+}
+
+/* 깜박이는 효과 */
+@keyframes blinkText {
+  50% {
+    opacity: 0;
+  }
+}
+
+
+/*오른쪽 상단 아이콘 그룹*/
+
+.icon-group {
+  position: absolute;
+  top: 4rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.icon-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  padding: 0;
+}
+
+.icon-button img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}

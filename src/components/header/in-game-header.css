@@ -4,7 +4,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: var(--primary-white);
   font-size: var(--text-16);
   color: var(--primary-black);
   inline-size: 100%;

@@ -9,47 +9,105 @@
     <link rel="stylesheet" href="/src/styles/common/index.css" />
     <link rel="stylesheet" href="/fonts/KIMM.css" />
     <link rel="stylesheet" href="/src/components/modal/modal.css" />
+    <link rel="stylesheet" href="/src/components/button/button.css" />
+    <link rel="stylesheet" href="/src/components/slider/slider.css" />
     <script type="module" src="/src/main.js"></script>
     <script type="module" src="/src/components/modal/modal.js"></script>
+    <script type="module" src="/src/components/button/button.js"></script>
+    <script type="module" src="/src/components/slider/slider.js"></script>
+    <script type="module" src="/src/components/slider/slider.css"></script>
   </head>
-  <body>
-    <!-- 컴포넌트 마크업을 작성하세요 -->
+  <body data-game="quiz">
     <h1>모달 컴포넌트</h1>
-    <!-- 게임 설명, 점수판, 설정에 쓰이는 모달 -->
+    <!-- 게임 설명에 쓰이는 모달 -->
     <div class="modal-container">
-      <button class="modal-open" data-target="common">공통 모달 열기(테스트용)</button>
-      <dialog class="modal" data-type="common">
+      <button class="modal-open" data-type="description">게임 설명 모달 열기(테스트용)</button>
+      <dialog class="modal" data-type="description">
         <div class="modal-inner">
-          <h2 class="modal-title">모달 제목</h2>
+          <h2 class="modal-title">게임 설명</h2>
           <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
           <div class="modal-content">
             <!-- 모달 콘텐츠 삽입 -->
-            <!-- 게임 설명 or 점수판 or 설정 콘텐츠 -->
-            <p>테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.테스트용 텍스트입니다.</p>
+          </div>
+        </div>
+      </dialog>
+    </div>
+    <!-- 점수판에 쓰이는 모달 -->
+    <div class="modal-container">
+      <button class="modal-open" data-type="scoreboard">점수판 모달 열기(테스트용)</button>
+      <dialog class="modal" data-type="scoreboard">
+        <div class="modal-inner">
+          <h2 class="modal-title">점수판</h2>
+          <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+          <div class="modal-content">
+            <!-- 모달 콘텐츠 삽입 -->
+          </div>
+        </div>
+      </dialog>
+    </div>
+    <!-- 설정에 쓰이는 모달 -->
+    <div class="modal-container">
+      <button class="modal-open" data-type="settings">설정 모달 열기 (테스트용)</button>
+      <dialog class="modal" data-type="settings">
+        <div class="modal-inner">
+          <h2 class="modal-title">설정</h2>
+          <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+          <div class="modal-content">
+            <!-- 모달 콘텐츠 삽입 -->
+            <div class="wrapper mode">
+              <span class="text">모드 선택</span>
+              <div class="divider"></div>
+              <div class="toggle-radio">
+                <input type="radio" id="normal" name="mode" checked />
+                <label for="normal" class="btn normal">일반 모드</label>
+                <input type="radio" id="dev" name="mode" />
+                <label for="dev" class="btn dev">개발자 모드</label>
+              </div>
+            </div>
+            <div class="wrapper">
+              <span class="text">BGM</span>
+              <div class="divider"></div>
+              <div class="bgm-slider-custom">
+                <div class="progress-bg">
+                  <div class="progress-fill"></div>
+                </div>
+                <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="bgm-range" />
+              </div>
+              <audio hidden id="test-audio" src="/assets/audio/bgm/main-XRayVision-Slynk.mp3" controls></audio>
+            </div>
+            <div class="wrapper">
+              <span class="text">효과음</span>
+              <div class="divider"></div>
+              <div class="bgm-slider-custom">
+                <div class="progress-bg">
+                  <div class="progress-fill"></div>
+                </div>
+                <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="effect-range" />
+              </div>
+              <audio hidden id="effect-audio" src="/assets/audio/bgm/main-XRayVision-Slynk.mp3" controls></audio>
+            </div>
+            <button type="button" class="exit-button" aria-label="게임을 종료하고 메인 화면으로 이동">게임 종료</button>
           </div>
         </div>
       </dialog>
     </div>
     <!-- 게임 일시정지 모달 -->
     <div class="modal-container">
-      <button class="modal-open" data-target="pause">게임 일시정지 테스트용 버튼</button>
+      <button class="modal-open" data-type="pause">게임 일시정지 테스트용 버튼</button>
       <dialog class="modal" data-type="pause">
         <div class="modal-inner">
           <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
           <div class="modal-content">
-            <!-- 모달 콘텐츠 삽입 -->
-            <!-- 임시 버튼 (버튼 컴포넌트 제작 완료 시 변경 예정) -->
-            <button type="submit" class="register-modal-submit">확인</button>
-            <!-- 계속하기 버튼 -->
-            <!-- 다시 하기 버튼-->
-            <!-- 메인 화면 버튼 -->
+            <button type="button" class="pause-modal continue-btn">계속 하기</button>
+            <button type="button" class="pause-modal retry-btn">다시 하기</button>
+            <button type="button" class="pause-modal main-btn">메인 화면</button>
           </div>
         </div>
       </dialog>
     </div>
     <!-- 닉네임 입력 모달 -->
     <div class="modal-container">
-      <button class="modal-open" data-target="register">닉네임 입력 모달 테스트 버튼</button>
+      <button class="modal-open" data-type="register">닉네임 입력 모달 테스트 버튼</button>
       <dialog class="modal" data-type="register">
         <div class="modal-inner">
           <h2 class="modal-title">닉네임을 입력해 주세요!</h2>
@@ -62,7 +120,6 @@
               <!-- 닉네임 중복 여부 확인 메시지 -->
               <p class="nickname-check-message">이미 사용 중인 닉네임입니다.</p>
               <div class="modal-button-container">
-                <!-- 임시 버튼 (버튼 컴포넌트 제작 완료 시 변경 예정) -->
                 <button type="submit" class="register-submit-button">확인</button>
                 <button type="button" class="modal-close-button">취소</button>
               </div>
