@@ -2,7 +2,7 @@ const bgmToggleBtn = document.getElementById('bgmToggleBtn')
 const bgmIcon = document.getElementById('bgmIcon')
 
 // 배경음악 설정
-const BGM_AUDIO = new Audio('/assets/audio/bgm/[산성비]Disco Heart - Coyote Hearing.mp3')
+const BGM_AUDIO = new Audio('/assets/audio/bgm/acidrain-DiscoHeart-Coyote Hearing.mp3')
 BGM_AUDIO.loop = true
 BGM_AUDIO.volume = 0.5
 BGM_AUDIO.play()
