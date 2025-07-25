@@ -37,6 +37,7 @@ body {
   border: 30px solid var(--gray-600);
   border-radius: 20px;
   box-sizing: content-box;
+  position: relative;
 }
 
 /* 받침대 이미지 */

@@ -19,7 +19,7 @@ modalOpenButtons.forEach((button) => {
 
   // 열기 이벤트
   button.addEventListener('click', () => {
-    dialog.showModal();
+    dialog.show();
 
     // 타입에 따른 JS 분기 처리
     switch (type) {
