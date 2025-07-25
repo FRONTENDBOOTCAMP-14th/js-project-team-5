@@ -3,7 +3,7 @@ const soundToggleBtn = document.getElementById('soundToggleBtn')
 const soundIcon = document.getElementById('soundIcon')
 
 // 오디오 객체는 상수로 (대문자 + SNAKE_CASE)
-const BGM = new Audio('/assets/audio/bgm/[게임메인]X Ray Vision - Slynk.mp3')
+const BGM = new Audio('/assets/audio/bgm/acidrain-DiscoHeart-Coyote Hearing.mp3')
 BGM.loop = true
 BGM.volume = 0.3
 BGM.play()
