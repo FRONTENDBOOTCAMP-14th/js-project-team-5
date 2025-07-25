@@ -4,8 +4,6 @@
   const screen = document.querySelector('.window-screen-wrapper');
 
   if (audio && image && screen) {
-    console.log('실행');
-
     audio.play().catch((err) => {
       console.warn('자동재생이 차단되었을 수 있습니다:', err);
     });
@@ -30,7 +28,6 @@ updateTime();
 
 document.querySelectorAll('.window-icon-item').forEach((item) => {
   item.addEventListener('click', () => {
-    console.log('테스트');
     document.querySelectorAll('.window-icon-item').forEach((el) => {
       el.classList.remove('window-icon-item__selected');
     });
