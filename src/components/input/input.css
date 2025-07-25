@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: flex-end; /* 하단 정렬 */
   inline-size: 100%;
-  padding-top: 4rem; /* 상단 여백 */
+  padding-top: 43rem; /* 상단 여백 */
   padding-block-end: 2.5rem;
   box-sizing: border-box;
 }
