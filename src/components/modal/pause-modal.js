@@ -6,7 +6,7 @@ import { handleWhackPause } from './pause-modal/whack-pause.js';
 /**
  * 현재 게임의 타입('data-game' 속성)을 기준으로 적절한 일시정지 모달 핸들러를 호출한다.
  *
- * 이 함수는 <body>의 하위 컨테이너에서 'data-game' 속성을 읽어, 각 게임별 pause 핸들러
+ * 이 함수는 <body>의 하위 컨테이너의 'data-game' 속성을 읽어, 각 게임별 pause 핸들러
  * ('handleWhackPause', 'handleQuizPause', 'handleDefensePause','handleAcidRainPause')를 호출한다.
  *
  * - 게임 타입이 지정되지 않은 경우, 경고 로그를 출력하고 종료된다.

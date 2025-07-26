@@ -1,6 +1,6 @@
 /**
  * 게임 설명 모달을 열 때 내용을 채워 넣는다.
- * 1) <body data-game=""> 값으로 게임 타입 확인
+ * 1) <body>의 하위 컨테이너의 'data-game' 속성 값으로 게임 타입 확인
  * 2) /data/game-info.json에서 설명 문자열 fetch
  * 3) **강조**·줄바꿈을 HTML 요소로 변환해 .modal-content에 삽입
  *
