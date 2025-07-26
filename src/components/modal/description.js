@@ -8,7 +8,9 @@
  */
 export function handleDescriptionModal(dialog) {
   // 1. 게임 타입 확인 (acidrain, defense, whack, quiz)
-  const gameType = document.body.dataset.game;
+  const container = dialog.closest('[data-game]');
+  const gameType = container?.dataset.game;
+
   if (!gameType) {
     console.warn('게임 타입이 지정되지 않았습니다.');
     return;
