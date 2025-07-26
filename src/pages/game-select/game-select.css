@@ -162,6 +162,10 @@ body {
   }
 }
 
+.modal-title {
+  user-select: none;
+}
+
 .setting-action-wrapper {
   display: flex;
   flex-direction: column;
@@ -230,6 +234,7 @@ body {
   color: var(--primary-black);
   font-size: var(--text-24);
   font-weight: 700;
+  user-select: none;
 }
 
 .effect-slider-custom {
