@@ -9,10 +9,18 @@
     <link rel="stylesheet" href="/fonts/KIMM.css" />
     <link rel="stylesheet" href="/src/styles/common/index.css" />
     <link rel="stylesheet" href="/src/pages/game-select/game-select.css" />
+    <link rel="stylesheet" href="/src/components/game-choice-header/game-choice-header.css" />
+    <link rel="stylesheet" href="/src/components/modal/modal.css" />
+    <link rel="stylesheet" href="/src/components/slider/slider.css" />
     <script type="module" src="/src/pages/game-select/script/game-select.js"></script>
+    <!-- <link rel="stylesheet" href="/src/components/card/card.css" /> -->
+    <!-- 
+    <script type="module" src="/src/components/game-choice-header/game-choice-header.js"></script>
+    <script type="module" src="/src/components/button/button.js"></script>
+    <script type="module" src="/src/components/slider/slider.js"></script> -->
   </head>
   <body>
-    <div class="main-container">
+    <div class="game-select-container">
       <header class="game-header">
         <button class="icon back-icon" id="back-btn" aria-label="뒤로가기">
           <img src="/assets/icons/back.svg" alt="" aria-hidden="true" />
@@ -23,7 +31,6 @@
           <span class="game-title stroke">게임을 선택해 주세요!</span>
           <span class="game-title body">게임을 선택해 주세요!</span>
         </div>
-
         <div class="icon-group">
           <button id="bgmToggleBtn" class="icon-button" aria-label="BGM 토글">
             <img id="bgmIcon" src="/assets/icons/sound-on.svg" alt="BGM 아이콘" />
@@ -54,7 +61,7 @@
         <div class="card-wrapper">
           <div class="card w340" tabindex="0" role="button">
             <div class="img-container">
-              <img src="/public/assets/icons/mole.png" alt="산성비" />
+              <img src="/assets/icons/mole.png" alt="산성비" />
             </div>
             <h2 class="card-title">두더지 잡기</h2>
           </div>
@@ -62,7 +69,7 @@
         <div class="card-wrapper">
           <div class="card w340" tabindex="0" role="button">
             <div class="img-container">
-              <img src="/public/assets/icons/quiz-alternative.png" alt="산성비" />
+              <img src="/assets/icons/quiz-alternative.png" alt="산성비" />
             </div>
             <h2 class="card-title">퀴즈</h2>
           </div>
@@ -93,7 +100,7 @@
                 </div>
               </div>
               <!-- BGM 슬라이더 -->
-              <div class="wrapper">
+              <div class="bgm-slider-wrapper">
                 <span class="text">BGM</span>
                 <div class="divider"></div>
                 <div class="bgm-slider-custom">
@@ -104,7 +111,7 @@
                 </div>
               </div>
               <!-- 효과음 슬라이더 -->
-              <div class="wrapper">
+              <div class="effect-slider-wrapper">
                 <span class="text">효과음</span>
                 <div class="divider"></div>
                 <div class="effect-slider-custom">
