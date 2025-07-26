@@ -1,14 +1,30 @@
+body.modal-opened {
+  overflow: hidden; /* 모달 열릴 때 body 스크롤 방지 */
+  pointer-events: none; /* 모달 외부 클릭/상호작용 방지 */
+  user-select: none; /* 모달 외부 텍스트 선택 방지 */
+}
+
+body.modal-opened .monitor-frame {
+  user-select: none; /* 모니터 프레임 안쪽 텍스트 선택 방지 */
+}
+
+body.modal-opened dialog.modal,
+body.modal-opened dialog.modal * {
+  pointer-events: auto; /* 모달 내부 클릭/상호작용 허용 */
+  user-select: auto; /* 모달 내부 텍스트 선택 허용 */
+}
+
 /* 공통 모달 스타일 */
 .modal {
   border: none;
   padding: 0;
   margin: 0;
 
-  position: fixed;
+  position: absolute;
   inset: 0;
 
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   background-color: rgba(0, 0, 0, 0.5);
 

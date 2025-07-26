@@ -19,7 +19,15 @@
 }
 
 .toggle-radio input[type='radio'] {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+.toggle-radio input[type='radio']:focus-visible + label {
+  outline: 2px solid var(--primary-black);
+  outline-offset: 2px;
 }
 
 .toggle-radio .btn {
@@ -105,4 +113,5 @@
   line-height: noraml;
   color: #0f1e69;
   user-select: none;
+  outline-offset: 4px;
 }

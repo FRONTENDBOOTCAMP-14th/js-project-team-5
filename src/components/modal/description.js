@@ -1,6 +1,6 @@
 /**
  * 게임 설명 모달을 열 때 내용을 채워 넣는다.
- * 1) <body data-game=""> 값으로 게임 타입 확인
+ * 1) <body>의 하위 컨테이너의 'data-game' 속성 값으로 게임 타입 확인
  * 2) /data/game-info.json에서 설명 문자열 fetch
  * 3) **강조**·줄바꿈을 HTML 요소로 변환해 .modal-content에 삽입
  *
@@ -8,7 +8,9 @@
  */
 export function handleDescriptionModal(dialog) {
   // 1. 게임 타입 확인 (acidrain, defense, whack, quiz)
-  const gameType = document.body.dataset.game;
+  const container = dialog.closest('[data-game]');
+  const gameType = container?.dataset.game;
+
   if (!gameType) {
     console.warn('게임 타입이 지정되지 않았습니다.');
     return;
