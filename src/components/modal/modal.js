@@ -7,26 +7,19 @@ import { handleRegisterModal } from './register-modal.js';
 {
   const modalOpenButtons = document.querySelectorAll('.modal-open');
 
-  // 모든 모달 열기 버튼 처리
   modalOpenButtons.forEach((button) => {
-    // data-type이 있는 경우
     const type = button.dataset.type;
-
     if (!type) return;
 
-    // 해당 타입의 모달 찾기
     const dialog = document.querySelector(`dialog.modal[data-type="${type}"]`);
     if (!dialog) return;
 
-    // 열기 이벤트
     button.addEventListener('click', () => {
-      // 다이얼로그를 열기 전의 포커스된 요소를 저장 (닫힐 때 복원용)
       const previouslyFocusedElement = document.activeElement;
 
       dialog.show();
-      trapFocus(dialog); // 포커스 트랩 추가
+      trapFocus(dialog); // 포커스 트랩 + 모니터 요소 inert 처리
 
-      // 타입에 따른 JS 분기 처리
       switch (type) {
         case 'description':
           handleDescriptionModal(dialog);
@@ -44,21 +37,19 @@ import { handleRegisterModal } from './register-modal.js';
           handleRegisterModal(dialog);
           break;
       }
-      // 다이얼로그가 닫힐 때 포커스 복원
-      // 'close' 이벤트는 dialog.close()에 의해 발생하거나, Escape 키를 누를 때 발생
-      // dialog.show()로 열었을 때는 Escape 키로 닫히지 않으므로, trapFocus에서 Escape를 처리해야 한다.
+
       dialog.addEventListener(
         'close',
         () => {
-          if (previouslyFocusedElement && typeof previouslyFocusedElement.focus === 'function') {
+          if (previouslyFocusedElement?.focus) {
             previouslyFocusedElement.focus();
           }
         },
         { once: true }
-      ); // 한 번만 실행되도록
+      );
     });
 
-    // 닫기 버튼 처리 (한 번만 바인딩)
+    // 닫기 버튼 처리
     if (!dialog.dataset.closeBound) {
       dialog.addEventListener('click', (e) => {
         const closeBtn = e.target.closest('.modal-close-button');
@@ -69,90 +60,99 @@ import { handleRegisterModal } from './register-modal.js';
   });
 }
 
-/**
- * 포커스 가능한 요소를 반환한다.
- *
- * @param {HTMLElement} element - 포커스를 찾을 기준 요소
- * @returns {HTMLElement[]} - 포커스 가능한 요소 배열
- */
-function getFocusableElements(element) {
-  const selector = ['button:not([disabled])', '[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', '[tabindex]:not([tabindex="-1"]):not([disabled])'].join(',');
-
-  const elements = element.querySelectorAll(selector);
-
-  // 화면에 실제 보이는 요소만 필터링
-  const visibleElements = Array.from(elements).filter((el) => {
-    return el.offsetWidth > 0 || el.offsetHeight > 0;
-  });
-
-  return visibleElements;
-}
+// trapFocus 관련 전역 변수
+const trapFocusState = {
+  dialog: null,
+  firstEl: null,
+  lastEl: null,
+  prevFocusedEl: null,
+};
 
 /**
- * keydown 핸들러를 생성한다.
- *
- * @param {HTMLElement} firstEl 첫 포커스 요소
- * @param {HTMLElement} lastEl 마지막 포커스 요소
- * @param {HTMLDialogElement} dialog 대상 모달
- * @returns {Function} keydown 이벤트 핸들러
- */
-function createKeydownHandler(firstEl, lastEl, dialog) {
-  return function handleKeydown(e) {
-    if (e.key === 'Tab') {
-      const isForward = !e.shiftKey;
-
-      if (isForward && document.activeElement === lastEl) {
-        e.preventDefault();
-        firstEl.focus();
-      } else if (!isForward && document.activeElement === firstEl) {
-        e.preventDefault();
-        lastEl.focus();
-      }
-    }
-  };
-}
-
-/**
- * 다이얼로그 닫힘 핸들러를 생성한다.
- *
- * @param {HTMLDialogElement} dialog 대상 모달
- * @param {Function} keydownHandler keydown 이벤트 핸들러
- * @param {HTMLElement} [prevFocusedEl] 이전 포커스 복원용 요소
- * @returns {Function} close 이벤트 핸들러
- */
-function createCloseHandler(dialog, keydownHandler, prevFocusedEl) {
-  return function handleClose() {
-    dialog.removeEventListener('keydown', keydownHandler);
-    dialog.removeEventListener('close', handleClose);
-
-    if (prevFocusedEl && typeof prevFocusedEl.focus === 'function') {
-      prevFocusedEl.focus();
-    }
-  };
-}
-
-/**
- * 포커스를 trap하고, Escape 키로 닫기 및 포커스 복원까지 처리
- *
- * @param {HTMLDialogElement} dialog 대상 모달
+ * 모달에 포커스 트랩을 적용하고, 모니터 프레임 내 모달 외 요소를 inert 처리한다.
+ * @param {HTMLDialogElement} dialog - 포커스 트랩을 적용할 모달(dialog) 요소
  */
 function trapFocus(dialog) {
-  const focusableElements = getFocusableElements(dialog);
+  // 포커스 가능한 요소 찾기
+  const selector = ['button:not([disabled])', '[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', '[tabindex]:not([tabindex="-1"]):not([disabled])'].join(',');
+  const focusableElements = Array.from(dialog.querySelectorAll(selector)).filter((el) => el.offsetWidth > 0 || el.offsetHeight > 0);
   if (focusableElements.length === 0) return;
 
-  const firstEl = focusableElements[0];
-  const lastEl = focusableElements[focusableElements.length - 1];
+  trapFocusState.dialog = dialog;
+  trapFocusState.firstEl = focusableElements[0];
+  trapFocusState.lastEl = focusableElements[focusableElements.length - 1];
+  trapFocusState.prevFocusedEl = document.activeElement;
 
-  const prevFocusedEl = document.activeElement;
+  document.body.classList.add('modal-opened');
 
-  // 렌더 후 포커스 이동
-  requestAnimationFrame(() => {
-    firstEl.focus();
+  requestAnimationFrame(function () {
+    trapFocusState.firstEl.focus();
   });
 
-  const keydownHandler = createKeydownHandler(firstEl, lastEl, dialog);
-  const closeHandler = createCloseHandler(dialog, keydownHandler, prevFocusedEl);
+  // 모니터 내 모달 외 요소 inert 처리
+  const container = dialog.closest('.monitor-frame');
+  if (container) {
+    Array.from(container.children).forEach((el) => {
+      if (!el.contains(dialog)) {
+        el.setAttribute('inert', '');
+      }
+    });
+  }
 
-  dialog.addEventListener('keydown', keydownHandler);
-  dialog.addEventListener('close', closeHandler);
+  dialog.addEventListener('keydown', trapFocusKeydownHandler);
+  dialog.addEventListener('close', trapFocusCloseHandler);
+  document.addEventListener('focusin', trapFocusFocusInHandler);
+}
+
+/**
+ * Tab 키를 눌렀을 때 포커스가 모달 내부에서만 순환되도록 처리한다.
+ * @param {KeyboardEvent} e - 키보드 이벤트 객체
+ */
+function trapFocusKeydownHandler(e) {
+  if (e.key === 'Tab') {
+    const isForward = !e.shiftKey;
+    if (isForward && document.activeElement === trapFocusState.lastEl) {
+      e.preventDefault();
+      trapFocusState.firstEl.focus();
+    } else if (!isForward && document.activeElement === trapFocusState.firstEl) {
+      e.preventDefault();
+      trapFocusState.lastEl.focus();
+    }
+  }
+}
+
+/**
+ * 포커스가 모달 내부에 없으면 강제로 첫 번째 포커스 가능한 요소로 이동시킨다.
+ */
+function trapFocusFocusInHandler() {
+  if (trapFocusState.dialog && !trapFocusState.dialog.contains(document.activeElement)) {
+    trapFocusState.firstEl.focus();
+  }
+}
+
+/**
+ * 모달이 닫힐 때 포커스 트랩, inert 처리, body 클래스 등을 해제하고 이전 포커스를 복원한다.
+ */
+function trapFocusCloseHandler() {
+  trapFocusState.dialog.removeEventListener('keydown', trapFocusKeydownHandler);
+  trapFocusState.dialog.removeEventListener('close', trapFocusCloseHandler);
+  document.removeEventListener('focusin', trapFocusFocusInHandler);
+
+  // inert 해제
+  const container = trapFocusState.dialog.closest('.monitor-frame');
+  if (container) {
+    Array.from(container.children).forEach((el) => {
+      el.removeAttribute('inert');
+    });
+  }
+  document.body.classList.remove('modal-opened');
+
+  if (trapFocusState.prevFocusedEl?.focus) {
+    trapFocusState.prevFocusedEl.focus();
+  }
+
+  trapFocusState.dialog = null;
+  trapFocusState.firstEl = null;
+  trapFocusState.lastEl = null;
+  trapFocusState.prevFocusedEl = null;
 }
