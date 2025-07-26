@@ -1,17 +1,17 @@
 import { setupPauseDialogClickHandler } from './pause-util.js';
 
 /**
- * 디펜스(Defense) 게임에서 일시정지 모달의 버튼 클릭 핸들러를 설정합니다.
+ * 디펜스(Defense) 게임에서 일시정지 모달의 버튼 클릭 핸들러를 설정한다.
  *
- * 이 함수는 pause 모달(`<dialog>` 요소)에 대해 디펜스 게임 전용 pause 로직을 바인딩하며,
- * 버튼 클릭 시 수행할 동작을 `setupPauseDialogClickHandler`를 통해 등록합니다.
+ * 이 함수는 pause 모달('<dialog>' 요소)에 대해 디펜스 게임 전용 pause 로직을 바인딩하며,
+ * 버튼 클릭 시 수행할 동작을 'setupPauseDialogClickHandler'를 통해 등록한다.
  *
- * 각 버튼의 동작은 다음과 같습니다:
- * - `.continue-btn`: 게임을 계속 진행
- * - `.retry-btn`: 게임을 처음부터 다시 시작
- * - `.main-btn`: 메인 화면으로 이동
+ * 각 버튼의 동작은 다음과 같다.
+ * - '.continue-btn': 게임을 계속 진행
+ * - '.retry-btn': 게임을 처음부터 다시 시작
+ * - '.main-btn': 메인 화면으로 이동
  *
- * @param {HTMLDialogElement} dialog - 일시정지 모달 `<dialog>` 요소
+ * @param {HTMLDialogElement} dialog - 일시정지 모달 '<dialog>' 요소
  */
 export function handleDefensePause(dialog) {
   // console.log는 디버깅용으로 사용
