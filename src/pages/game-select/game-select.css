@@ -1,7 +1,7 @@
 body {
   inline-size: 100vw;
   block-size: 100vh;
-  background-color: var(--primary-blue);
+  background-color: var(--primary-indigo);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,6 +16,7 @@ body {
   justify-content: center;
   align-items: center;
   background: var(--primary-blue);
+  padding-top: 6.25rem;
 }
 
 /* 게임 선택 헤더 전체 */
