@@ -1,25 +1,21 @@
-body,
-html {
-  height: 100%;
-}
-.main-container {
-  width: 100%;
-  height: 100%;
-  background-color: var(--primary-indigo);
+body {
+  inline-size: 100vw;
+  block-size: 100vh;
+  background-color: var(--primary-blue);
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: center;
 }
 
-.monitor-frame {
-  width: 100rem;
-  height: 50rem;
-  border: 1.875rem solid var(--primary-black);
-  background: var(--primary-blue);
-  border-radius: 1.25rem;
-  box-sizing: content-box;
+.main-container {
+  display: flex;
   position: relative;
+  inline-size: 100rem;
+  block-size: 50rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-blue);
 }
 
 /* 게임 선택 헤더 전체 */
@@ -143,16 +139,6 @@ html {
 .card.w340 {
   width: 21.25rem;
   height: 31.25rem;
-}
-
-.monitor-neck {
-  position: absolute;
-  left: 50%;
-  top: 87%; /* .monitor-wrapper 아래 20px 위치 */
-  transform: translateX(-50%);
-  width: 22.8125rem;
-  height: auto;
-  z-index: -1;
 }
 
 /* 산성비 */
