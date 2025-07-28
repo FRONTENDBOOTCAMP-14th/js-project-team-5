@@ -22,14 +22,16 @@
   <body>
     <div class="landing" data-game="quiz">
       <header class="game-header">
-        <img src="/assets/icons/back.svg" alt="뒤로가기" class="icon back-icon" />
+        <button class="back-button">
+          <img src="/assets/icons/back.svg" alt="뒤로가기" class="icon back-icon" />
+        </button>
         <h1 class="game-title">퀴즈</h1>
         <div class="icon-group">
           <button id="bgmToggleBtn" class="icon-button" aria-label="BGM 토글">
             <img id="bgmIcon" src="/assets/icons/sound-on.svg" alt="BGM 아이콘" />
           </button>
-          <button class="icon-button modal-open" data-type="settings" aria-label="환경설정">
-            <img src="/assets/icons/option.svg" alt="환경설정" />
+          <button class="modal-open" data-type="settings">
+            <img src="/assets/icons/option.svg" alt="설정" class="icon" />
           </button>
         </div>
       </header>
