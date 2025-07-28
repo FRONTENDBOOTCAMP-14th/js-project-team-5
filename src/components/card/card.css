@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   background: var(--primary-blue);
-  border: 0.375rem solid var(--blue-400);
+  border: 0.375rem solid var(--blue-300);
   border-radius: 2.1875rem;
   padding: 0 1.5625rem;
   gap: 1.875rem;
@@ -52,6 +52,13 @@
 /* 호버 및 포커스 효과 */
 .card:hover,
 .card:focus-visible {
-  background: var(--blue-400); /*카드의 border 색상과 똑같은 색상으로 변경하기 */
+  background: var(--blue-300); /*카드의 border 색상과 똑같은 색상으로 변경하기 */
   outline: none;
+  color: var(--primary-blue);
+}
+
+/* 호버 및 포커스 시 타이틀 텍스트 변경 */
+.card:hover .card-title,
+.card:focus-visible .card-title {
+  color: var(--primary-blue);
 }
