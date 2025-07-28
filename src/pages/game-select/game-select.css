@@ -178,21 +178,6 @@ body {
   transform: translateX(-0.9375rem);
 }
 
-.toggle-radio input[type='radio'] {
-  position: absolute;
-  opacity: 0;
-  width: 0.0625rem;
-  height: 0.0625rem;
-}
-
-.toggle-radio .btn:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 0.125rem var(--primary-black); /* 파란색 테두리 효과 */
-  background: var(--gray-100); /* 배경색 변경 */
-  color: var(--primary-black); /* 글자색 변경 */
-  border-radius: 2em;
-}
-
 .shutdown-btn-wrapper {
   display: flex;
   justify-content: center;
