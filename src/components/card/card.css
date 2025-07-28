@@ -1,13 +1,10 @@
-p {
-  margin-block: 3.125rem;
-}
-
-.body-wrapper {
+.card-component-wrapper {
   display: flex;
   gap: 3.125rem;
 }
 
-.card-wrapper {
+/* 사이즈 상관없이 공통 css */
+.card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,11 +39,19 @@ p {
   }
 }
 
-.card-wrapper.w340 {
+/* 카드 사이즈 유형 */
+.card.w340 {
   width: 21.25rem;
   height: 31.25rem;
 }
-.card-wrapper.w400 {
+.card.w400 {
   width: 25rem;
   height: 34.375rem;
+}
+
+/* 호버 및 포커스 효과 */
+.card:hover,
+.card:focus-visible {
+  background: var(--blue-400); /*카드의 border 색상과 똑같은 색상으로 변경하기 */
+  outline: none;
 }
