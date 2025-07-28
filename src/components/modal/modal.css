@@ -130,6 +130,15 @@ body.modal-opened dialog.modal * {
 }
 
 /* 🔷 설정 모달 */
+.modal[data-type='settings'] .modal-content {
+  width: 31.25rem;
+  height: 20.625rem;
+  align-self: center;
+  margin-block: auto;
+  border: 1px solid var(--primary-black);
+  border-radius: 1rem;
+}
+
 .modal[data-type='settings'] .mode {
   padding-right: 1.8125rem;
 }

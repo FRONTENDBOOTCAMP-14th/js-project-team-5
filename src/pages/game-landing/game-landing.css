@@ -1,0 +1,58 @@
+/* 랜딩 페이지 스타일링 */
+.landing {
+  inline-size: 100rem; /* 1600px */
+  block-size: 50rem; /* 800px */
+  background-color: var(--primary-blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 4rem;
+
+  /* 안 넘치게 만들기 */
+  box-sizing: border-box;
+
+  .landing-card-container {
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    gap: 5rem;
+  }
+}
+
+[data-game='acidrain'],
+[data-game='quiz'] {
+  .game-title {
+    color: var(--blue-300);
+  }
+  .card {
+    border-color: var(--blue-300);
+  }
+  .card:hover,
+  .card:focus-visible {
+    background: var(--blue-300); /*카드의 border 색상과 똑같은 색상으로 변경하기 */
+  }
+}
+
+[data-game='defense'] {
+  .game-title {
+    color: var(--blue-200);
+  }
+  .card {
+    border-color: var(--blue-200);
+  }
+  .card:hover,
+  .card:focus-visible {
+    background: var(--blue-200); /*카드의 border 색상과 똑같은 색상으로 변경하기 */
+  }
+}
+[data-game='whack'] {
+  .game-title {
+    color: var(--red-200);
+  }
+  .card {
+    border-color: var(--red-200);
+  }
+  .card:hover,
+  .card:focus-visible {
+    background: var(--red-200); /*카드의 border 색상과 똑같은 색상으로 변경하기 */
+  }
+}

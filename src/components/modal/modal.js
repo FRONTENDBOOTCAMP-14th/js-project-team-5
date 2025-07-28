@@ -14,6 +14,14 @@ import { handleRegisterModal } from './register-modal.js';
     const dialog = document.querySelector(`dialog.modal[data-type="${type}"]`);
     if (!dialog) return;
 
+    // Enter 또는 Space 키로 모달 열기
+    button.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        button.click();
+      }
+    });
+
     button.addEventListener('click', () => {
       const previouslyFocusedElement = document.activeElement;
 
