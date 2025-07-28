@@ -1,3 +1,7 @@
+* {
+  user-select: none;
+}
+
 .window-container {
   height: 800px;
   width: 1600px;
@@ -10,7 +14,7 @@
 }
 
 .window-screen-wrapper {
-  background-image: url('/public/assets/icons/window-background.jpg');
+  background-image: url('/public/assets/images/window-background.jpg');
   height: 100%;
   width: 100%;
   background-size: cover;
@@ -46,7 +50,6 @@
 .window-icon-imgage {
   width: 55px;
   height: 55px;
-  user-select: none;
 }
 
 .window-icon-name {
@@ -58,7 +61,6 @@
   text-align: center;
   line-height: 1.25rem;
   letter-spacing: -5%;
-  user-select: none;
 }
 
 .window-icon-item__selected {
