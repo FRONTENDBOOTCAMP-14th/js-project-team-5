@@ -1,21 +1,49 @@
-body,
-html {
+html,
+body {
   height: 100%;
+  margin: 0;
 }
+
 .main-container {
   width: 100%;
   height: 100%;
   background-color: var(--primary-indigo);
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
 }
 
+/* 스케일 영역 */
+.monitor-frame-wrapper {
+  width: 100%;
+  max-width: 100rem;
+  aspect-ratio: 1660 / 920; /* 프레임(1660) + 넥 포함 비율 */
+  position: relative;
+  overflow: hidden;
+}
+
+/* 전체 스케일 대상 그룹 */
+.monitor-frame-group {
+  width: 1660px; /* content + border 포함 */
+  height: auto;
+  transform-origin: top left;
+  position: absolute;
+}
+
+/* 프레임 */
 .monitor-frame {
-  width: 100rem;
-  height: 50rem;
-  border: 1.875rem solid var(--gray-600);
-  border-radius: 1.25rem;
+  width: 1600px;
+  height: 800px;
+  border: 30px solid var(--gray-600);
+  border-radius: 20px;
   box-sizing: content-box;
+  position: relative;
+}
+
+/* 받침대 이미지 */
+.monitor-neck {
+  display: block;
+  width: 30%; /* ← 원본 비율과 자연스러운 너비로 조정 (직접 눈으로 확인하며 튜닝 필요) */
+  height: auto;
+  margin: 0 auto;
 }

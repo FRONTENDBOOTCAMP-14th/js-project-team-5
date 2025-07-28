@@ -33,11 +33,35 @@ function clearCleanupTasks() {
   cleanupTasks = [];
 }
 
+function scaleMonitorGroup() {
+  const wrapper = document.querySelector('.monitor-frame-wrapper');
+  const group = document.querySelector('.monitor-frame-group');
+
+  if (!wrapper || !group) return;
+
+  // 실측 기준: 프레임 외곽 사이즈 1660x860 + 넥 여유 포함 약 920px
+  const designWidth = 1660;
+  const designHeight = 920;
+
+  const scaleX = wrapper.clientWidth / designWidth;
+  const scaleY = wrapper.clientHeight / designHeight;
+  const scale = Math.min(scaleX, scaleY);
+
+  group.style.transform = `scale(${scale})`;
+}
+
+window.addEventListener('resize', scaleMonitorGroup);
+window.addEventListener('DOMContentLoaded', scaleMonitorGroup);
+
+function removeDynamicScripts() {
+  console.log('안된다?');
+  document.querySelectorAll('script[data-dynamic]').forEach((el) => el.remove());
+}
+
 function loadHTML(url) {
   const container = document.querySelector('.monitor-frame');
   if (!container) return;
 
-  // 이전 페이지 클린업
   clearCleanupTasks();
   container.innerHTML = '';
 
@@ -49,19 +73,24 @@ function loadHTML(url) {
     .then((html) => {
       container.innerHTML = html;
 
-      const scripts = container.querySelectorAll('script');
+      const scripts = Array.from(container.querySelectorAll('script'));
+      scripts.forEach((s) => s.remove());
+
       scripts.forEach((oldScript) => {
         const newScript = document.createElement('script');
+        newScript.type = oldScript.type || 'text/javascript';
+
         if (oldScript.src) {
-          newScript.src = oldScript.src;
+          const scriptURL = new URL(oldScript.src, location.href);
+          scriptURL.searchParams.set('_ts', Date.now());
+          newScript.src = scriptURL.toString();
         } else {
           newScript.textContent = oldScript.textContent;
         }
-        newScript.type = oldScript.type || 'text/javascript';
+
         document.body.appendChild(newScript);
       });
 
-      // 다음 페이지 JS에서 실행되는 setInterval, addEventListener 등 감시 시작
       hookGlobalAPIs();
     })
     .catch(console.error);
