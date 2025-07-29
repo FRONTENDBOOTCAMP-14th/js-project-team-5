@@ -98,3 +98,8 @@
   outline: 2px solid var(--gray-500);
   border-radius: 3.125rem;
 }
+
+.modal {
+  position: fixed;      /* 또는 absolute */
+  z-index: 1000;        /* 충분히 큰 값 */
+}
