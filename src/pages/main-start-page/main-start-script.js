@@ -1,3 +1,5 @@
+import audioManager from '../../scripts/audiomanager.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   audioManager.setSource('/assets/audio/bgm/main-XRayVision-Slynk.mp3');
   audioManager.audio.volume = 0.3;
