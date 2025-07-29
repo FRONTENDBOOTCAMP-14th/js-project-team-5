@@ -15,4 +15,8 @@ export default defineConfig([
     },
     ignores: ['**/dist/**'],
   },
+  {
+    files: ['customLib.js'],
+    languageOptions: { globals: globals.node },
+  },
 ]);
