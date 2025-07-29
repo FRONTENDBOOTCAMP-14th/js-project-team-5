@@ -1,4 +1,4 @@
-import audioManager from '../../scripts/audioManager.js';
+import audioManager from '../../scripts/audiomanager.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   audioManager.setSource('/assets/audio/bgm/main-XRayVision-Slynk.mp3');
