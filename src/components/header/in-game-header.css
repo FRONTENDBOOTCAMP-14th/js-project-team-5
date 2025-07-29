@@ -16,7 +16,7 @@
 .score-info {
   display: flex;
   gap: 1rem;
-  font-size: var(--text-24);
+  font-size: var(--text-48);
   font-weight: bold;
   color: var(--primary-blue);
 }

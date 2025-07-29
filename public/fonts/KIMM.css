@@ -3,7 +3,9 @@
 
 @font-face {
   font-family: 'KIMM';
-  src: url('/fonts/KIMM_Bold.woff2') format('woff2'), url('/fonts/KIMM_Bold.ttf') format('truetype');
+  src:
+    url('/fonts/KIMM_Bold.woff2') format('woff2'),
+    url('/fonts/KIMM_Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -11,7 +13,9 @@
 
 @font-face {
   font-family: 'KIMM';
-  src: url('/fonts/KIMM_Light.woff2') format('woff2'), url('/fonts/KIMM_Light.ttf') format('truetype');
+  src:
+    url('/fonts/KIMM_Light.woff2') format('woff2'),
+    url('/fonts/KIMM_Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;

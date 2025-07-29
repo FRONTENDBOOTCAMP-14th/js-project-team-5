@@ -5,55 +5,76 @@
     <link rel="icon" href="/assets/icons/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
-    <title>모달 컴포넌트</title>
-    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <title>퀴즈 랜딩 페이지</title>
     <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/src/components/game-choice-header/game-choice-header.css" />
     <link rel="stylesheet" href="/src/components/modal/modal.css" />
-    <link rel="stylesheet" href="/src/components/button/button.css" />
     <link rel="stylesheet" href="/src/components/slider/slider.css" />
-    <script type="module" src="/src/main.js"></script>
+    <link rel="stylesheet" href="/src/components/button/button.css" />
+    <link rel="stylesheet" href="/src/components/card/card.css" />
+    <link rel="stylesheet" href="/src/pages/game-landing/game-landing.css" />
     <script type="module" src="/src/components/modal/modal.js"></script>
     <script type="module" src="/src/components/button/button.js"></script>
     <script type="module" src="/src/components/slider/slider.js"></script>
+    <script type="module" src="/src/pages/game-landing/landing-bgm.js"></script>
   </head>
   <body>
-    <div class="modals-container" data-game="quiz">
-      <h1>모달 컴포넌트</h1>
-      <!-- 게임 설명에 쓰이는 모달 -->
-      <div class="modal-container">
-        <button class="modal-open" data-type="description">게임 설명 모달 열기(테스트용)</button>
+    <div class="landing" data-game="quiz">
+      <header class="game-header">
+        <button>
+          <img src="/assets/icons/back.svg" alt="뒤로가기" class="icon back-icon" />
+        </button>
+        <h1 class="game-title">퀴즈</h1>
+        <div class="icon-group">
+          <button id="soundToggleBtn" class="icon-button">
+            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드" />
+          </button>
+          <button class="icon-button modal-open" data-type="settings">
+            <img src="/assets/icons/option.svg" alt="설정" class="icon" />
+          </button>
+        </div>
+      </header>
+      <div class="landing-card-container">
+        <div class="card w400 modal-open" data-type="description" tabindex="0" role="button">
+          <div class="img-container">
+            <img src="/assets/icons/guide.png" alt="게임 설명" />
+          </div>
+          <h2 class="card-title">게임 설명</h2>
+        </div>
+        <div class="card w400" tabindex="0" role="button">
+          <div class="img-container">
+            <img src="/assets/icons/quiz-alternative.png" alt="게임 시작" />
+          </div>
+          <h2 class="card-title">게임 시작</h2>
+        </div>
+        <div class="card w400 modal-open" data-type="scoreboard" tabindex="0" role="button">
+          <div class="img-container">
+            <img src="/assets/icons/leaderboard.png" alt="점수판" />
+          </div>
+          <h2 class="card-title">점수판</h2>
+        </div>
+      </div>
+      <div class="landing-modal-container">
         <dialog class="modal" data-type="description">
           <div class="modal-inner">
             <h2 class="modal-title">게임 설명</h2>
             <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
-            <div class="modal-content">
-              <!-- 모달 콘텐츠 삽입 -->
-            </div>
+            <div class="modal-content"></div>
           </div>
         </dialog>
-      </div>
-      <!-- 점수판에 쓰이는 모달 -->
-      <div class="modal-container">
-        <button class="modal-open" data-type="scoreboard">점수판 모달 열기(테스트용)</button>
         <dialog class="modal" data-type="scoreboard">
           <div class="modal-inner">
             <h2 class="modal-title">점수판</h2>
             <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
-            <div class="modal-content">
-              <!-- 모달 콘텐츠 삽입 -->
-            </div>
+            <div class="modal-content"></div>
           </div>
         </dialog>
-      </div>
-      <!-- 설정에 쓰이는 모달 -->
-      <div class="modal-container">
-        <button class="modal-open" data-type="settings">설정 모달 열기 (테스트용)</button>
         <dialog class="modal" data-type="settings">
           <div class="modal-inner">
             <h2 class="modal-title">설정</h2>
             <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
             <div class="modal-content">
-              <!-- 모달 콘텐츠 삽입 -->
               <div class="wrapper mode">
                 <span class="text">모드 선택</span>
                 <div class="divider"></div>
@@ -85,43 +106,6 @@
                 </div>
               </div>
               <button type="button" class="exit-button" aria-label="게임을 종료하고 메인 화면으로 이동">게임 종료</button>
-            </div>
-          </div>
-        </dialog>
-      </div>
-      <!-- 게임 일시정지 모달 -->
-      <div class="modal-container">
-        <button class="modal-open" data-type="pause">게임 일시정지 테스트용 버튼</button>
-        <dialog class="modal" data-type="pause">
-          <div class="modal-inner">
-            <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
-            <div class="modal-content">
-              <button type="button" class="pause-modal continue-btn">계속 하기</button>
-              <button type="button" class="pause-modal retry-btn">다시 하기</button>
-              <button type="button" class="pause-modal main-btn">메인 화면</button>
-            </div>
-          </div>
-        </dialog>
-      </div>
-      <!-- 닉네임 입력 모달 -->
-      <div class="modal-container">
-        <button class="modal-open" data-type="register">닉네임 입력 모달 테스트 버튼</button>
-        <dialog class="modal" data-type="register">
-          <div class="modal-inner">
-            <h2 class="modal-title">닉네임을 입력해 주세요!</h2>
-            <div class="modal-content">
-              <!-- 모달 콘텐츠 삽입 -->
-              <form id="nickname-register-form">
-                <label for="nickname-input" class="sr-only">닉네임</label>
-                <!-- 닉네임 입력 필드 -->
-                <input type="text" id="nickname-input" name="nickname" maxlength="10" placeholder="최대 10자" required autocomplete="off" />
-                <!-- 닉네임 중복 여부 확인 메시지 -->
-                <p class="nickname-check-message">이미 사용 중인 닉네임입니다.</p>
-                <div class="modal-button-container">
-                  <button type="submit" class="register-submit-button">확인</button>
-                  <button type="button" class="modal-close-button">취소</button>
-                </div>
-              </form>
             </div>
           </div>
         </dialog>

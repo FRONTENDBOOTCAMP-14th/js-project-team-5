@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko-KR">
   <head>
     <meta charset="UTF-8" />
@@ -17,16 +17,19 @@
     <h2>게임 선택 페이지 헤더 컴포넌트</h2>
 
     <header class="game-header">
-      <img src="/assets/icons/back.svg" alt="뒤로가기" class="icon back-icon" />
-
+      <button>
+        <img src="/assets/icons/back.svg" alt="뒤로가기" class="icon back-icon" />
+      </button>
       <!-- 게임 이름 -->
       <h1 class="game-title">산성비</h1>
 
       <div class="icon-group">
-        <button id="bgmToggleBtn" class="icon-button" aria-label="BGM 토글">
-         <img id="bgmIcon" src="/assets/icons/sound-on.svg" alt="BGM 아이콘" />
+        <button id="soundToggleBtn" class="icon-button">
+          <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드" />
         </button>
-        <img src="/assets/icons/option.svg" alt="설정" class="icon" />
+        <button class="icon-button">
+          <img src="/assets/icons/option.svg" alt="설정" class="icon" />
+        </button>
       </div>
     </header>
   </body>
