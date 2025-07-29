@@ -1,0 +1,215 @@
+body {
+  inline-size: 100vw;
+  block-size: 100vh;
+  background-color: var(--primary-indigo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mole-game-container {
+  display: flex;
+  position: relative;
+  inline-size: 100rem;
+  block-size: 50rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-blue);
+  gap: 3.125rem;
+}
+
+.score-info span {
+  color: var(--primary-white);
+}
+
+.status-bar {
+  z-index: 9999;
+  position: absolute;
+  top: 4.375rem;
+}
+
+.mole-game-map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  flex: 1 1 auto;
+  z-index: 1;
+}
+
+.typing-area {
+  position: absolute;
+  left: 50%;
+  bottom: 2.5rem;
+  transform: translateX(-50%);
+  width: 44.5rem;
+  height: 6.3125rem;
+  box-sizing: border-box;
+  background: var(--primary-white);
+  opacity: 0.7;
+  font-size: var(--text-48);
+  border-radius: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+  z-index: 10;
+}
+
+.typing-area::placeholder {
+  color: var(--primary-blue);
+  font-weight: 700;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.typing-area:not(:placeholder-shown)::placeholder {
+  opacity: 0 !important;
+}
+
+.mole-holes {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 10rem;
+  width: 100%;
+  z-index: 2;
+}
+
+.mole-hole {
+  width: 100px;
+  height: 100px;
+  border-radius: 0%;
+  position: absolute;
+  align-content: center;
+  /* background: transparent; */
+  border:5px solid red;
+  overflow: hidden;
+}
+
+.mole {
+  width: 80px;
+  height: 80px;
+  background: url('/assets/images/mole.png') no-repeat center/contain;
+  position: absolute;
+  bottom: -0;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%); /* 처음엔 땅 아래에 숨김 */
+  opacity: 1;
+  transition: transform 1.5s ease, opacity 0.2s;
+  pointer-events: none;
+}
+
+.mole.show {
+  bottom: 0;
+}
+
+.mole-hole.hole0 {
+  width: 180px;
+  height: 180px;
+  left: 30px;
+  bottom: -40px;
+
+  .mole {
+    scale: 2;
+  }
+}
+.mole-hole.hole1 {
+  left: 85px;
+  bottom: 295px;
+
+  .mole {
+    scale: 1.3;
+  }
+}
+.mole-hole.hole2 {
+  left: 335px;
+  bottom: 135px;
+
+  .mole {
+    scale: 0.9;
+  }
+}
+.mole-hole.hole3 {
+  left: 545px;
+  bottom: 155px;
+
+  .mole {
+    scale: 1.8;
+  }
+}
+.mole-hole.hole4 {
+  left: 495px;
+  bottom: 345px;
+
+  .mole {
+    scale: 1;
+  }
+}
+.mole-hole.hole5 {
+  left: 870px;
+  bottom: 50px;
+
+  .mole {
+    scale: 1.6;
+  }
+}
+.mole-hole.hole6 {
+  left: 845px;
+  bottom: 390px;
+
+  .mole {
+    scale: 0.9;
+  }
+}
+.mole-hole.hole7 {
+  left: 1255px;
+  bottom: -40px;
+
+  .mole {
+    scale: 1.5;
+  }
+}
+.mole-hole.hole8 {
+  left: 1425px;
+  bottom: 5px;
+
+  .mole {
+    scale: 1.8;
+  }
+}
+.mole-hole.hole9 {
+  left: 1345px;
+  bottom: 275px;
+
+  .mole {
+    scale: 1.6;
+  }
+}
+
+.mole-hole .mole.show {
+  transform: translateX(-100%) translateY(0) scale(var(--mole-scale, 1));
+  opacity: 1;
+}
+
+
+
+.mole-word {
+  position: absolute;
+  left: 50%;
+  bottom: 100%; /* 두더지 머리 위 */
+  transform: translateX(-50%) translateY(-10px);
+  background: #ffd700;
+  border: 5px solid #842;
+  color: var(--primary-white);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.70);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0.3em 0.8em;
+  border-radius: 10px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 9999;
+}
