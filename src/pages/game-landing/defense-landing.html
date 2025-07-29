@@ -14,23 +14,23 @@
     <link rel="stylesheet" href="/src/components/button/button.css" />
     <link rel="stylesheet" href="/src/components/card/card.css" />
     <link rel="stylesheet" href="/src/pages/game-landing/game-landing.css" />
-    <script type="module" src="/src/components/game-choice-header/game-choice-header.js"></script>
     <script type="module" src="/src/components/modal/modal.js"></script>
     <script type="module" src="/src/components/button/button.js"></script>
     <script type="module" src="/src/components/slider/slider.js"></script>
+    <script type="module" src="/src/pages/game-landing/landing-bgm.js"></script>
   </head>
   <body>
     <div class="landing" data-game="defense">
       <header class="game-header">
-        <button class="back-button">
+        <button>
           <img src="/assets/icons/back.svg" alt="뒤로가기" class="icon back-icon" />
         </button>
         <h1 class="game-title">디펜스</h1>
         <div class="icon-group">
-          <button id="bgmToggleBtn" class="icon-button" aria-label="BGM 토글">
-            <img id="bgmIcon" src="/assets/icons/sound-on.svg" alt="BGM 아이콘" />
+          <button id="soundToggleBtn" class="icon-button">
+            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드" />
           </button>
-          <button class="modal-open" data-type="settings">
+          <button class="icon-button modal-open" data-type="settings">
             <img src="/assets/icons/option.svg" alt="설정" class="icon" />
           </button>
         </div>
