@@ -55,7 +55,12 @@ body {
   font-size: var(--text-62);
   z-index: 2;
   user-select: none;
-  text-shadow: 0 0 0.25rem var(--pink-500), 0 0 0.75rem var(--pink-500), 0 0 2rem var(--pink-500), 0 0 4rem var(--pink-500), 0 0 5rem rgba(255, 56, 175, 0.5);
+  text-shadow:
+    0 0 0.25rem var(--pink-500),
+    0 0 0.75rem var(--pink-500),
+    0 0 2rem var(--pink-500),
+    0 0 4rem var(--pink-500),
+    0 0 5rem rgba(255, 56, 175, 0.5);
 }
 
 /* game-select */
@@ -176,21 +181,6 @@ body {
   width: 31.25rem;
   height: 5.125rem;
   transform: translateX(-0.9375rem);
-}
-
-.toggle-radio input[type='radio'] {
-  position: absolute;
-  opacity: 0;
-  width: 0.0625rem;
-  height: 0.0625rem;
-}
-
-.toggle-radio .btn:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 0.125rem var(--primary-black); /* 파란색 테두리 효과 */
-  background: var(--gray-100); /* 배경색 변경 */
-  color: var(--primary-black); /* 글자색 변경 */
-  border-radius: 2em;
 }
 
 .shutdown-btn-wrapper {

@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite';
+import { fileURLToPath } from 'url';
 import path from 'path';
-import { findAllHtmlFiles } from './src/scripts/customLib.js';
+import { findAllHtmlFiles } from './customLib.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   build: {

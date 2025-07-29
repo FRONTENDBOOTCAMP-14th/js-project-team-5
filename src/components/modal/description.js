@@ -47,8 +47,8 @@ export function handleDescriptionModal(dialog) {
       // 7. 각 단락을 <p>로 감싸고, 내부 줄바꿈(\n)은 <br>로 처리
       paragraphs.forEach((paragraph, index) => {
         const p = document.createElement('p');
-        p.style.fontSize = '1.5rem';
-        p.style.lineHeight = '1.6'; // 또는 '24px', '2rem'도 가능
+        p.style.fontSize = '1.25rem';
+        p.style.lineHeight = '1.4'; // 또는 '24px', '2rem'도 가능
 
         // 단락 내 줄바꿈을 위해 \n을 <br>로 변환
         const lines = paragraph.split('\n');
