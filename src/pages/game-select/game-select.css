@@ -297,3 +297,8 @@ body {
   border-radius: 3.125rem ;
   transition: width 0.15s;
 }
+
+.modal {
+  position: fixed;     
+  z-index: 1000;        
+}

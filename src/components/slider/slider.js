@@ -19,22 +19,4 @@ function updateBarAndVolume() {
 updateBarAndVolume();
 RANGE.addEventListener('input', updateBarAndVolume);
 
-const bgmRange = document.getElementById("bgm-range");
-const progressFill = bgmRange?.parentElement.querySelector(".progress-fill");
 
-function updateProgressFill(value) {
-  if (progressFill) {
-    progressFill.style.width = `${value}%`;
-  }
-}
-
-if (bgmRange) {
-  // 초기값 반영
-  updateProgressFill(bgmRange.value);
-
-  bgmRange.addEventListener("input", (e) => {
-    const value = e.target.value;
-    audioManager.audio.volume = value / 100;
-    updateProgressFill(value);
-  });
-}
