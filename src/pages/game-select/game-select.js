@@ -1,7 +1,7 @@
 import audioManager from "/src/scripts/audiomanager.js";
 
 audioManager.setSource(
-  "/assets/audio/bgm/acidrain-DiscoHeart-Coyote Hearing.mp3"
+  "/assets/audio/bgm/acidrain-DiscoHeart-Coyote-Hearing.mp3"
 ); // 각자 필요한 배경음악 경로//
 
 
