@@ -8,21 +8,20 @@
     <title>퀴즈 시작 페이지</title>
     <link rel="stylesheet" href="/fonts/KIMM.css" />
     <link rel="stylesheet" href="/src/styles/common/index.css" />
-    <link rel="stylesheet" href="/src/components/game-choice-header/game-choice-header.css" />
     <link rel="stylesheet" href="/src/pages/game-quiz/quiz.css" />
     <script type="module" src="/src/pages/game-quiz/quiz.js"></script>
   </head>
   <body>
     <div class="quiz-container start" data-game="quiz">
-        <button class="quiz-time-attack-btn"><img src="/assets/icons/hourglass.svg" alt="" />타임어택</button>
-        <picture>
-          <source srcset="/assets/images/quiz-title.avif 1x, /assets/images/quiz-title@2x.avif 2x" type="image/avif" />
-          <source srcset="/assets/images/quiz-title.webp 1x, /assets/images/quiz-title@2x.webp 2x" type="image/webp" />
-          <img src="/assets/images/quiz-title.png" srcset="/assets/images/quiz-title@2x.png 2x, /assets/images/quiz-title.png 1x" alt="" />
-        </picture>
-        <button class="quiz-focus-on-btn"><img src="/assets/icons/focus-on.svg" alt="" />집중 모드</button>
-        <button class="quiz-exit-btn">나가기</button>
-      </div>
+      <h1 class="sr-only">퀴즈를 맞춰라!</h1>
+      <button class="quiz-time-attack-btn"><img src="/assets/icons/hourglass.svg" alt="" />타임어택 모드</button>
+      <picture class="quiz-title jello-horizontal">
+        <source srcset="/assets/images/quiz-title.avif 1x, /assets/images/quiz-title@2x.avif 2x" type="image/avif" />
+        <source srcset="/assets/images/quiz-title.webp 1x, /assets/images/quiz-title@2x.webp 2x" type="image/webp" />
+        <img src="/assets/images/quiz-title.png" srcset="/assets/images/quiz-title@2x.png 2x, /assets/images/quiz-title.png 1x" alt="" />
+      </picture>
+      <button class="quiz-focus-on-btn"><img src="/assets/icons/focus-on.svg" alt="" />집중 모드</button>
+      <button class="quiz-exit-btn">나가기</button>
     </div>
   </body>
 </html>

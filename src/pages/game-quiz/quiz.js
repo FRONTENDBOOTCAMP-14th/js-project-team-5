@@ -32,3 +32,15 @@ quizContainer.addEventListener('click', (e) => {
     // loadHTML('/src/pages/game-quiz/quiz-time-attack.html');
   }
 });
+
+// 타이틀 애니메이션 끝나면 버튼 페이드인
+const title = quizContainer.querySelector('.quiz-title');
+const buttons = quizContainer.querySelectorAll('.quiz-time-attack-btn, .quiz-focus-on-btn');
+const exitBtn = quizContainer.querySelector('.quiz-exit-btn');
+
+if (title) {
+  title.addEventListener('animationend', () => {
+    buttons.forEach((btn) => btn.classList.add('fade-in-up'));
+    exitBtn.classList.add('fade-in');
+  });
+}
