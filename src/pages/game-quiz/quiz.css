@@ -151,6 +151,24 @@
       font-size: var(--text-16);
       color: var(--gray-400);
     }
+
+    /* 문제 답 입력 시, 스타일 변경 */
+    transition:
+      border 0.2s,
+      box-shadow 0.2s;
+
+    &.correct {
+      box-shadow:
+        0 0 0 0.25rem #2ecc40,
+        0 0 2rem 0.5rem #2ecc40;
+      transition: box-shadow 0.2s;
+    }
+    &.wrong {
+      box-shadow:
+        0 0 0 0.25rem #ff4136,
+        0 0 2rem 0.5rem #ff4136;
+      transition: box-shadow 0.2s;
+    }
   }
 
   .countdown-overlay {

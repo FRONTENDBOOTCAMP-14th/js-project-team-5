@@ -2,10 +2,15 @@
 import audioManager from '/src/scripts/audiomanager.js';
 // import { loadHTML } from '/src/components/window/controlWindow.js';
 
+// 효과음 관리
+const correctSfx = new Audio('/assets/audio/sfx/quiz-correct.mp3');
+const wrongSfx = new Audio('/assets/audio/sfx/quiz-wrong.mp3');
+
 // 주요 DOM 요소
 const quizContainer = document.querySelector('.quiz-container');
 const timeSpan = quizContainer.querySelector('.score-info span:last-child');
 const bar = quizContainer.querySelector('.progress-bar');
+const questionContainer = quizContainer.querySelector('.quiz-question-container');
 const progressTextQ = quizContainer.querySelector('.progress-text span:first-child');
 const questionText = quizContainer.querySelector('.question-text');
 const currentQ = quizContainer.querySelector('.current-question');
@@ -120,8 +125,21 @@ function showQuestion() {
 
 function handleAnswer(input) {
   if (input === generalQuizList[currentQuestion - 1]?.answer) {
+    correctSfx.currentTime = 0;
+    correctSfx.play();
+
+    questionContainer.classList.remove('wrong');
+    questionContainer.classList.add('correct');
+    setTimeout(() => questionContainer.classList.remove('correct'), 1000);
     correctCount++;
     score += 10; // 정답일 경우 10점 추가
+  } else {
+    wrongSfx.currentTime = 0;
+    wrongSfx.play();
+
+    questionContainer.classList.remove('correct');
+    questionContainer.classList.add('wrong');
+    setTimeout(() => questionContainer.classList.remove('wrong'), 1000);
   }
   currentQuestion++;
   showQuestion();
@@ -204,4 +222,7 @@ function initAudio() {
     iconSelector: '#soundIcon',
     buttonSelector: '#soundToggleBtn',
   });
+  // 효과음 볼륨 설정
+  correctSfx.volume = volume;
+  wrongSfx.volume = volume - 0.1; // 오답 효과음 기본 볼륨이 커서 약간 낮춤
 }

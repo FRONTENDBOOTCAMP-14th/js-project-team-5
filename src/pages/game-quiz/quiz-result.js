@@ -17,9 +17,9 @@ initResult();
 
 resultButtons.addEventListener('click', (e) => {
   const button = e.target;
-  if (button.classList.contains('.retry-button')) {
+  if (button.classList.contains('retry-button')) {
     loadHTML(LOAD_URL);
-  } else if (button.classList.contains('.main-button')) {
+  } else if (button.classList.contains('main-button')) {
     loadHTML('/src/pages/game-quiz/quiz-start.html');
   }
 });
