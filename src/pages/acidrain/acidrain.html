@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/assets/icons/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
+    <title>산성비 타자 게임</title>
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/pages/acidrain/acidrain.css" />
+    <link rel="stylesheet" href="/src/components/header/in-game-header.css" />
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/pages/acidrain/acidrain.js"></script>
+    <script type="module" src="/src/scripts/audiomanager.js"></script>
+  </head>
+
+  <body>
+    <div class="acidrain-bg">
+      <!-- 상단 상태바 -->
+      <div class="status-bar">
+        <div class="score-info">
+          <span id="score">점수: 0</span>
+          <span id="time">시간: 60초</span>
+        </div>
+
+        <div class="icon-group">
+          <button id="soundToggleBtn" class="icon-button" aria-label="사운드 켜기">
+            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드 아이콘" />
+          </button>
+          <button class="icon-button" aria-label="일시정지">
+            <img src="/assets/icons/pause.svg" alt="일시정지 아이콘" />
+          </button>
+        </div>
+      </div>
+
+      <!-- 게임 영역 -->
+      <div class="game-body">
+        <input type="text" class="typing-input" placeholder="여기에 입력하세요" aria-label="타자 입력창" />
+      </div>
+<!-- 🎮 게임 오버 모달 -->
+<div id="gameOverModal" class="game-over-modal" hidden>
+  <div class="game-over-box">
+    <p class="final-label">최종 점수</p>
+    <p class="final-score" id="finalScore">0</p>
+    <div class="modal-button-group">
+      <button class="modal-button">리더보드등록</button>
+      <button class="modal-button" id="retryBtn">다시 하기</button>
+      <button class="modal-button" id="goHomeBtn">메인 화면</button>
+    </div>
+  </div>
+</div>
+  </div>
+  </body>
+</html>
