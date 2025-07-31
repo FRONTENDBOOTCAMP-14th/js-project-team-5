@@ -14,7 +14,7 @@
 }
 
 .window-screen-wrapper {
-  background-image: url('/public/assets/images/window-background.jpg');
+  background-image: url('/assets/images/window-background.jpg');
   height: 100%;
   width: 100%;
   background-size: cover;
