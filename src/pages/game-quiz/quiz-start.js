@@ -27,9 +27,9 @@ quizContainer.addEventListener('click', (e) => {
   if (button.classList.contains('quiz-exit-btn')) {
     // loadHTML('/src/pages/game-landing/quiz-landing.html');
   } else if (button.classList.contains('quiz-focus-on-btn')) {
-    // loadHTML('/src/pages/game-quiz/quiz-focus-on.html');
+    loadHTML('/src/pages/game-quiz/quiz-focus-on.html');
   } else if (button.classList.contains('quiz-time-attack-btn')) {
-    // loadHTML('/src/pages/game-quiz/quiz-time-attack.html');
+    loadHTML('/src/pages/game-quiz/quiz-time-attack.html');
   }
 });
 
@@ -44,35 +44,3 @@ if (title) {
     exitBtn.classList.add('fade-in');
   });
 }
-
-// 카운트다운
-const countdownEl = quizContainer.querySelector('.countdown-overlay');
-let count = 5;
-
-function showCountdown() {
-  countdownEl.textContent = count;
-  countdownEl.classList.remove('hide');
-  const interval = setInterval(() => {
-    count--;
-    if (count > 0) {
-      countdownEl.textContent = count;
-    } else if (count === 0) {
-      countdownEl.textContent = '시작!';
-    } else {
-      countdownEl.classList.add('hide');
-      clearInterval(interval);
-      // 게임 시작 로직 실행
-    }
-  }, 1000);
-}
-
-showCountdown();
-
-function updateProgressBar(current, total) {
-  const bar = quizContainer.querySelector('.progress-bar');
-  const percent = (current / total) * 100;
-  bar.style.setProperty('--progress', percent + '%');
-  bar.style.setProperty('--progress-width', percent + '%');
-}
-// 예시: 15개 풀었을 때
-updateProgressBar(15, 30);
