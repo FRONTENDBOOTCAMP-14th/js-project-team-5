@@ -24,10 +24,10 @@
           <span>시간: 60초</span>
         </div>
         <div class="icon-group">
-          <button id="soundToggleBtn" class="icon-button">
+          <button id="soundToggleBtn" class="icon-button" tabindex="2">
             <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드" />
           </button>
-          <button class="icon-button modal-open" data-type="pause">
+          <button class="icon-button modal-open" data-type="pause" tabindex="3">
             <img src="/assets/icons/pause.svg" alt="일시정지" />
           </button>
         </div>
@@ -42,7 +42,7 @@
           <strong class="question-text">여기에 퀴즈 질문이 표시됩니다.</strong>
           <p class="guide-text"><em>Enter</em> 또는 <em>space</em> 키를 눌러 정답을 제출하세요.</p>
         </div>
-        <input type="text" class="typing-input" placeholder="정답을 입력해 주세요." aria-label="타자 입력창" />
+        <input type="text" class="typing-input" placeholder="정답을 입력해 주세요." aria-label="타자 입력창" tabindex="1" />
       </main>
       <dialog class="modal" data-type="pause">
         <div class="modal-inner">

@@ -43,7 +43,7 @@ initQuizGame();
 
 function initQuizGame() {
   initAudio();
-  typingInput.focus();
+  if (typingInput) typingInput.focus();
   fetch(QUIZ_LIST_DEV)
     .then((response) => {
       if (!response.ok) throw new Error('문제 데이터를 불러오지 못했습니다.');
