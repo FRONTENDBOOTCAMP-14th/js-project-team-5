@@ -28,7 +28,7 @@
     flex-shrink: 0;
 
     font-size: var(--text-32);
-    font-weight: 700;
+    font-weight: bold;
     color: var(--primary-black);
 
     img {
@@ -50,7 +50,7 @@
     padding: 0.5rem 1rem;
 
     font-size: var(--text-24);
-    font-weight: 700;
+    font-weight: bold;
     letter-spacing: 0.225rem;
     color: var(--primary-black);
     &:hover,
@@ -58,6 +58,135 @@
       border: none;
       border-radius: 3.125rem;
       background-color: var(--primary-white);
+    }
+  }
+}
+
+.quiz-container.time-attack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .quiz-main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    row-gap: 1.875rem;
+
+    .typing-input {
+      width: 54.6875rem;
+      height: 4.6875rem;
+      border-radius: 3.125rem;
+      font-size: var(--text-32);
+    }
+  }
+
+  .progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 1.25rem;
+
+    .progress-bar {
+      position: relative;
+      width: 54.6875rem;
+      height: 1.875rem;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 3.125rem;
+      overflow: hidden;
+    }
+    /* 가상 요소를 통해 문제 진행 상황 표시 */
+    .progress-bar::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--progress-width, 0%); /* 0%는 기본값(문제 풀기 전, 아무것도 채워지지 않음) */
+      background: var(--primary-black);
+      border-radius: 1rem;
+      transition: width 0.3s;
+    }
+
+    .progress-text {
+      display: flex;
+      flex-direction: row;
+      column-gap: 0.625rem;
+      justify-content: center;
+      font-size: var(--text-24);
+      font-weight: bold;
+    }
+  }
+
+  .quiz-question-container {
+    width: 56.25rem;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    gap: 8.4375rem;
+    padding: 1.25rem;
+
+    background-color: var(--primary-white);
+    border-radius: 1.5rem;
+
+    .question-text {
+      font-size: var(--text-48);
+      font-weight: bold;
+      color: var(--primary-black);
+    }
+    .guide-text {
+      font-size: var(--text-16);
+      color: var(--gray-400);
+    }
+  }
+
+  .countdown-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    align-content: center;
+    text-align: center;
+    background: var(--primary-white);
+    border-radius: 1.5rem;
+    color: var(--primary-black);
+    font-size: 9.375rem;
+    font-weight: bold;
+  }
+  .countdown-overlay.hide {
+    display: none;
+  }
+
+  .modal {
+    .modal-inner {
+      border: none;
+      box-shadow: 0 0 3.125rem var(--blue-900);
+      background-color: #dff3f3;
+    }
+    .continue-btn,
+    .retry-btn,
+    .main-btn {
+      width: 21.875rem;
+      height: 5.625rem;
+      background-color: var(--primary-white);
+      border: 0;
+      box-shadow: 0.25rem 0.25rem 0.625rem 0 rgba(0, 0, 0, 0.25);
+      border-radius: 1rem;
+      font-weight: bold;
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--red-100);
+      }
     }
   }
 }
