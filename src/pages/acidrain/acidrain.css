@@ -49,7 +49,6 @@ body {
   background-color: var(--primary-white);
 }
 
-
 /* 🕹 전체 배경 오버레이 */
 .game-over-modal {
   position: absolute;
@@ -109,14 +108,17 @@ body {
   background-color: var(--primary-white); /* 흰색 배경 */
   border: 2px solid var(--gray-300); /* 회색 테두리 */
   color: var(--gray-500); /* 회색 글자 */
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    border-color 0.3s;
 }
 
 /* 호버 상태: 배경 파란색 + 글자색 흰색 + 테두리 파란색 */
 .modal-button:hover {
-  background-color: var(--primary-cyan);   /* 파란색 배경 */
-  color: var(--primary-white);                /* 흰 글자 */
-  border-color: var(--primary-cyan);       /* 파란 테두리 */
+  background-color: var(--primary-cyan); /* 파란색 배경 */
+  color: var(--primary-white); /* 흰 글자 */
+  border-color: var(--primary-cyan); /* 파란 테두리 */
 }
 
 .modal-button:focus-visible {
@@ -129,4 +131,36 @@ body {
 /* hidden 속성이 있으면 display: none 처리 */
 .game-over-modal[hidden] {
   display: none !important;
+}
+
+.countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  animation: pulse 0.9s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.countdown {
+  animation: pulse 1s ease-in-out;
 }
