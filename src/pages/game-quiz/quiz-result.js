@@ -26,12 +26,18 @@ resultButtons.addEventListener('click', (e) => {
   }
 });
 
+/**
+ * 결과 페이지의 점수, 총 문제 수, 정답 개수를 UI에 표시
+ */
 function initResult() {
   scoreText.textContent = result.score;
   totalText.textContent = result.total;
   correctText.textContent = result.correct;
 }
 
+/**
+ * 오디오 매니저 초기화하고, 효과음 재생 후 배경음악을 재생
+ */
 function initAudio() {
   let volume = localStorage.getItem('quizVolume');
   if (volume === null) volume = 0.3;

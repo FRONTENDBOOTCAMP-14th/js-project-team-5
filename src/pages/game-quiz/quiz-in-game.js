@@ -16,14 +16,13 @@ const questionText = quizContainer.querySelector('.question-text');
 const currentQ = quizContainer.querySelector('.current-question');
 const typingInput = quizContainer.querySelector('.typing-input');
 
-//  2. 문제 데이터
+//  2. 문제 데이터 경로 및 상태 변수 선언
 const QUIZ_LIST_NORMAL = '/data/quiz-normal.json'; // 일반 모드
 const QUIZ_LIST_DEV = '/data/quiz-dev.json'; // 개발자 모드
 // 일반 모드, 개발자 모드 분기 필요
 
 let generalQuizList = [];
 
-//  3. 게임 상태 변수
 let currentQuestion = 0;
 let timer = 0;
 let timerInterval = null;
@@ -46,6 +45,9 @@ if (typingInput) {
 
 initQuizGame();
 
+/**
+ *  4. 퀴즈 게임을 초기화하고 문제 데이터를 불러온 뒤, 이벤트 리스너 등록
+ */
 function initQuizGame() {
   initAudio();
   if (typingInput) typingInput.focus();
@@ -55,7 +57,7 @@ function initQuizGame() {
       return response.json();
     })
     .then((data) => {
-      generalQuizList = data;
+      generalQuizList = suffleQuestion(data); // 문제 순서 섞기
       ({ totalQuestions, startTime } = initModeSettings());
       timer = startTime;
       showCountdown();
@@ -78,8 +80,22 @@ function initQuizGame() {
     });
 }
 
-//  5. 게임 핵심 로직
+/**
+ * 5. 문제 배열을 Fisher-Yates 알고리즘으로 무작위로 섞어 반환
+ * @param {Array} data - 문제 객체 배열
+ * @returns {Array} 섞인 문제 배열
+ */
+function suffleQuestion(data) {
+  for (let i = data.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [data[i], data[j]] = [data[j], data[i]];
+  }
+  return data;
+}
 
+/**
+ * 6. 게임을 시작하고, 상태값을 초기화하며 첫 문제를 표시
+ */
 function startGame() {
   isGameActive = true;
   currentQuestion = 1;
@@ -91,6 +107,9 @@ function startGame() {
   startTimer();
 }
 
+/**
+ * 6-1. 타이머를 1초마다 감소시키고, 시간이 다 되면 게임 종료
+ */
 function startTimer() {
   timerInterval = setInterval(() => {
     timer--;
@@ -102,11 +121,18 @@ function startTimer() {
   }, 1000);
 }
 
-//  6. UI 업데이트 함수
+/**
+ * 6-2. 남은 시간 및 점수를 UI에 표시
+ * @param {number} time - 남은 시간(초)
+ */
 function updateTimeUI(time) {
   if (timeSpan) timeSpan.textContent = `시간: ${time}초`;
+  if (scoreText) scoreText.textContent = `점수: ${score}점`;
 }
 
+/**
+ * 6-3. 현재 문제를 화면에 표시하고, 진행률 업데이트
+ */
 function showQuestion() {
   // 현재 질문이 총 질문 수를 초과하면 게임 종료
   if (currentQuestion > totalQuestions) {
@@ -123,6 +149,10 @@ function showQuestion() {
   if (currentQ) currentQ.textContent = currentQuestion + 1;
 }
 
+/**
+ * 6-4. 사용자의 답안을 채점하고, 정답/오답 효과 및 점수 처리
+ * @param {string} input - 사용자가 입력한 답
+ */
 function handleAnswer(input) {
   if (input === generalQuizList[currentQuestion - 1]?.answer) {
     correctSfx.currentTime = 0;
@@ -145,6 +175,9 @@ function handleAnswer(input) {
   showQuestion();
 }
 
+/**
+ * 6-5. 게임을 종료하고, 결과를 sessionStorage에 저장한 뒤 결과 페이지로 이동
+ */
 function endGame() {
   isGameActive = false;
   clearInterval(timerInterval);
@@ -162,6 +195,11 @@ function endGame() {
   loadHTML('/src/pages/game-quiz/quiz-result.html');
 }
 
+/**
+ * 7. 진행률 바와 진행률 텍스트 업데이트
+ * @param {number} current - 현재 문제 번호
+ * @param {number} total - 전체 문제 수
+ */
 function updateProgressBar(current, total) {
   const percent = (current / total) * 100;
   bar.style.setProperty('--progress', percent + '%');
@@ -169,7 +207,9 @@ function updateProgressBar(current, total) {
   progressTextQ.textContent = current; // 진행률 텍스트 업데이트
 }
 
-//  7. 카운트다운 및 모드별 초기화
+/**
+ * 8. 카운트다운 표시 및 카운트다운 종료 후 게임 시작
+ */
 function showCountdown() {
   const countdownEl = quizContainer.querySelector('.countdown-overlay');
   let count = 5;
@@ -193,7 +233,10 @@ function showCountdown() {
   }, 1000);
 }
 
-//  8. 모드별 세팅 및 오디오
+/**
+ * 9. 모드별(집중/타임어택)로 문제 수와 제한 시간을 설정하고, UI에 반영
+ * @returns {{totalQuestions: number, startTime: number}} 문제 수와 제한 시간
+ */
 function initModeSettings() {
   let totalQuestions = 30;
   let startTime = 60;
@@ -212,6 +255,9 @@ function initModeSettings() {
   return { totalQuestions, startTime };
 }
 
+/**
+ * 10. 오디오 매니저 초기화하고, bgm과 효과음 볼륨 및 UI 설정
+ */
 function initAudio() {
   let volume = localStorage.getItem('quizVolume');
   if (volume === null) volume = 0.3;
