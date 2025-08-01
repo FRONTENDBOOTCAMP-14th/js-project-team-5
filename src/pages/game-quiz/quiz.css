@@ -1,6 +1,6 @@
 .quiz-container {
-  inline-size: 100%;
-  block-size: 100%;
+  inline-size: 100rem; /* 1600px */
+  block-size: 50rem; /* 800px */
   padding: 2rem;
   background-image: image-set(url('/assets/images/quiz-bg.avif') type('image/avif') 1x, url('/assets/images/quiz-bg@2x.avif') type('image/avif') 2x, url('/assets/images/quiz-bg.webp') type('image/webp') 1x, url('/assets/images/quiz-bg@2x.webp') type('image/webp') 2x, url('/assets/images/quiz-bg.png') type('image/png') 1x, url('/assets/images/quiz-bg@2x.png') type('image/png') 2x);
   background-size: cover;
