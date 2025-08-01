@@ -58,7 +58,7 @@ function removeDynamicScripts() {
   document.querySelectorAll('script[data-dynamic]').forEach((el) => el.remove());
 }
 
-function loadHTML(url) {
+export function loadHTML(url) {
   const container = document.querySelector('.monitor-frame');
   if (!container) return;
 

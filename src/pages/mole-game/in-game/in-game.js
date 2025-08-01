@@ -315,6 +315,18 @@ function showRandomMoles() {
   });
 }
 
+function pauseGame() {
+  if (gameEnded) return;
+  // 모든 루프, 타이머 멈춤
+  if (timer) clearInterval(timer);
+  if (showMolesInterval) clearInterval(showMolesInterval);
+  moleTimers.forEach(clearTimeout);
+  typingArea.disabled = true;
+  // 모달창 띄우기
+  const pauseDialog = document.querySelector('dialog[data-type="pause"]');
+  if (pauseDialog) pauseDialog.showModal();
+}
+
 function stopGame() {
   if (gameEnded) return;
   gameEnded = true;
@@ -456,7 +468,7 @@ function onTypingInput() {
 }
 
 function onPauseButtonClick() {
-  stopGame();
+  pauseGame();
 }
 
 function onContinueClick() {
@@ -504,7 +516,7 @@ function onRetryClick() {
 }
 
 function onMainClick() {
-  window.location.href = '/src/pages/game-landing/whack-landing.html';
+  loadHTML('/src/pages/game-landing/whack-landing.html');
 }
 
 function onWindowResize() {
@@ -616,6 +628,16 @@ function attachEventListeners() {
   if (mainBtn) {
     mainBtn.removeEventListener('click', onMainClick);
     mainBtn.addEventListener('click', onMainClick);
+  }
+  const pauseBtn = document.querySelector('.icon-button.modal-open[data-type="pause"]');
+  if (pauseBtn) {
+    pauseBtn.removeEventListener('click', onPauseButtonClick);
+    pauseBtn.addEventListener('click', onPauseButtonClick);
+  }
+  const soundIconBtn = document.getElementById('soundToggleBtn');
+  if (soundIconBtn) {
+    soundIconBtn.removeEventListener('click', pauseGame);
+    soundIconBtn.addEventListener('click', pauseGame);
   }
 }
 
