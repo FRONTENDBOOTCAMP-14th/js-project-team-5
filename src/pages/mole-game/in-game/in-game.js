@@ -251,7 +251,7 @@ function showRandomMoles() {
     if (!mole.classList.contains('show')) {
       mole.classList.remove('show');
       words[idx].textContent = '';
-      words[idx].style.opacity = '1';
+      words[idx].style.opacity = '0';
 
       const frypan = document.querySelector(`.frypan-img[data-mole="${idx}"]`);
       if (frypan) {
@@ -262,15 +262,16 @@ function showRandomMoles() {
     }
   });
 
-  const count = Math.floor(Math.random() * 2) + 2;
+  const count = 4;
   const indexes = [];
   while (indexes.length < count) {
     const randIdx = Math.floor(Math.random() * moles.length);
     if (!indexes.includes(randIdx)) indexes.push(randIdx);
   }
 
-  indexes.forEach((idx, i) => {
-    const delay = i * 500;
+  // 각 두더지마다 무작위 타이밍(delay) 적용
+  indexes.forEach((idx) => {
+    const delay = Math.floor(Math.random() * 1200); // 0~1200ms 사이 랜덤 딜레이
 
     const showTimer = setTimeout(() => {
       if (gameEnded) return;
@@ -298,7 +299,7 @@ function showRandomMoles() {
 
         moles[idx].classList.remove('show', 'hit');
         words[idx].textContent = '';
-        words[idx].style.opacity = '1';
+        words[idx].style.opacity = '0';
         moles[idx].hideTimeout = null;
 
         const frypan = document.querySelector(`.frypan-img[data-mole="${idx}"]`);
@@ -323,6 +324,12 @@ function stopGame() {
   moleTimers = [];
 
   typingArea.disabled = true;
+
+  // 최종 점수를 localStorage에 저장
+  localStorage.setItem('moleGameScore', score);
+
+  // 결과 페이지 로드
+  loadHTML('/src/pages/mole-game/mole-game-result/mole-game-result.html');
 }
 
 function startTimer() {
@@ -367,6 +374,7 @@ function handleCorrectAnswer(matchedIdx) {
   if (frypan && moleImg) {
     frypan.classList.remove('miss');
     frypan.classList.add('hit');
+    wordBox.classList.add('rotate');
 
     const onFrypanAnimationEnd = (event) => {
       if (event.animationName.includes('frypan-hit')) {
@@ -377,10 +385,13 @@ function handleCorrectAnswer(matchedIdx) {
         setTimeout(() => {
           visibleMole.classList.add('hide');
           visibleMole.classList.remove('show', 'hit');
+          wordBox.style.opacity = '0';
 
           setTimeout(() => {
             moleImg.classList.remove('rotate');
             visibleMole.classList.remove('hide');
+            wordBox.classList.remove('rotate'); // 회전 클래스 제거
+            wordBox.style.opacity = '0'; // 다음 등장에 대비
           }, 500);
         }, 200);
       }

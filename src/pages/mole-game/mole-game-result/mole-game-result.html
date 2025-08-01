@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko-KR">
   <head>
     <meta charset="UTF-8" />
@@ -10,29 +10,27 @@
     <link rel="stylesheet" href="/src/styles/common/index.css" />
     <link rel="stylesheet" href="/src/pages/mole-game/mole-game-result/mole-game-result.css" />
     <link rel="stylesheet" href="/src/components/modal/modal.css" />
-    <script type="module" src="/src/components/modal/modal.js"></script>
-    <script type="module" src="/src/pages/mole-game/mole-game-result/mole-game-result.js"></script>
   </head>
   <body>
-    <div class="game-result-container ">
+    <div class="game-result-container">
       <div class="score-container">
-        <div class="score-text fade-target">최종 점수</div>
-        <div class="score-number fade-target">3,530</div>
+        <div class="score-text">최종 점수</div>
+        <div class="score-number">0</div>
       </div>
-<div class="brown-mole fade-target">
-  <img src="/public/assets/images/mole.png" alt="갈색두더지" />
-</div>
-<div class="golden-mole fade-target">
-  <img src="/public/assets/images/gold-mole.png" alt="황금두더지" />
-</div>
+      <div class="brown-mole">
+        <img src="/public/assets/images/mole.png" alt="갈색두더지" />
+      </div>
+      <div class="golden-mole">
+        <img src="/public/assets/images/gold-mole.png" alt="황금두더지" />
+      </div>
       <!-- 돌아가기, 다시하기 등 페이지 이동 -->
-    <div class="button-container ">
-      <button type="button" class="leaderboard btn modal-open fade-target" data-type="register">점수판 등록</button>
-      <button type="button" class="move-main btn fade-target">메인화면</button>
-      <button type="button" class="regame btn fade-target">다시하기</button>
-    </div>
-    
-<div class="modal-container">
+      <div class="button-container">
+        <button type="button" class="leaderboard btn modal-open" data-type="register">점수판 등록</button>
+        <button type="button" class="move-main btn">메인화면</button>
+        <button type="button" class="regame btn">다시하기</button>
+      </div>
+
+      <div class="modal-container">
         <dialog class="modal" data-type="register">
           <div class="modal-inner">
             <h2 class="modal-title">닉네임을 입력해 주세요!</h2>
@@ -54,5 +52,6 @@
         </dialog>
       </div>
     </div>
+    <script type="module" src="/src/pages/mole-game/mole-game-result/mole-game-result.js" /></script>
   </body>
 </html>
