@@ -27,6 +27,7 @@ let timer = 0;
 let timerInterval = null;
 let countdownInterval = null;
 let countdownValue = null;
+let isCountdownActive = false;
 let correctCount = 0;
 let score = 0;
 let isGameActive = false;
@@ -42,6 +43,10 @@ initQuizGame();
 function typingInputHandler(e) {
   if (!isGameActive) return;
   if (e.key === 'Enter' || e.key === ' ') {
+    if (isCountdownActive) {
+      e.preventDefault(); // 카운트다운 중이면 무시
+      return;
+    }
     if (!e.target.value.trim()) return;
     handleAnswer(e.target.value);
     e.target.value = '';
@@ -283,6 +288,7 @@ function updateProgressBar(current, total) {
 
 // 18. 카운트다운
 function showCountdown() {
+  isCountdownActive = true;
   clearInterval(countdownInterval);
   const countdownEl = quizContainer.querySelector('.countdown-overlay');
   let count = countdownValue !== null ? countdownValue : 5;
@@ -299,6 +305,7 @@ function showCountdown() {
     } else {
       countdownEl.classList.add('hide');
       clearInterval(countdownInterval);
+      isCountdownActive = false;
       countdownInterval = null;
       countdownValue = null;
       startGame();
