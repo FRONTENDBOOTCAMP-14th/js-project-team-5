@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/assets/icons/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
+    <title>퀴즈 결과 페이지</title>
+    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/src/pages/game-quiz/quiz.css" />
+    <link rel="stylesheet" href="/src/components/button/button.css" />
+    <link rel="stylesheet" href="/src/components/modal/modal.css" />
+  </head>
+  <body>
+    <div class="quiz-container result" data-game="quiz">
+      <h1 class="sr-only">퀴즈를 맞춰라!</h1>
+      <div class="quiz-result-container">
+        <h2 class="quiz-result-title">최종 결과</h2>
+        <p class="quiz-score-text"><span id="score">0</span>점</p>
+        <div class="quiz-result-details">
+          <p class="quiz-question-text">푼 문제 수: <span id="total">0</span></p>
+          <p class="quiz-question-text">맞춘 문제 수: <span id="correct">0</span></p>
+        </div>
+      </div>
+
+      <div class="quiz-result-buttons">
+        <button type="button" class="open-modal-btn modal-open" data-type="register">점수판 등록</button>
+        <button type="button" class="page-move-btn retry-button">다시하기</button>
+        <button type="button" class="page-move-btn main-button">메인화면</button>
+      </div>
+    </div>
+    <dialog class="modal" data-type="register">
+      <div class="modal-inner">
+        <h2 class="modal-title">닉네임을 입력해 주세요!</h2>
+        <div class="modal-content">
+          <!-- 모달 콘텐츠 삽입 -->
+          <form id="nickname-register-form">
+            <label for="nickname-input" class="sr-only">닉네임</label>
+            <!-- 닉네임 입력 필드 -->
+            <input type="text" id="nickname-input" name="nickname" maxlength="10" placeholder="최대 10자" required autocomplete="off" />
+            <!-- 닉네임 중복 여부 확인 메시지 -->
+            <p class="nickname-check-message">이미 사용 중인 닉네임입니다.</p>
+            <div class="modal-button-container">
+              <button type="submit" class="register-submit-button">확인</button>
+              <button type="button" class="modal-close-button">취소</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </dialog>
+    <script type="module" src="/src/pages/game-quiz/quiz-result.js"></script>
+    <script type="module" src="/src/components/modal/modal.js"></script>
+  </body>
+</html>

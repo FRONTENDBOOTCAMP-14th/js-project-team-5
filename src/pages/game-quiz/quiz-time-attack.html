@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/assets/icons/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
+    <title>퀴즈 - 타임 어택 모드</title>
+    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/src/components/header/in-game-header.css" />
+    <link rel="stylesheet" href="/src/components/button/button.css" />
+    <link rel="stylesheet" href="/src/components/modal/modal.css" />
+    <link rel="stylesheet" href="/src/components/input/input.css" />
+    <link rel="stylesheet" href="/src/pages/game-quiz/quiz.css" />
+  </head>
+  <body>
+    <div class="quiz-container time-attack" data-game="quiz">
+      <h1 class="sr-only">퀴즈를 맞춰라!</h1>
+      <h2 class="sr-only">타임어택 모드</h2>
+      <header class="status-bar">
+        <div class="score-info">
+          <span>점수: 0</span>
+          <span>시간: 60초</span>
+        </div>
+        <div class="icon-group">
+          <button id="soundToggleBtn" class="icon-button" tabindex="2">
+            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드" />
+          </button>
+          <button class="icon-button modal-open" data-type="pause" tabindex="3">
+            <img src="/assets/icons/pause.svg" alt="일시정지" />
+          </button>
+        </div>
+      </header>
+      <main class="quiz-main">
+        <div class="progress">
+          <div class="progress-bar"></div>
+          <p class="progress-text">문제 <span>0</span> / 30</p>
+        </div>
+        <div class="quiz-question-container">
+          <strong class="countdown-overlay" aria-live="assertive"></strong>
+          <strong class="question-text">여기에 퀴즈 질문이 표시됩니다.</strong>
+          <p class="guide-text"><em>Enter</em> 또는 <em>space</em> 키를 눌러 정답을 제출하세요.</p>
+        </div>
+        <input type="text" class="typing-input" placeholder="정답을 입력해 주세요." aria-label="타자 입력창" tabindex="1" />
+      </main>
+      <dialog class="modal" data-type="pause">
+        <div class="modal-inner">
+          <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
+          <div class="modal-content">
+            <button type="button" class="pause-modal continue-btn">계속 하기</button>
+            <button type="button" class="pause-modal retry-btn">다시 하기</button>
+            <button type="button" class="pause-modal main-btn">메인 화면</button>
+          </div>
+        </div>
+      </dialog>
+    </div>
+    <script type="module" src="/src/components/modal/modal.js"></script>
+    <script type="module" src="/src/pages/game-quiz/quiz-in-game.js"></script>
+  </body>
+</html>
