@@ -5,7 +5,7 @@
     <link rel="icon" href="/assets/icons/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
-    <title>game-select</title>
+    <title>두더지잡기</title>
     <link rel="stylesheet" href="/fonts/KIMM.css" />
     <link rel="stylesheet" href="/src/styles/common/index.css" />
     <link rel="stylesheet" href="/src/pages/mole-game/in-game/in-game.css" />
@@ -14,17 +14,9 @@
     <link rel="stylesheet" href="/src/components/slider/slider.css" />
     <link rel="stylesheet" href="/src/components/button/button.css" />
     <link rel="stylesheet" href="/src/components/card/card.css" />
-    <script type="module" src="/src/pages/mole-game/in-game/in-game.js"></script>
-    <script type="module" src="/src/components/header/in-game-header.js"></script>
-    <script type="module" src="/src/components/modal/modal.js"></script>
-
-    <!-- 
-    <script type="module" src="/src/components/game-choice-header/game-choice-header.js"></script>
-    <script type="module" src="/src/components/button/button.js"></script>
-    <script type="module" src="/src/components/slider/slider.js"></script> -->
   </head>
   <body>
-    <div class="mole-game-container">
+    <div class="mole-game-container" data-game="whack">
       <!-- 헤더 -->
       <div class="status-bar">
         <div class="score-info">
@@ -36,81 +28,80 @@
           <button id="soundToggleBtn" class="icon-button" aria-label="사운드 켜기">
             <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드 아이콘" />
           </button>
-          <button class="icon-button" aria-label="일시정지">
+          <button class="icon-button modal-open" aria-label="일시정지" data-type="pause">
             <img src="/assets/icons/pause.svg" alt="일시정지 아이콘" />
           </button>
         </div>
       </div>
       <img class="mole-game-map" src="/assets/images/mole-game-theme.jpg" alt="두더지 게임 맵" />
-      <input type="text" class="typing-area" aria-label="정답 입력란" placeholder="단어를 입력해 주세요" />
       <div class="mole-holes">
-        <div class="mole-hole hole0" data-index="0"></div>
-        <div class="mole-hole hole1" data-index="1"></div>
-        <div class="mole-hole hole2" data-index="2"></div>
-        <div class="mole-hole hole3" data-index="3"></div>
-        <div class="mole-hole hole4" data-index="4"></div>
-        <div class="mole-hole hole5" data-index="5"></div>
-        <div class="mole-hole hole6" data-index="6"></div>
-        <div class="mole-hole hole7" data-index="7"></div>
-        <div class="mole-hole hole8" data-index="8"></div>
-        <div class="mole-hole hole9" data-index="9"></div>
-      </div>
-        <input type="text" class="typing-area" aria-label="정답 입력란" placeholder="단어를 입력해 주세요" required />
-      </div>
-    </div>
 
-    <!-- 설정 창 modal -->
-    <!-- <div class="modal-container"> -->
-    <div class="modal-container">
-      <dialog class="modal" data-type="common">
-        <div class="modal-inner">
-          <h2 class="modal-title">설정</h2>
-          <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
-          <div class="modal-content">
-            <!-- 모달 콘텐츠 삽입 -->
-            <!-- 게임 설명 or 점수판 or 설정 콘텐츠 -->
-            <div class="setting-action-wrapper">
-              <!-- 모드 변경 라디오 -->
-              <div class="toggle-radio-wrapper">
-                <span class="text">모드 선택</span>
-                <div class="divider"></div>
-                <div class="toggle-radio">
-                  <input type="radio" id="normal" name="mode" checked tabindex="0" />
-                  <label for="normal" class="btn normal">일반 모드</label>
-                  <input type="radio" id="dev" name="mode" tabindex="0" />
-                  <label for="dev" class="btn dev">개발자 모드</label>
-                </div>
-              </div>
-              <!-- BGM 슬라이더 -->
-              <div class="bgm-slider-wrapper">
-                <span class="text">BGM</span>
-                <div class="divider"></div>
-                <div class="bgm-slider-custom">
-                  <div class="progress-bg">
-                    <div class="progress-fill"></div>
-                  </div>
-                  <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="bgm-range" />
-                </div>
-              </div>
-              <!-- 효과음 슬라이더 -->
-              <div class="effect-slider-wrapper">
-                <span class="text">효과음</span>
-                <div class="divider"></div>
-                <div class="effect-slider-custom">
-                  <div class="progress-bg">
-                    <div class="progress-fill"></div>
-                  </div>
-                  <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="effect-range" />
-                </div>
-              </div>
-              <!-- 게임종료 버튼 -->
-              <div class="shutdown-btn-wrapper">
-                <button type="button" class="shutdown-btn">게임 종료</button>
-              </div>
+  <div class="mole-holes">
+  <!-- 두더지(구멍) 영역: 절대 위치/스케일 스타일 따로 적용 -->
+  <div class="mole mole0 " data-index="0">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <div class="mole mole1" data-index="1">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <div class="mole mole2" data-index="2">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <div class="mole mole3" data-index="3">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <div class="mole mole4" data-index="4">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <div class="mole mole5" data-index="5">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <div class="mole mole6" data-index="6">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <div class="mole mole7" data-index="7">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <div class="mole mole8" data-index="8">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <div class="mole mole9" data-index="9">
+    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+  </div>
+  <!-- 단어 표시 영역: 부모 기준 절대 위치로 JS로 위치 잡아주면 됨 -->
+  <div class="mole-word-container">
+    <div class="mole-word" data-index="0"></div>
+    <div class="mole-word" data-index="1"></div>
+    <div class="mole-word" data-index="2"></div>
+    <div class="mole-word" data-index="3"></div>
+    <div class="mole-word" data-index="4"></div>
+    <div class="mole-word" data-index="5"></div>
+    <div class="mole-word" data-index="6"></div>
+    <div class="mole-word" data-index="7"></div>
+    <div class="mole-word" data-index="8"></div>
+    <div class="mole-word" data-index="9"></div>
+  </div>
+</div>
+      </div>
+        <input type="text" class="typing-area" aria-label="정답 입력란" placeholder="단어를 입력해 주세요" required spellcheck="false" autocomplete="off"/>
+      </div>
+    
+<div class="modal-container">
+        <dialog class="modal" data-type="pause">
+          <div class="modal-inner">
+            <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
+            <div class="modal-content">
+              <button type="button" class="pause-modal continue-btn">계속 하기</button>
+              <button type="button" class="pause-modal retry-btn">다시 하기</button>
+              <button type="button" class="pause-modal main-btn">메인 화면</button>
             </div>
           </div>
-        </div>
-      </dialog>
-    </div>
+        </dialog>
+      </div>
+      </div>
+    <script type="module" src="/src/pages/mole-game/in-game/in-game.js"></script>
+    <script type="module" src="/src/components/header/in-game-header.js"></script>
+    <script type="module" src="/src/components/modal/modal.js"></script>
+    <script type="module" src="/src/components/modal/pause-modal/whack-pause.js"></script>
   </body>
 </html>
