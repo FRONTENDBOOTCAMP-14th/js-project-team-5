@@ -297,8 +297,11 @@ body {
   border-radius: 3.125rem ;
   transition: width 0.15s;
 }
+<<<<<<< HEAD
 
 .modal {
   position: fixed;     
   z-index: 1000;        
 }
+=======
+>>>>>>> c2c4b36390fee8dbc92f5e44b611b59db353d07d
