@@ -397,11 +397,6 @@ typingInput.addEventListener('keydown', (e) => {
 });
 
 // =====================================
-//  다시하기 버튼
-// =====================================
-retryBtn.addEventListener('click');
-
-// =====================================
 //  메인 버튼
 // =====================================
 const goHomeBtn = document.getElementById('goHomeBtn');
