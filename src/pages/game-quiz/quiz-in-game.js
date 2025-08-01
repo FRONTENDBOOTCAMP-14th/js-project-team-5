@@ -32,6 +32,7 @@ let score = 0;
 let isGameActive = false;
 let totalQuestions = 0;
 let startTime = 0;
+let comboCount = 0;
 
 //  4. 초기화 및 이벤트 바인딩
 
@@ -58,7 +59,7 @@ function initQuizGame() {
       return response.json();
     })
     .then((data) => {
-      generalQuizList = suffleQuestion(data); // 문제 순서 섞기
+      generalQuizList = data; // 문제 순서 섞기
       ({ totalQuestions, startTime } = initModeSettings());
       timer = startTime;
       showCountdown();
@@ -127,7 +128,7 @@ function startTimer() {
  * @param {number} time - 남은 시간(초)
  * @param {number} score - 현재 점수
  */
-function updateTimeUI(time, score) {
+function updateTimeUI(time, score = 0) {
   if (timeText) timeText.textContent = `시간: ${time}초`;
   if (scoreText) scoreText.textContent = `점수: ${score}점`;
 }
@@ -157,6 +158,12 @@ function showQuestion() {
  */
 function handleAnswer(input) {
   if (input === generalQuizList[currentQuestion - 1]?.answer) {
+    comboCount++;
+    let comboBonus = 0;
+    if ([3, 5, 10, 15, 20, 25, 30].includes(comboCount)) {
+      comboBonus = 5;
+      showComboUI(comboCount); // 콤보 UI 표시 함수 호출
+    }
     correctSfx.currentTime = 0;
     correctSfx.play();
 
@@ -164,8 +171,10 @@ function handleAnswer(input) {
     questionContainer.classList.add('correct');
     setTimeout(() => questionContainer.classList.remove('correct'), 1000);
     correctCount++;
-    score += 10; // 정답일 경우 10점 추가
+
+    score += 10 + comboBonus; // 정답 점수 + 콤보 보너스
   } else {
+    comboCount = 0; // 오답 시 콤보 초기화
     wrongSfx.currentTime = 0;
     wrongSfx.play();
 
@@ -175,6 +184,22 @@ function handleAnswer(input) {
   }
   currentQuestion++;
   showQuestion();
+}
+
+/**
+ * 6-4-1. 콤보 달성 시 콤보 UI를 화면에 표시
+ * @param {number} combo - 현재 콤보 수
+ */
+function showComboUI(combo) {
+  // 기존 콤보 UI가 있으면 제거
+  const prev = questionContainer.querySelector('.combo-ui');
+  if (prev) prev.remove();
+
+  const comboEl = document.createElement('div');
+  comboEl.className = 'combo-ui';
+  comboEl.textContent = `🎉 ${combo} COMBO 🎉`;
+  questionContainer.prepend(comboEl); // 문제 카드 안 맨 위에 추가
+  setTimeout(() => comboEl.remove(), 1000);
 }
 
 /**
