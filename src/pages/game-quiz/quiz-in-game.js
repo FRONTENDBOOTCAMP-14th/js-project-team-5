@@ -8,7 +8,8 @@ const wrongSfx = new Audio('/assets/audio/sfx/quiz-wrong.mp3');
 
 // 주요 DOM 요소
 const quizContainer = document.querySelector('.quiz-container');
-const timeSpan = quizContainer.querySelector('.score-info span:last-child');
+const scoreText = quizContainer.querySelector('.score-info span:first-child');
+const timeText = quizContainer.querySelector('.score-info span:last-child');
 const bar = quizContainer.querySelector('.progress-bar');
 const questionContainer = quizContainer.querySelector('.quiz-question-container');
 const progressTextQ = quizContainer.querySelector('.progress-text span:first-child');
@@ -113,7 +114,7 @@ function startGame() {
 function startTimer() {
   timerInterval = setInterval(() => {
     timer--;
-    updateTimeUI(timer);
+    updateTimeUI(timer, score);
     if (timer <= 0) {
       clearInterval(timerInterval);
       endGame();
@@ -124,9 +125,10 @@ function startTimer() {
 /**
  * 6-2. 남은 시간 및 점수를 UI에 표시
  * @param {number} time - 남은 시간(초)
+ * @param {number} score - 현재 점수
  */
-function updateTimeUI(time) {
-  if (timeSpan) timeSpan.textContent = `시간: ${time}초`;
+function updateTimeUI(time, score) {
+  if (timeText) timeText.textContent = `시간: ${time}초`;
   if (scoreText) scoreText.textContent = `점수: ${score}점`;
 }
 
