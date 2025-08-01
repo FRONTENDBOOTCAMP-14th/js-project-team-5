@@ -2,6 +2,8 @@ import audioManager from '/src/scripts/audiomanager.js';
 // import { loadHTML } from '/src/components/window/controlWindow.js';
 
 const result = JSON.parse(sessionStorage.getItem('quizResult'));
+// 효과음 관리
+const gameOverSfx = new Audio('/assets/audio/sfx/quiz-game-over2.mp3');
 
 // 다시하기 버튼 클릭 시, 이동할 페이지 경로 설정
 const LOAD_URL = result.mode === 'time-attack' ? '/src/pages/game-quiz/quiz-time-attack.html' : '/src/pages/game-quiz/quiz-focus-on.html';
@@ -35,9 +37,16 @@ function initAudio() {
   if (volume === null) volume = 0.3;
   audioManager.setSource('/assets/audio/bgm/quiz-WildPogo-Francis-Preve.mp3');
   audioManager.audio.volume = volume;
-  audioManager.play();
   audioManager.setUI({
     iconSelector: '#soundIcon',
     buttonSelector: '#soundToggleBtn',
   });
+  gameOverSfx.volume = volume;
+  gameOverSfx.loop = false;
+  gameOverSfx.playbackRate = 1.2;
+  gameOverSfx.play();
+  // 게임 오버 사운드가 끝나면 배경음악 재생
+  gameOverSfx.onended = () => {
+    audioManager.play();
+  };
 }
