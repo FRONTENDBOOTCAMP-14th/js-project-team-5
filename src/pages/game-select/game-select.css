@@ -277,7 +277,6 @@ body {
   border-radius: 3.125rem;
 }
 
-
 .bgm-slider-custom .progress-bg {
   position: absolute;
   top: 0;
@@ -294,14 +293,11 @@ body {
 .bgm-slider-custom .progress-fill {
   height: 100%;
   background: var(--gray-500);
-  border-radius: 3.125rem ;
+  border-radius: 3.125rem;
   transition: width 0.15s;
 }
-<<<<<<< HEAD
 
 .modal {
-  position: fixed;     
-  z-index: 1000;        
+  position: fixed;
+  z-index: 1000;
 }
-=======
->>>>>>> c2c4b36390fee8dbc92f5e44b611b59db353d07d
