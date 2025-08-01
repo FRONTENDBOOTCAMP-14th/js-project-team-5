@@ -1,3 +1,5 @@
+import { loadHTML } from '/src/components/monitor/controlMonitor.js';
+
 (() => {
   const audio = document.getElementById('bg-audio');
   const image = document.querySelector('.window-start-image');

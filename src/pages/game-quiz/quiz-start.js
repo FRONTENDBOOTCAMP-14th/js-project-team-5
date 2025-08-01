@@ -1,5 +1,5 @@
 import audioManager from '/src/scripts/audiomanager.js';
-// import { loadHTML } from '/src/components/window/controlWindow.js';
+import { loadHTML } from '/src/components/monitor/controlMonitor.js';
 
 const quizContainer = document.querySelector('.quiz-container');
 
@@ -12,7 +12,7 @@ quizContainer.addEventListener('click', (e) => {
 
   // 페이지 연결은 추후에 다시 연결할 예정
   if (button.classList.contains('quiz-exit-btn')) {
-    // loadHTML('/src/pages/game-landing/quiz-landing.html');
+    loadHTML('/src/pages/game-landing/quiz-landing.html');
   } else if (button.classList.contains('quiz-focus-on-btn')) {
     loadHTML('/src/pages/game-quiz/quiz-focus-on.html');
   } else if (button.classList.contains('quiz-time-attack-btn')) {

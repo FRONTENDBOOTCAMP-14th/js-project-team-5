@@ -1,4 +1,4 @@
-import audioManager from '/src/scripts/audiomanager.js'; // 필요하면 포함
+// import audioManager from '/src/scripts/audiomanager.js'; // 필요하면 포함
 
 // === 전역 변수 ===
 let moles = document.querySelectorAll('.mole');
