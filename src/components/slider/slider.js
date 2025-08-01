@@ -18,5 +18,3 @@ function updateBarAndVolume() {
 
 updateBarAndVolume();
 RANGE.addEventListener('input', updateBarAndVolume);
-
-

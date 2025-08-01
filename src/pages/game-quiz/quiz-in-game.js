@@ -1,5 +1,6 @@
 // 1. 모듈/상수/DOM 요소 선언
 import audioManager from '/src/scripts/audiomanager.js';
+import { loadHTML } from '/src/components/monitor/controlMonitor.js';
 
 // 효과음 관리
 const correctSfx = new Audio('/assets/audio/sfx/quiz-correct.mp3');
@@ -18,7 +19,7 @@ const typingInput = quizContainer.querySelector('.typing-input');
 const pauseButton = document.querySelector('[data-type="pause"]');
 
 // 2. 문제 데이터 경로 및 상태 변수 선언
-const QUIZ_LIST_NORMAL = '/data/quiz-normal.json'; // 일반 모드
+// const QUIZ_LIST_NORMAL = '/data/quiz-normal.json'; // 일반 모드
 const QUIZ_LIST_DEV = '/data/quiz-dev.json'; // 개발자 모드
 
 let generalQuizList = [];
@@ -109,7 +110,7 @@ function initQuizGame() {
       return response.json();
     })
     .then((data) => {
-      generalQuizList = data;
+      generalQuizList = shuffleQuestion(data);
       ({ totalQuestions, startTime } = initModeSettings());
       timer = startTime;
       showCountdown();

@@ -1,4 +1,5 @@
-//import { loadHTML } from '/src/components/window/controlWindow.js';
+import { loadHTML } from '/src/components/monitor/controlMonitor.js';
+
 //=====================================
 // 🎵 오디오 매니저 설정 (유저 컨트롤 포함)
 // =====================================

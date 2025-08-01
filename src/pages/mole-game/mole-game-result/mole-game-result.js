@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
+  const scoreNumber = document.querySelector('.score-number');
   const score = localStorage.getItem('moleGameScore') || 0;
   if (scoreNumber) scoreNumber.textContent = score.toLocaleString();
 });
