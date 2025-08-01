@@ -1,0 +1,38 @@
+.defence-game-frame {
+  display: block;
+  margin: 0 auto;
+}
+
+/* 상태 바 (점수/시간) */
+.status-bar {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 30px;
+  border-radius: 10px;
+  display: flex;
+  gap: 40px;
+  z-index: 10;
+}
+
+/* 입력창 */
+.typing-input {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  padding: 10px 20px;
+  border: 3px solid #5ba1f0;
+  border-radius: 10px;
+  outline: none;
+  background-color: #fff;
+  color: #222;
+  z-index: 10;
+  width: 400px;
+  box-shadow: 0 0 10px rgba(91, 161, 240, 0.5);
+}

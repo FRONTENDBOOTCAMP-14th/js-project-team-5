@@ -1,0 +1,166 @@
+/* 전체 화면 설정 및 배경 */
+body {
+  font-family: 'KIMM', Arial, sans-serif;
+  inline-size: 100vw;
+  block-size: 100vh;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acidrain-bg {
+  position: relative;
+  inline-size: 1600px;
+  block-size: 800px;
+  background: url('/assets/images/acidrain-background.png');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 상태바 영역*/
+
+.status-bar {
+  padding-top: 3rem; /* 상단 여백 */
+}
+
+/* 게임 인풋 영역 */
+.game-body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* 하단 정렬 */
+  inline-size: 100%;
+  padding-top: 38rem; /* 상단 여백 */
+  padding-block-end: 2.5rem;
+  box-sizing: border-box;
+}
+
+.typing-input {
+  font-weight: bold;
+  inline-size: 21.25rem;
+  block-size: 3.25rem;
+  text-align: center;
+  border: 0.125rem solid var(--primary-black);
+  border-radius: 5rem;
+  outline: none;
+  background-color: var(--primary-white);
+}
+
+/* 🕹 전체 배경 오버레이 */
+.game-over-modal {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.25); /* 흐린 어두운 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 🪟 모달 중앙 박스 */
+.game-over-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem 3rem;
+  border-radius: 1.25rem;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  min-inline-size: 20rem;
+}
+
+/* 텍스트 */
+.final-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.final-score {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+/* 버튼 그룹: 가로 정렬 */
+.modal-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* 버튼 공통 */
+.modal-button {
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+}
+
+/* 기본 상태: 회색 테두리 + 흰 배경 + 회색 글자 */
+.modal-button {
+  background-color: var(--primary-white); /* 흰색 배경 */
+  border: 2px solid var(--gray-300); /* 회색 테두리 */
+  color: var(--gray-500); /* 회색 글자 */
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    border-color 0.3s;
+}
+
+/* 호버 상태: 배경 파란색 + 글자색 흰색 + 테두리 파란색 */
+.modal-button:hover {
+  background-color: var(--primary-cyan); /* 파란색 배경 */
+  color: var(--primary-white); /* 흰 글자 */
+  border-color: var(--primary-cyan); /* 파란 테두리 */
+}
+
+.modal-button:focus-visible {
+  background-color: var(--primary-cyan);
+  color: var(--primary-white);
+  border-color: var(--primary-cyan);
+  outline: none; /* 기본 브라우저 포커스 링 제거 (선택사항) */
+}
+
+/* hidden 속성이 있으면 display: none 처리 */
+.game-over-modal[hidden] {
+  display: none !important;
+}
+
+.countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  animation: pulse 0.9s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.countdown {
+  animation: pulse 1s ease-in-out;
+}

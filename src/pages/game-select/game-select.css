@@ -276,3 +276,28 @@ body {
   outline: 2px solid var(--gray-500);
   border-radius: 3.125rem;
 }
+
+.bgm-slider-custom .progress-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 3.125rem;
+  background: #ccc;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.bgm-slider-custom .progress-fill {
+  height: 100%;
+  background: var(--gray-500);
+  border-radius: 3.125rem;
+  transition: width 0.15s;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+}
