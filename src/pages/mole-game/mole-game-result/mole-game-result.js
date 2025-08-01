@@ -10,19 +10,30 @@ document.addEventListener('DOMContentLoaded', () => {
   if (scoreNumber) scoreNumber.textContent = '0';
 
   // 초기 상태: opacity 0
-  [scoreText, scoreNumber, brownMole, goldenMole, ...buttons].forEach(el => {
+  [scoreText, scoreNumber, brownMole, goldenMole, ...buttons].forEach((el) => {
     if (el) el.classList.remove('fade-in');
   });
 
-  setTimeout(() => { if (scoreText) scoreText.classList.add('fade-in'); }, 300);
-  setTimeout(() => { if (scoreNumber) scoreNumber.classList.add('fade-in'); }, 900);
-  setTimeout(() => { if (brownMole) brownMole.classList.add('fade-in'); }, 1300);
-  setTimeout(() => { if (goldenMole) goldenMole.classList.add('fade-in'); }, 1700);
+  setTimeout(() => {
+    if (scoreText) scoreText.classList.add('fade-in');
+  }, 300);
+  setTimeout(() => {
+    if (scoreNumber) scoreNumber.classList.add('fade-in');
+  }, 900);
+  setTimeout(() => {
+    if (brownMole) brownMole.classList.add('fade-in');
+  }, 1300);
+  setTimeout(() => {
+    if (goldenMole) goldenMole.classList.add('fade-in');
+  }, 1700);
 
   buttons.forEach((btn, idx) => {
-    setTimeout(() => {
-      btn.classList.add('fade-in');
-    }, 2100 + idx * 400);
+    setTimeout(
+      () => {
+        btn.classList.add('fade-in');
+      },
+      2100 + idx * 400
+    );
   });
 
   // 모든 fade-in이 끝난 뒤(마지막 버튼 기준) 카운팅 시작
