@@ -23,6 +23,7 @@ import { handleRegisterModal } from './register-modal.js';
     });
 
     button.addEventListener('click', () => {
+      console.log("테스트")
       const previouslyFocusedElement = document.activeElement;
 
       dialog.show();

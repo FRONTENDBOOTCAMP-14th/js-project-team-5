@@ -253,8 +253,9 @@ function addScore(pt) {
 }
 
 //게임 오버
-function gameOver() {
-  gameState = 'gameover';
+function gameOver(flag) {
+  console.log("테스트")
+  if(flag)gameState = 'gameover';
   finalScore = score;
   finalTime = timer;
   score = 0;
@@ -314,7 +315,7 @@ function render() {
         let dmg = m.img === images.m1 ? 5 : m.img === images.m2 ? 10 : 20;
         towerHealth = Math.max(0, towerHealth - dmg);
         if (towerHealth <= 0) {
-          gameOver();
+          gameOver(true);
           requestAnimationFrame(render);
           return;
         }
@@ -395,7 +396,8 @@ canvas.addEventListener('click', (e) => {
   }
 });
 
-function gameStart() {
+export function gameStart() {
+  gameOver(false)
   gameState = 'fadeout';
   fadeAlpha = 0;
   statusBar.querySelectorAll('span')[1].textContent = `시간: ${timer}초`;
@@ -403,4 +405,25 @@ function gameStart() {
   audioGame.volume = 0.5;
   audioGame.currentTime = 0;
   audioGame.play().catch(() => {});
+}
+
+export function goToMainMenu() {
+  gameOver(false)
+  audioGame.pause();
+  audioTitle.volume = 0.5;
+  audioTitle.currentTime = 0;
+  audioTitle.play().catch((err) => console.warn('타이틀 브금 재생 실패:', err));
+  gameState = 'title';
+}
+
+export function pauseGame() {
+  clearInterval(timerInterval);
+  clearInterval(spawnInterval1);
+  clearInterval(spawnInterval2);
+  clearInterval(spawnInterval3);
+}
+
+export function resumeGame() {
+  // spawn 루프와 타이머 재시작
+  startMonsterSpawnLoop();
 }

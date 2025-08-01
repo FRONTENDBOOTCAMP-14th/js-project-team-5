@@ -1,4 +1,5 @@
 let cleanupTasks = [];
+let prevHtml = null;
 
 function hookGlobalAPIs() {
   const originalSetInterval = window.setInterval;
@@ -54,7 +55,6 @@ window.addEventListener('resize', scaleMonitorGroup);
 window.addEventListener('DOMContentLoaded', scaleMonitorGroup);
 
 function removeDynamicScripts() {
-  console.log('안된다?');
   document.querySelectorAll('script[data-dynamic]').forEach((el) => el.remove());
 }
 
@@ -95,5 +95,7 @@ function loadHTML(url) {
     })
     .catch(console.error);
 }
+
+
 
 window.loadHTML = loadHTML;
