@@ -1,4 +1,6 @@
 import { setupPauseDialogClickHandler } from './pause-util.js';
+// import {loadHTML} from '/src/components/window/controlWindow.js';
+import { resumeGame, restartGame, goToMain } from '/src/pages/game-quiz/quiz-in-game.js';
 
 /**
  * 퀴즈(Quiz) 게임에서 일시정지 모달의 버튼 클릭 핸들러를 설정한다.
@@ -19,16 +21,16 @@ export function handleQuizPause(dialog) {
   // 기존에 있던 console.log는 제거하고 필요한 로직만 남기기
   setupPauseDialogClickHandler(dialog, {
     continue: () => {
-      console.log('퀴즈 계속하기');
       // 퀴즈 계속하기 로직
+      resumeGame();
     },
     retry: () => {
-      console.log('퀴즈 다시하기');
       // 퀴즈 다시하기 로직
+      restartGame();
     },
     main: () => {
-      console.log('퀴즈 메인 화면으로 이동');
       // 메인 화면 이동 로직
+      goToMain();
     },
   });
 }
