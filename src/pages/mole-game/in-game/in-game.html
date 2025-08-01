@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko-KR">
   <head>
     <meta charset="UTF-8" />
@@ -35,73 +35,70 @@
       </div>
       <img class="mole-game-map" src="/assets/images/mole-game-theme.jpg" alt="두더지 게임 맵" />
       <div class="mole-holes">
-
-  <div class="mole-holes">
-  <!-- 두더지(구멍) 영역: 절대 위치/스케일 스타일 따로 적용 -->
-  <div class="mole mole0 " data-index="0">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <div class="mole mole1" data-index="1">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <div class="mole mole2" data-index="2">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <div class="mole mole3" data-index="3">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <div class="mole mole4" data-index="4">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <div class="mole mole5" data-index="5">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <div class="mole mole6" data-index="6">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <div class="mole mole7" data-index="7">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <div class="mole mole8" data-index="8">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <div class="mole mole9" data-index="9">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
-  </div>
-  <!-- 단어 표시 영역: 부모 기준 절대 위치로 JS로 위치 잡아주면 됨 -->
-  <div class="mole-word-container">
-    <div class="mole-word" data-index="0"></div>
-    <div class="mole-word" data-index="1"></div>
-    <div class="mole-word" data-index="2"></div>
-    <div class="mole-word" data-index="3"></div>
-    <div class="mole-word" data-index="4"></div>
-    <div class="mole-word" data-index="5"></div>
-    <div class="mole-word" data-index="6"></div>
-    <div class="mole-word" data-index="7"></div>
-    <div class="mole-word" data-index="8"></div>
-    <div class="mole-word" data-index="9"></div>
-  </div>
-</div>
-      </div>
-        <input type="text" class="typing-area" aria-label="정답 입력란" placeholder="단어를 입력해 주세요" required spellcheck="false" autocomplete="off"/>
-      </div>
-    
-<div class="modal-container">
-        <dialog class="modal" data-type="pause">
-          <div class="modal-inner">
-            <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
-            <div class="modal-content">
-              <button type="button" class="pause-modal continue-btn">계속 하기</button>
-              <button type="button" class="pause-modal retry-btn">다시 하기</button>
-              <button type="button" class="pause-modal main-btn">메인 화면</button>
-            </div>
+        <div class="mole-holes">
+          <!-- 두더지(구멍) 영역: 절대 위치/스케일 스타일 따로 적용 -->
+          <div class="mole mole0" data-index="0">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
           </div>
-        </dialog>
+          <div class="mole mole1" data-index="1">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+          </div>
+          <div class="mole mole2" data-index="2">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+          </div>
+          <div class="mole mole3" data-index="3">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+          </div>
+          <div class="mole mole4" data-index="4">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+          </div>
+          <div class="mole mole5" data-index="5">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+          </div>
+          <div class="mole mole6" data-index="6">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+          </div>
+          <div class="mole mole7" data-index="7">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+          </div>
+          <div class="mole mole8" data-index="8">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+          </div>
+          <div class="mole mole9" data-index="9">
+            <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+          </div>
+          <!-- 단어 표시 영역: 부모 기준 절대 위치로 JS로 위치 잡아주면 됨 -->
+          <div class="mole-word-container">
+            <div class="mole-word" data-index="0"></div>
+            <div class="mole-word" data-index="1"></div>
+            <div class="mole-word" data-index="2"></div>
+            <div class="mole-word" data-index="3"></div>
+            <div class="mole-word" data-index="4"></div>
+            <div class="mole-word" data-index="5"></div>
+            <div class="mole-word" data-index="6"></div>
+            <div class="mole-word" data-index="7"></div>
+            <div class="mole-word" data-index="8"></div>
+            <div class="mole-word" data-index="9"></div>
+          </div>
+        </div>
       </div>
-      </div>
+      <input type="text" class="typing-area" aria-label="정답 입력란" placeholder="단어를 입력해 주세요" required spellcheck="false" autocomplete="off" />
+    </div>
+
+    <div class="modal-container">
+      <dialog class="modal" data-type="pause">
+        <div class="modal-inner">
+          <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
+          <div class="modal-content">
+            <button type="button" class="pause-modal continue-btn">계속 하기</button>
+            <button type="button" class="pause-modal retry-btn">다시 하기</button>
+            <button type="button" class="pause-modal main-btn">메인 화면</button>
+          </div>
+        </div>
+      </dialog>
+    </div>
     <script type="module" src="/src/pages/mole-game/in-game/in-game.js"></script>
     <script type="module" src="/src/components/header/in-game-header.js"></script>
     <script type="module" src="/src/components/modal/modal.js"></script>
-    <script type="module" src="/src/components/modal/pause-modal/whack-pause.js"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 import audioManager from '/src/scripts/audiomanager.js';
-// import { loadHTML } from '/src/components/window/controlWindow.js';
+import { loadHTML } from '/src/components/monitor/controlMonitor.js';
 
 const result = JSON.parse(sessionStorage.getItem('quizResult'));
 // 효과음 관리
