@@ -8,17 +8,13 @@ body {
 }
 
 .mole-game-container {
-  display: flex;
   position: relative;
-  inline-size: 100rem;
-  block-size: 50rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: var(--primary-blue);
-  gap: 3.125rem;
+  width: 100rem;
+  height: 50rem; /* 게임 영역 높이 조절 */
+  background-color: #d9f0ff; /* 배경색(예시) */
+  overflow: hidden;
+  user-select: none;
 }
-
 .score-info span {
   color: var(--primary-white);
 }
@@ -51,14 +47,16 @@ body {
   background: var(--primary-white);
   opacity: 0.7;
   font-size: var(--text-48);
-  border-radius: 1.5rem;
+  border-radius: 0.75rem;
   text-align: center;
   font-weight: 700;
   z-index: 10;
+  border: none;
+  color: var(--primary-black);
 }
 
 .typing-area::placeholder {
-  color: var(--primary-blue);
+  color: var(--primary-black);
   font-weight: 700;
   opacity: 0.7;
   transition: opacity 0.2s;
@@ -68,148 +66,367 @@ body {
   opacity: 0 !important;
 }
 
+.modal {
+  z-index: 9999;
+}
+
+.modal-inner {
+  z-index:9999;
+}
+
+.typing-area:focus {
+  outline: none;
+  border: 3px solid black;
+  box-shadow: 0 0 0 1px black, 2px 2px 0 0 black, 4px 4px 0 0 black;
+  image-rendering: pixelated;
+}
+.penalty-image {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 1600px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
 .mole-holes {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  position: absolute;
-  bottom: 10rem;
+  position: relative;
   width: 100%;
+  height: 500px;
+  bottom: 0;
   z-index: 2;
+  /* layout은 절대 위치로 구멍 배치 */
 }
 
-.mole-hole {
-  width: 100px;
-  height: 100px;
-  border-radius: 0%;
-  position: absolute;
-  align-content: center;
-  /* background: transparent; */
-  border:5px solid red;
-  overflow: hidden;
-}
-
+/* 두더지 기본 스타일 */
 .mole {
+  position: absolute;
   width: 80px;
   height: 80px;
-  background: url('/assets/images/mole.png') no-repeat center/contain;
-  position: absolute;
-  bottom: -0;
+  overflow: hidden; /* 구멍 역할로 넘치는 부분 숨김 */
+  transition: none;
+  cursor: pointer;
+  transform: translateX(-50%);
   left: 50%;
-  transform: translateX(-50%) translateY(100%); /* 처음엔 땅 아래에 숨김 */
-  opacity: 1;
-  transition: transform 1.5s ease, opacity 0.2s;
-  pointer-events: none;
+}
+
+.mole-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: translateY(100%);
+  transition: transform 1s cubic-bezier(0.2, 0.7, 0.41, 1.01);
+}
+
+.mole.show .mole-img {
+  transform: translateY(0);
 }
 
 .mole.show {
-  bottom: 0;
+  transform: translateX(-50%) translateY(0);
 }
 
-.mole-hole.hole0 {
-  width: 180px;
-  height: 180px;
-  left: 30px;
-  bottom: -40px;
-
-  .mole {
-    scale: 2;
-  }
+.mole0 {
+  left: 120px;
+  bottom: -200px;
+  width: 160px; /* 80px * 2 */
+  height: 160px; /* 80px * 2 */
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
 }
-.mole-hole.hole1 {
-  left: 85px;
-  bottom: 295px;
-
-  .mole {
-    scale: 1.3;
-  }
-}
-.mole-hole.hole2 {
-  left: 335px;
-  bottom: 135px;
-
-  .mole {
-    scale: 0.9;
-  }
-}
-.mole-hole.hole3 {
-  left: 545px;
-  bottom: 155px;
-
-  .mole {
-    scale: 1.8;
-  }
-}
-.mole-hole.hole4 {
-  left: 495px;
-  bottom: 345px;
-
-  .mole {
-    scale: 1;
-  }
-}
-.mole-hole.hole5 {
-  left: 870px;
-  bottom: 50px;
-
-  .mole {
-    scale: 1.6;
-  }
-}
-.mole-hole.hole6 {
-  left: 845px;
-  bottom: 390px;
-
-  .mole {
-    scale: 0.9;
-  }
-}
-.mole-hole.hole7 {
-  left: 1255px;
-  bottom: -40px;
-
-  .mole {
-    scale: 1.5;
-  }
-}
-.mole-hole.hole8 {
-  left: 1425px;
-  bottom: 5px;
-
-  .mole {
-    scale: 1.8;
-  }
-}
-.mole-hole.hole9 {
-  left: 1345px;
-  bottom: 275px;
-
-  .mole {
-    scale: 1.6;
-  }
+.mole.show.mole0 {
+  transform: translateX(-50%);
 }
 
-.mole-hole .mole.show {
-  transform: translateX(-100%) translateY(0) scale(var(--mole-scale, 1));
-  opacity: 1;
+.mole1 {
+  left: 125px;
+  bottom: 145px;
+  width: 104px; /* 80px * 1.3 */
+  height: 104px;
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+.mole.show.mole1 {
+  transform: translateX(-50%);
 }
 
+.mole2 {
+  left: 385px;
+  bottom: 0px;
+  width: 72px; /* 80px * 0.9 */
+  height: 72px;
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+.mole.show.mole2 {
+  transform: translateX(-50%);
+}
 
+.mole3 {
+  left: 565px;
+  bottom: -15px;
+  width: 144px; /* 80px * 1.8 */
+  height: 144px;
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+.mole.show.mole3 {
+  transform: translateX(-50%);
+}
 
+.mole4 {
+  left: 550px;
+  bottom: 205px;
+  width: 80px; /* 80px * 1 */
+  height: 80px;
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+.mole.show.mole4 {
+  transform: translateX(-50%);
+}
+
+.mole5 {
+  left: 900px;
+  bottom: -110px;
+  width: 128px; /* 80px * 1.6 */
+  height: 128px;
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+.mole.show.mole5 {
+  transform: translateX(-50%);
+}
+
+.mole6 {
+  left: 900px;
+  bottom: 255px;
+  width: 80px; /* 80px * 1 */
+  height: 80px;
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+.mole.show.mole6 {
+  transform: translateX(-50%);
+}
+
+.mole7 {
+  left: 1285px;
+  bottom: -205px;
+  width: 136px; /* 80px * 1.7 */
+  height: 136px;
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+.mole.show.mole7 {
+  transform: translateX(-50%);
+}
+
+.mole8 {
+  left: 1440px;
+  bottom: -170px;
+  width: 160px; /* 80px * 2 */
+  height: 160px;
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+.mole.show.mole8 {
+  transform: translateX(-50%);
+}
+
+.mole9 {
+  left: 1375px;
+  bottom: 100px;
+  width: 152px; /* 80px * 1.9 */
+  height: 152px;
+  position: absolute;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+.mole.show.mole9 {
+  transform: translateX(-50%);
+}
+
+/* 단어 표시 컨테이너 */
+.mole-word-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* 단어 스타일 (JS에서 위치 조작) */
 .mole-word {
   position: absolute;
-  left: 50%;
-  bottom: 100%; /* 두더지 머리 위 */
-  transform: translateX(-50%) translateY(-10px);
-  background: #ffd700;
-  border: 5px solid #842;
-  color: var(--primary-white);
-  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.70);
-  font-size: 18px;
+  width: 80px;
+  transform: translate(-50%, 400%);
+  height: 25px;
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--primary-black);
+  font-size: 12px;
   font-weight: 700;
-  padding: 0.3em 0.8em;
-  border-radius: 10px;
-  white-space: nowrap;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  opacity: 1;
+  z-index: 10;
+  border: 1px solid black;
+  box-shadow: 0 0 0 1px black, 2px 2px 0 0 black, 3px 3px 0 0 black;
+  image-rendering: pixelated;
+}
+.mole-word.type2 {
+  position: absolute;
+  width: 80px;
+  transform: translate(-50%, 400%);
+  height: 25px;
+  background: var(--primary-blue);
+  opacity: 0.75;
+  color: var(--primary-white);
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  opacity: 1;
+  z-index: 10;
+  border: 1px solid black;
+  box-shadow: 0 0 0 1px black, 2px 2px 0 0 black, 3px 3px 0 0 black;
+  image-rendering: pixelated;
+}
+
+
+
+.typing-area {
+  -webkit-text-decoration-skip: none;
+  -webkit-user-modify: read-write-plaintext-only;
+}
+
+/* 두더지 회전 */
+.mole-img.rotate {
+  animation: mole-rotate 0.2s forwards;
+}
+@keyframes mole-rotate {
+  0% { transform: translateY(0) rotate(0deg);}
+  100% { transform: translateY(0) rotate(-45deg);}
+}
+
+/* 프라이팬 기본 위치 및 페이드 효과 */
+.frypan-img {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.2s;
   z-index: 9999;
+  --frypan-scale: 1;
+  transform: scale(var(--frypan-scale));
+}
+
+/* 두더지 올라올 때 frypan 페이드인 */
+.mole.show .frypan-img {
+  opacity: 1;
+  transform: rotate(0deg) translateY(0);
+}
+
+/* 후라이팬 회전 */
+.frypan-img.hit {
+  animation: frypan-hit 0.1s forwards; /* steps(2, end) 제거 */
+}
+
+@keyframes frypan-hit {
+  0%   { transform: scale(var(--frypan-scale)) rotate(0deg);}
+  100% { transform: scale(var(--frypan-scale)) rotate(-50deg);}
+}
+
+/* 두더지와 후라이팬 내려감 */
+.mole.hide .mole-img,
+.mole.hide .frypan-img {
+  transition: transform 0.5s;
+  transform: translateY(100%) rotate(-45deg);
+}
+
+.frypan-img.miss {
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.5s;
+  transform: scale(var(--frypan-scale)) translateY(100%) rotate(-45deg);
+}
+
+/* 각 두더지 인덱스별 scale 조정 */
+.frypan-img[data-mole="0"] { transform: scale(2.0); }
+.frypan-img[data-mole="1"] { transform: scale(1.3); }
+.frypan-img[data-mole="2"] { transform: scale(0.9); }
+.frypan-img[data-mole="3"] { transform: scale(1.8); }
+.frypan-img[data-mole="4"] { transform: scale(1.0); }
+.frypan-img[data-mole="5"] { transform: scale(1.6); }
+.frypan-img[data-mole="6"] { transform: scale(1.0); }
+.frypan-img[data-mole="7"] { transform: scale(1.7); }
+.frypan-img[data-mole="8"] { transform: scale(2.0); }
+.frypan-img[data-mole="9"] { transform: scale(1.9); }
+
+@keyframes frypan-hit-0 {
+  0% { transform: scale(2.0) rotate(0deg);}
+  100% { transform: scale(2.0) rotate(-50deg);}
+}
+@keyframes frypan-hit-1 {
+  0% { transform: scale(1.3) rotate(0deg);}
+  100% { transform: scale(1.3) rotate(-50deg);}
+}
+@keyframes frypan-hit-2 {
+  0% { transform: scale(0.9) rotate(0deg);}
+  100% { transform: scale(0.9) rotate(-50deg);}
+}
+@keyframes frypan-hit-3 {
+  0% { transform: scale(1.8) rotate(0deg);}
+  100% { transform: scale(1.8) rotate(-50deg);}
+}
+@keyframes frypan-hit-4 {
+  0% { transform: scale(1.0) rotate(0deg);}
+  100% { transform: scale(1.0) rotate(-50deg);}
+}
+@keyframes frypan-hit-5 {
+  0% { transform: scale(1.6) rotate(0deg);}
+  100% { transform: scale(1.6) rotate(-50deg);}
+}
+@keyframes frypan-hit-6 {
+  0% { transform: scale(1.0) rotate(0deg);}
+  100% { transform: scale(1.0) rotate(-50deg);}
+}
+@keyframes frypan-hit-7 {
+  0% { transform: scale(1.7) rotate(0deg);}
+  100% { transform: scale(1.7) rotate(-50deg);}
+}
+@keyframes frypan-hit-8 {
+  0% { transform: scale(2.0) rotate(0deg);}
+  100% { transform: scale(2.0) rotate(-50deg);}
+}
+@keyframes frypan-hit-9 {
+  0% { transform: scale(1.9) rotate(0deg);}
+  100% { transform: scale(1.9) rotate(-50deg);}
+}
+
+.mole.hide .mole-img {
+  transition: transform 0.5s;
+  transform: translateY(100%) rotate(-45deg);
 }
