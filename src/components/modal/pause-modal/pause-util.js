@@ -26,14 +26,22 @@ export function setupPauseDialogClickHandler(dialog, handlers) {
     if (!target.matches('.continue-btn, .retry-btn, .main-btn')) return;
     e.preventDefault();
 
+    let handler = null;
     if (target.matches('.continue-btn') && handlers.continue) {
-      handlers.continue();
-      dialog.close();
+      handler = handlers.continue;
     } else if (target.matches('.retry-btn') && handlers.retry) {
-      handlers.retry();
-      dialog.close();
+      handler = handlers.retry;
     } else if (target.matches('.main-btn') && handlers.main) {
-      handlers.main();
+      handler = handlers.main;
+    }
+    if (handler) {
+      dialog.addEventListener(
+        'close',
+        () => {
+          handler();
+        },
+        { once: true }
+      );
       dialog.close();
     }
   });
