@@ -1,5 +1,19 @@
 import audioManager from '../../scripts/audiomanager.js';
 
+let backButton = document.querySelector('#back-btn');
+
+backButton.addEventListener('click', () => {
+  window.loadHTML('/src/pages/game-select/game-select.html');
+}
+)
+
+document.querySelectorAll('#game-start-card').forEach((card) => {
+  card.addEventListener('click', () => {
+    const link = card.getAttribute('data-link');
+    window.loadHTML(link)
+  });
+});
+
 // .landing 요소에서 data-game 값 읽기
 const landingDiv = document.querySelector('.landing');
 const gameType = landingDiv?.dataset.game;

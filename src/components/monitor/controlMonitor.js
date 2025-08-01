@@ -1,4 +1,7 @@
 let cleanupTasks = [];
+let previousPage = null;
+
+
 
 function hookGlobalAPIs() {
   const originalSetInterval = window.setInterval;
@@ -58,12 +61,18 @@ window.addEventListener('DOMContentLoaded', scaleMonitorGroup);
 //   document.querySelectorAll('script[data-dynamic]').forEach((el) => el.remove());
 // }
 
-export function loadHTML(url) {
+export function loadHTML(url, onLoaded) {
   const container = document.querySelector('.monitor-frame');
   if (!container) return;
 
+  const currentPage = container.getAttribute('data-current-page');
+  if (currentPage) {
+    previousPage = currentPage;
+  }
+
   clearCleanupTasks();
   container.innerHTML = '';
+  container.setAttribute('data-current-page', url);
 
   fetch(url)
     .then((res) => {
@@ -92,8 +101,30 @@ export function loadHTML(url) {
       });
 
       hookGlobalAPIs();
+
+      // ✅ 페이지 로드 완료 후 콜백 실행
+      if (typeof onLoaded === 'function') {
+        onLoaded();
+      }
     })
     .catch(console.error);
 }
 
+
+export function goBack() {
+  if (previousPage) {
+    loadHTML(previousPage);
+  } else {
+    console.warn('뒤로 갈 페이지가 없습니다.');
+  }
+}
+
+(() => {
+  if (!previousPage) {
+    previousPage = '/src/components/booting/booting.html';
+    loadHTML('/src/components/booting/booting.html');
+  }
+})();
+
+window.goBack = goBack;
 window.loadHTML = loadHTML;

@@ -38,3 +38,10 @@ if (bgmRange) {
     updateProgressFill(value);
   });
 }
+
+document.querySelectorAll('.card-wrapper .card').forEach((card) => {
+  card.addEventListener('click', () => {
+    const link = card.getAttribute('data-link');
+    window.loadHTML(link)
+  });
+});
