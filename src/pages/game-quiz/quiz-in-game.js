@@ -110,7 +110,10 @@ function initQuizGame() {
       showCountdown();
     })
     .catch(() => {
-      alert('문제 데이터를 불러오는 데 실패했습니다.');
+      // 게임이 이미 종료된 상태라면 alert를 띄우지 않음
+      if (isGameActive) {
+        alert('문제 데이터를 불러오는 데 실패했습니다.');
+      }
       generalQuizList = [];
     });
 }
@@ -264,8 +267,9 @@ export function restartGame() {
 }
 
 export function goToMain() {
-  // audioManager.pause();
-  endGame();
+  audioManager.pause();
+  isGameActive = false;
+  cleanupQuizGame();
   loadHTML('/src/pages/game-quiz/quiz-start.html');
 }
 
