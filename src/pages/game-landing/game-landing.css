@@ -6,10 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2rem 4rem;
-
-  /* 안 넘치게 만들기 */
-  box-sizing: border-box;
+  padding-top: 3.4375rem;
 
   .landing-card-container {
     display: flex;
