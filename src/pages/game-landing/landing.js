@@ -12,7 +12,7 @@ document.querySelectorAll('#game-start-card').forEach((card) => {
     const link = card.getAttribute('data-link');
     window.loadHTML(link)
   });
-});
+});h
 
 // .landing 요소에서 data-game 값 읽기
 const landingDiv = document.querySelector('.landing');
