@@ -59,12 +59,31 @@ class AudioManager {
         this.iconEl.src = '/assets/icons/sound-on.svg';
         this.iconEl.alt = '사운드 켜짐';
         this.btnEl.setAttribute('aria-label', '사운드 끄기');
+        this.unmuteSfx();
       } else {
         this.iconEl.src = '/assets/icons/sound-off.svg';
         this.iconEl.alt = '사운드 꺼짐';
         this.btnEl.setAttribute('aria-label', '사운드 켜기');
+        this.muteSfx();
       }
     }
+  }
+
+  // SFX 관련 메서드
+  setSfx(sfxList) {
+    this.sfxList = sfxList; // 배열 또는 객체로 여러 SFX 등록
+  }
+
+  muteSfx() {
+    if (!this.sfxList) return;
+    Object.values(this.sfxList).forEach((sfx) => (sfx.volume = 0));
+  }
+
+  unmuteSfx() {
+    if (!this.sfxList) return;
+    Object.values(this.sfxList).forEach((sfx) => {
+      sfx.volume = sfx.defaultVolume ?? 0.2;
+    });
   }
 }
 

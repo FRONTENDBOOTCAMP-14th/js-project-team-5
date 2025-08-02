@@ -455,6 +455,13 @@ function initAudio() {
   if (sfxVolume === null) sfxVolume = 0.2;
   else sfxVolume = Number(sfxVolume);
 
+  // 효과음의 원래 볼륨 저장
+  correctSfx.defaultVolume = sfxVolume;
+  wrongSfx.defaultVolume = sfxVolume;
+
+  // audioManager에 등록
+  audioManager.setSfx({ correctSfx, wrongSfx });
+
   audioManager.audio && (audioManager.audio.volume = bgmVolume);
   correctSfx.volume = sfxVolume;
   wrongSfx.volume = Math.max(0, sfxVolume - 0.1);

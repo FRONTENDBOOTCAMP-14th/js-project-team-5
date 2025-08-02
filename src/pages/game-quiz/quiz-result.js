@@ -47,7 +47,12 @@ function initAudio() {
   if (sfxVolume === null) sfxVolume = 0.2;
   else sfxVolume = Number(sfxVolume);
 
-  let volume = localStorage.getItem('quizVolume');
+  // 효과음의 원래 볼륨 저장
+  gameOverSfx.defaultVolume = sfxVolume;
+
+  // audioManager에 등록
+  audioManager.setSfx({ gameOverSfx });
+
   if (volume === null) volume = 0.3;
   audioManager.setSource('/assets/audio/bgm/quiz-WildPogo-Francis-Preve.mp3');
   audioManager.audio.volume = bgmVolume;

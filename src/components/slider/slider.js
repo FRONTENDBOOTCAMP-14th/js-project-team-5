@@ -50,6 +50,12 @@ if (sfxVolume === null) sfxVolume = 0.2;
 else sfxVolume = Number(sfxVolume);
 clickSfx.volume = sfxVolume;
 
+// 효과음의 원래 볼륨 저장
+clickSfx.defaultVolume = sfxVolume;
+
+// audioManager에 등록
+audioManager.setSfx({ clickSfx });
+
 const sfxRange = document.getElementById('sfx-range');
 const progressSfxFill = sfxRange?.closest('.sfx-slider-custom')?.querySelector('.progress-fill');
 
