@@ -43,7 +43,7 @@ if (bgmRange) {
 ========================= */
 
 // 클릭 효과음 객체
-export const clickSfx = new Audio('/assets/audio/sfx/click.wav');
+const clickSfx = new Audio('/assets/audio/sfx/click.wav');
 
 let sfxVolume = localStorage.getItem('sfxVolume');
 if (sfxVolume === null) sfxVolume = 0.2;
@@ -81,6 +81,7 @@ function isInteractiveElement(el) {
 
 // monitor-frame 내 상호작용 효과음
 const monitorFrame = document.querySelector('.monitor-frame');
+const mainStart = monitorFrame?.querySelector('.main-start');
 
 if (monitorFrame) {
   // 클릭 효과음
@@ -98,6 +99,16 @@ if (monitorFrame) {
       clickSfx.play();
     }
   });
+
+  // mainStart가 있을 때만 이벤트 등록
+  if (mainStart) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        clickSfx.currentTime = 0;
+        clickSfx.play();
+      }
+    });
+  }
 }
 
 /* =========================
