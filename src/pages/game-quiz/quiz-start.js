@@ -33,16 +33,12 @@ if (title) {
 }
 
 /**
- * 오디오 매니저 초기화하고, 볼륨 및 UI를 설정
+ * 오디오 매니저 초기화하고, 볼륨 설정
  */
 function initAudio() {
-  let volume = localStorage.getItem('quizVolume');
-  if (volume === null) volume = 0.3;
+  let bgmVolume = localStorage.getItem('bgmVolume');
+  if (bgmVolume === null) bgmVolume = 0.3;
   audioManager.setSource('/assets/audio/bgm/quiz-WildPogo-Francis-Preve.mp3');
-  audioManager.audio.volume = volume;
+  audioManager.audio.volume = bgmVolume;
   audioManager.play();
-  audioManager.setUI({
-    iconSelector: '#soundIcon',
-    buttonSelector: '#soundToggleBtn',
-  });
 }

@@ -447,27 +447,33 @@ function initModeSettings() {
 
 // 20. 오디오 초기화
 function initAudio() {
-  let volume = localStorage.getItem('quizVolume');
-  if (volume === null) volume = 0.3;
+  let bgmVolume = localStorage.getItem('bgmVolume');
+  if (bgmVolume === null) bgmVolume = 0.3;
+  else bgmVolume = Number(bgmVolume);
 
+  let sfxVolume = localStorage.getItem('sfxVolume');
+  if (sfxVolume === null) sfxVolume = 0.2;
+  else sfxVolume = Number(sfxVolume);
+
+  audioManager.audio && (audioManager.audio.volume = bgmVolume);
+  correctSfx.volume = sfxVolume;
+  wrongSfx.volume = Math.max(0, sfxVolume - 0.1);
+
+  // 이미 같은 BGM이 재생 중이면 UI만 갱신하고 리턴
   if (audioManager.audio && audioManager.audio.src.includes('quiz-WildPogo-Francis-Preve.mp3') && !audioManager.audio.paused) {
-    audioManager.audio.volume = volume;
     audioManager.setUI({
       iconSelector: '#soundIcon',
       buttonSelector: '#soundToggleBtn',
     });
-    correctSfx.volume = volume;
-    wrongSfx.volume = volume - 0.1;
     return;
   }
 
+  // 아니면 새로 세팅
   audioManager.setSource('/assets/audio/bgm/quiz-WildPogo-Francis-Preve.mp3');
-  audioManager.audio.volume = volume;
+  audioManager.audio.volume = bgmVolume;
   audioManager.play();
   audioManager.setUI({
     iconSelector: '#soundIcon',
     buttonSelector: '#soundToggleBtn',
   });
-  correctSfx.volume = volume;
-  wrongSfx.volume = volume - 0.1;
 }

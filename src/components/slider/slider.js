@@ -9,10 +9,14 @@ const BGM_SRC = '/assets/audio/bgm/main-XRayVision-Slynk.mp3';
 const bgmRange = document.getElementById('bgm-range');
 const progressBgmFill = bgmRange?.closest('.bgm-slider-custom')?.querySelector('.progress-fill');
 
+let bgmVolume = localStorage.getItem('bgmVolume');
+if (bgmVolume === null) bgmVolume = 0.3;
+else bgmVolume = Number(bgmVolume);
+
 // BGM이 다르거나, 아직 재생 중이 아니면만 setSource/재생
 if (!audioManager.audio || audioManager.audio.src !== location.origin + BGM_SRC) {
   audioManager.setSource(BGM_SRC);
-  audioManager.audio.volume = 0.3;
+  audioManager.audio.volume = bgmVolume;
   audioManager.play();
 }
 
@@ -23,12 +27,14 @@ audioManager.setUI({
 
 // BGM 볼륨 슬라이더 이벤트
 if (bgmRange) {
+  bgmRange.value = bgmVolume * 100;
   updateProgressFill(progressBgmFill, bgmRange.value);
 
   bgmRange.addEventListener('input', (e) => {
     const value = e.target.value;
     audioManager.audio.volume = value / 100;
     updateProgressFill(progressBgmFill, value);
+    localStorage.setItem('bgmVolume', value / 100);
   });
 }
 
@@ -37,19 +43,26 @@ if (bgmRange) {
 ========================= */
 
 // 클릭 효과음 객체
-const clickSfx = new Audio('/assets/audio/sfx/click.wav');
-clickSfx.volume = 0.2; // 초기 볼륨 설정
+export const clickSfx = new Audio('/assets/audio/sfx/click.wav');
+
+let sfxVolume = localStorage.getItem('sfxVolume');
+if (sfxVolume === null) sfxVolume = 0.2;
+else sfxVolume = Number(sfxVolume);
+clickSfx.volume = sfxVolume;
 
 const sfxRange = document.getElementById('sfx-range');
 const progressSfxFill = sfxRange?.closest('.sfx-slider-custom')?.querySelector('.progress-fill');
 
 // SFX 볼륨 슬라이더 이벤트
 if (sfxRange) {
+  sfxRange.value = sfxVolume * 100;
   updateProgressFill(progressSfxFill, sfxRange.value);
+
   sfxRange.addEventListener('input', (e) => {
     const value = e.target.value;
     clickSfx.volume = value / 100;
     updateProgressFill(progressSfxFill, value);
+    localStorage.setItem('sfxVolume', value / 100);
   });
 }
 
