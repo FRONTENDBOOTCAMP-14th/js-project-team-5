@@ -63,10 +63,22 @@ function initAudio() {
   gameOverSfx.volume = sfxVolume;
   gameOverSfx.loop = false;
   gameOverSfx.playbackRate = 1.2;
-  gameOverSfx.play();
+
+  // === 음소거 상태에 따라 play/pause 분기 ===
+  const isMuted = sessionStorage.getItem('isMuted') === 'true';
+  if (isMuted) {
+    audioManager.audio.pause();
+  } else {
+    gameOverSfx.play();
+    audioManager.audio.play();
+  }
 
   // 게임 오버 사운드가 끝나면 배경음악 재생
   gameOverSfx.onended = () => {
-    audioManager.play();
+    // 재생 전에도 음소거 상태 체크
+    const isMuted = sessionStorage.getItem('isMuted') === 'true';
+    if (!isMuted) {
+      audioManager.play();
+    }
   };
 }

@@ -40,5 +40,12 @@ function initAudio() {
   if (bgmVolume === null) bgmVolume = 0.3;
   audioManager.setSource('/assets/audio/bgm/quiz-WildPogo-Francis-Preve.mp3');
   audioManager.audio.volume = bgmVolume;
-  audioManager.play();
+
+  // === 뮤트 상태 동기화 ===
+  const isMuted = sessionStorage.getItem('isMuted') === 'true';
+  if (isMuted) {
+    audioManager.audio.pause();
+  } else {
+    audioManager.audio.play();
+  }
 }
