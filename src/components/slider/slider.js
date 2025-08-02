@@ -1,20 +1,92 @@
-const RANGE = document.getElementById('bgm-range');
-const PROGRESS_FILL = document.querySelector('.progress-fill');
-const AUDIO = document.getElementById('test-audio');
+import audioManager from '/src/scripts/audiomanager.js';
 
-function updateBarAndVolume() {
-  const value = parseInt(RANGE.value, 10);
-  // 프로그레스바 연동
-  PROGRESS_FILL.style.width = value + '%';
-  // 0만 왼쪽만 라운드, 20 이상은 양쪽 라운드
-  if (value === 0) {
-    PROGRESS_FILL.style.borderRadius = '3.125rem 0 0 3.125rem';
-  } else {
-    PROGRESS_FILL.style.borderRadius = '3.125rem';
-  }
-  // 오디오 볼륨 연동 (0~1로 변환)
-  AUDIO.volume = value / 100;
+/* =========================
+   BGM(배경음악) 관련 코드
+========================= */
+
+// BGM AudioManager 설정
+const BGM_SRC = '/assets/audio/bgm/main-XRayVision-Slynk.mp3';
+const bgmRange = document.getElementById('bgm-range');
+const progressBgmFill = bgmRange?.closest('.bgm-slider-custom')?.querySelector('.progress-fill');
+
+// BGM이 다르거나, 아직 재생 중이 아니면만 setSource/재생
+if (!audioManager.audio || audioManager.audio.src !== location.origin + BGM_SRC) {
+  audioManager.setSource(BGM_SRC);
+  audioManager.audio.volume = 0.3;
+  audioManager.play();
 }
 
-updateBarAndVolume();
-RANGE.addEventListener('input', updateBarAndVolume);
+audioManager.setUI({
+  iconSelector: '#soundIcon',
+  buttonSelector: '#soundToggleBtn',
+});
+
+// BGM 볼륨 슬라이더 이벤트
+if (bgmRange) {
+  updateProgressFill(progressBgmFill, bgmRange.value);
+
+  bgmRange.addEventListener('input', (e) => {
+    const value = e.target.value;
+    audioManager.audio.volume = value / 100;
+    updateProgressFill(progressBgmFill, value);
+  });
+}
+
+/* =========================
+   효과음(SFX) 관련 코드
+========================= */
+
+// 클릭 효과음 객체
+const clickSfx = new Audio('/assets/audio/sfx/click.wav');
+clickSfx.volume = 0.2; // 초기 볼륨 설정
+
+const sfxRange = document.getElementById('sfx-range');
+const progressSfxFill = sfxRange?.closest('.sfx-slider-custom')?.querySelector('.progress-fill');
+
+// SFX 볼륨 슬라이더 이벤트
+if (sfxRange) {
+  updateProgressFill(progressSfxFill, sfxRange.value);
+  sfxRange.addEventListener('input', (e) => {
+    const value = e.target.value;
+    clickSfx.volume = value / 100;
+    updateProgressFill(progressSfxFill, value);
+  });
+}
+
+// 인터랙티브 요소 판별 함수
+const INTERACTIVE_SELECTOR = ['button', 'a', 'input', 'label', '.card', '.game-btn', '[role="button"]'].join(',');
+
+function isInteractiveElement(el) {
+  return el.closest(INTERACTIVE_SELECTOR);
+}
+
+// monitor-frame 내 상호작용 효과음
+const monitorFrame = document.querySelector('.monitor-frame');
+
+if (monitorFrame) {
+  // 클릭 효과음
+  monitorFrame.addEventListener('click', (e) => {
+    if (isInteractiveElement(e.target)) {
+      clickSfx.currentTime = 0;
+      clickSfx.play();
+    }
+  });
+
+  // 키보드로 Enter/Space로 활성화 시 효과음
+  monitorFrame.addEventListener('keydown', (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && isInteractiveElement(e.target)) {
+      clickSfx.currentTime = 0;
+      clickSfx.play();
+    }
+  });
+}
+
+/* =========================
+   공통 유틸 함수
+========================= */
+
+function updateProgressFill(fillEl, value) {
+  if (fillEl) {
+    fillEl.style.width = `${value}%`;
+  }
+}
