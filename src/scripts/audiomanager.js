@@ -80,6 +80,9 @@ class AudioManager {
   toggleWithUI() {
     const isNowPlaying = this.toggle();
 
+    // 상태 저장 (isMuted: true면 음소거)
+    sessionStorage.setItem('isMuted', String(!isNowPlaying));
+
     if (this.iconEl && this.btnEl) {
       if (isNowPlaying) {
         this.iconEl.src = '/assets/icons/sound-on.svg';
