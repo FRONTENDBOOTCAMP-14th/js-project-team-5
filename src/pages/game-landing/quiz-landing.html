@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/assets/icons/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
+    <title>퀴즈 랜딩 페이지</title>
+    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/src/components/game-choice-header/game-choice-header.css" />
+    <link rel="stylesheet" href="/src/components/modal/modal.css" />
+    <link rel="stylesheet" href="/src/components/slider/slider.css" />
+    <link rel="stylesheet" href="/src/components/button/button.css" />
+    <link rel="stylesheet" href="/src/components/card/card.css" />
+    <link rel="stylesheet" href="/src/pages/game-landing/game-landing.css" />
+  </head>
+  <body>
+    <div class="landing" data-game="quiz">
+      <header class="game-header">
+        <button>
+          <img src="/assets/icons/back.svg" alt="뒤로가기" class="icon back-icon" />
+        </button>
+        <h1 class="game-title">퀴즈</h1>
+        <div class="icon-group">
+          <button id="soundToggleBtn" class="icon-button">
+            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드" />
+          </button>
+          <button class="icon-button modal-open" data-type="settings">
+            <img src="/assets/icons/option.svg" alt="설정" class="icon" />
+          </button>
+        </div>
+      </header>
+      <div class="landing-card-container">
+        <div class="card w400 modal-open" data-type="description" tabindex="0" role="button">
+          <div class="img-container">
+            <img src="/assets/icons/guide.png" alt="게임 설명" />
+          </div>
+          <h2 class="card-title">게임 설명</h2>
+        </div>
+        <div class="card w400" tabindex="0" role="button">
+          <div class="img-container">
+            <img src="/assets/icons/quiz-alternative.png" alt="게임 시작" />
+          </div>
+          <h2 class="card-title">게임 시작</h2>
+        </div>
+        <div class="card w400 modal-open" data-type="scoreboard" tabindex="0" role="button">
+          <div class="img-container">
+            <img src="/assets/icons/leaderboard.png" alt="점수판" />
+          </div>
+          <h2 class="card-title">점수판</h2>
+        </div>
+      </div>
+      <div class="landing-modal-container">
+        <dialog class="modal" data-type="description">
+          <div class="modal-inner">
+            <h2 class="modal-title">게임 설명</h2>
+            <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+            <div class="modal-content"></div>
+          </div>
+        </dialog>
+        <dialog class="modal" data-type="scoreboard">
+          <div class="modal-inner">
+            <h2 class="modal-title">점수판</h2>
+            <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+            <div class="modal-content"></div>
+          </div>
+        </dialog>
+        <dialog class="modal" data-type="settings">
+          <div class="modal-inner">
+            <h2 class="modal-title">설정</h2>
+            <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+            <div class="modal-content">
+              <div class="wrapper mode">
+                <span class="text">모드 선택</span>
+                <div class="divider"></div>
+                <div class="toggle-radio">
+                  <input type="radio" id="normal" name="mode" checked />
+                  <label for="normal" class="btn normal">일반 모드</label>
+                  <input type="radio" id="dev" name="mode" />
+                  <label for="dev" class="btn dev">개발자 모드</label>
+                </div>
+              </div>
+              <div class="wrapper">
+                <span class="text">BGM</span>
+                <div class="divider"></div>
+                <div class="bgm-slider-custom">
+                  <div class="progress-bg">
+                    <div class="progress-fill"></div>
+                  </div>
+                  <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="bgm-range" />
+                </div>
+              </div>
+              <div class="wrapper">
+                <span class="text">효과음</span>
+                <div class="divider"></div>
+                <div class="bgm-slider-custom">
+                  <div class="progress-bg">
+                    <div class="progress-fill"></div>
+                  </div>
+                  <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="sfx-range" />
+                </div>
+              </div>
+              <button type="button" class="exit-button" aria-label="게임을 종료하고 메인 화면으로 이동">게임 종료</button>
+            </div>
+          </div>
+        </dialog>
+      </div>
+    </div>
+    <script type="module" src="/src/components/modal/modal.js"></script>
+    <script type="module" src="/src/components/button/button.js"></script>
+    <script type="module" src="/src/components/slider/slider.js"></script>
+    <script type="module" src="/src/pages/game-landing/landing-bgm.js"></script>
+  </body>
+</html>

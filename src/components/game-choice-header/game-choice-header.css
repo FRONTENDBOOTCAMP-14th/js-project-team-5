@@ -1,0 +1,47 @@
+/* 게임 선택 헤더 전체 */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  color: var(--primary-black);
+  inline-size: 100%;
+  max-inline-size: 100rem; /* 1600px */
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+  font-size: var(--text-16);
+}
+
+/* 가운데 타이틀 */
+.game-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--title-font-size);
+  font-weight: bold;
+  color: var(--blue-100); /* 연한 하늘색 */
+  white-space: nowrap;
+}
+
+/* 아이콘 그룹 (오른쪽) */
+.icon-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 버튼 스타일 통일 */
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* 아이콘 이미지 스타일 */
+.icon {
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
+  /* object-fit: contain; */
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/assets/icons/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
+    <title>카드 컴포넌트</title>
+    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/src/components/button/button.css" />
+    <script type="module" src="/src/components/button/button.js"></script>
+  </head>
+  <body>
+    <p>버튼 컴포넌트 페이지</p>
+
+    <!-- 컴포넌트 마크업을 작성하세요 -->
+    <!-- 토글형 라디오 버튼 -->
+    <div class="toggle-radio">
+      <input type="radio" id="normal" name="mode" checked />
+      <label for="normal" class="btn normal">일반 모드</label>
+      <input type="radio" id="dev" name="mode" />
+      <label for="dev" class="btn dev">개발자 모드</label>
+    </div>
+    <!-- 게임 결과 페이지 버튼 -->
+    <!-- 리더보드 등록 (클릭 시 모달 창) -->
+    <button type="button" class="open-modal-btn">점수판 등록</button>
+    <!-- 돌아가기, 다시하기 등 페이지 이동 -->
+    <button type="button" class="page-move-btn">다시하기</button>
+
+    <!-- 게임 pause 시 나오는 버튼 -->
+    <button type="button" class="pause-modal continue-btn">계속 하기</button>
+    <button type="button" class="pause-modal retry-btn">다시 하기</button>
+    <button type="button" class="pause-modal main-btn">메인 화면</button>
+  </body>
+</html>

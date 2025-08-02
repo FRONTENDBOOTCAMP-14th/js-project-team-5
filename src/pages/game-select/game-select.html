@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/assets/icons/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
+    <title>game-select</title>
+    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/src/pages/game-select/game-select.css" />
+    <link rel="stylesheet" href="/src/components/game-choice-header/game-choice-header.css" />
+    <link rel="stylesheet" href="/src/components/modal/modal.css" />
+    <link rel="stylesheet" href="/src/components/slider/slider.css" />
+    <link rel="stylesheet" href="/src/components/button/button.css" />
+    <link rel="stylesheet" href="/src/components/card/card.css" />
+    <script type="module" src="/src/pages/game-select/game-select.js"></script>
+    <script type="module" src="/src/components/game-choice-header/game-choice-header.js"></script>
+    <script type="module" src="/src/scripts/audiomanager.js"></script>
+    <script type="module" src="/src/components/button/button.js"></script>
+    <script type="module" src="/src/components/modal/modal.js"></script>
+  </head>
+  <body>
+    <div class="game-select-container">
+      <header class="game-header">
+        <button class="icon back-icon" id="back-btn" aria-label="뒤로가기">
+          <img src="/assets/icons/back.svg" alt="" aria-hidden="true" />
+        </button>
+
+        <!-- 게임 이름 -->
+        <div class="game-title-wrapper">
+          <span class="game-title stroke">게임을 선택해 주세요!</span>
+          <span class="game-title body">게임을 선택해 주세요!</span>
+        </div>
+        <div class="icon-group">
+          <button id="soundToggleBtn" class="icon-button">
+            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드" />
+          </button>
+          <button class="icon-button modal-open" data-type="settings">
+            <img src="/assets/icons/option.svg" alt="설정" class="icon" />
+          </button>
+        </div>
+      </header>
+      <!-- 게임 선택 -->
+      <main class="game-select-wrapper">
+        <div class="card-wrapper">
+          <div class="card w340" tabindex="0" role="button">
+            <div class="img-container">
+              <img src="/assets/icons/acidrain.png" alt="산성비" />
+            </div>
+            <h2 class="card-title">산성비</h2>
+          </div>
+        </div>
+        <div class="card-wrapper">
+          <div class="card w340" tabindex="0" role="button">
+            <div class="img-container">
+              <img src="/assets/icons/defense.png" alt="산성비" />
+            </div>
+            <h2 class="card-title">디펜스</h2>
+          </div>
+        </div>
+        <div class="card-wrapper">
+          <div class="card w340" tabindex="0" role="button">
+            <div class="img-container">
+              <img src="/assets/icons/mole.png" alt="산성비" />
+            </div>
+            <h2 class="card-title">두더지 잡기</h2>
+          </div>
+        </div>
+        <div class="card-wrapper">
+          <div class="card w340" tabindex="0" role="button">
+            <div class="img-container">
+              <img src="/assets/icons/quiz-alternative.png" alt="산성비" />
+            </div>
+            <h2 class="card-title">퀴즈</h2>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- 설정 창 modal -->
+    <!-- <div class="modal-container"> -->
+    <div class="modal-container">
+      <dialog class="modal" data-type="settings">
+        <div class="modal-inner">
+          <h2 class="modal-title">설정</h2>
+          <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+          <div class="modal-content">
+            <!-- 모달 콘텐츠 삽입 -->
+            <div class="wrapper mode">
+              <span class="text">모드 선택</span>
+              <div class="divider"></div>
+              <div class="toggle-radio">
+                <input type="radio" id="normal" name="mode" checked />
+                <label for="normal" class="btn normal">일반 모드</label>
+                <input type="radio" id="dev" name="mode" />
+                <label for="dev" class="btn dev">개발자 모드</label>
+              </div>
+            </div>
+            <div class="wrapper">
+              <span class="text">BGM</span>
+              <div class="divider"></div>
+              <div class="bgm-slider-custom">
+                <div class="progress-bg">
+                  <div class="progress-fill"></div>
+                </div>
+                <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="bgm-range" />
+              </div>
+            </div>
+
+            <div class="wrapper">
+              <span class="text">효과음</span>
+              <div class="divider"></div>
+              <div class="effect-slider-custom">
+                <div class="progress-bg">
+                  <div class="progress-fill"></div>
+                </div>
+                <input type="range" min="0" max="100" step="20" value="60" aria-label="음량 조절" id="sfx-range" />
+              </div>
+            </div>
+            <button type="button" class="exit-button" aria-label="게임을 종료하고 메인 화면으로 이동">게임 종료</button>
+          </div>
+        </div>
+      </dialog>
+    </div>
+  </body>
+</html>
