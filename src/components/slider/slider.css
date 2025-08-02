@@ -21,14 +21,16 @@
   height: 2.5rem;
 }
 
-.bgm-slider-custom {
+.bgm-slider-custom,
+.sfx-slider-custom {
   position: relative;
   width: 13.625rem;
   height: 1.875rem;
   display: flex;
   align-items: center;
 }
-.bgm-slider-custom .progress-bg {
+.bgm-slider-custom .progress-bg,
+.sfx-slider-custom .progress-bg {
   position: absolute;
   top: 0;
   left: 0;
@@ -41,18 +43,22 @@
   width: 100%;
   z-index: 1;
 }
-.bgm-slider-custom .progress-fill {
+
+.bgm-slider-custom .progress-fill,
+.sfx-slider-custom .progress-fill {
   height: 100%;
   background: var(--gray-500);
   border-radius: 3.125rem;
   transition: width 0.15s;
 }
 
-.bgm-slider-custom .progress-fill[style*='100%'] {
+.bgm-slider-custom .progress-fill[style*='100%'],
+.sfx-slider-custom .progress-fill[style*='100%'] {
   border-radius: 3.125rem;
 }
 
-.bgm-slider-custom input[type='range'] {
+.bgm-slider-custom input[type='range'],
+.sfx-slider-custom input[type='range'] {
   -webkit-appearance: none;
   position: relative;
   width: 100%;
@@ -61,7 +67,8 @@
   z-index: 2;
   appearance: none;
 }
-.bgm-slider-custom input[type='range']::-webkit-slider-thumb {
+.bgm-slider-custom input[type='range']::-webkit-slider-thumb,
+.sfx-slider-custom input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 0;
@@ -70,14 +77,16 @@
   border: none;
 }
 
-.bgm-slider-custom input[type='range']::-moz-range-thumb {
+.bgm-slider-custom input[type='range']::-moz-range-thumb,
+.sfx-slider-custom input[type='range']::-moz-range-thumb {
   width: 0;
   height: 0;
   background: transparent;
   border: none;
 }
 
-.bgm-slider-custom input[type='range']::-ms-thumb {
+.bgm-slider-custom input[type='range']::-ms-thumb,
+.sfx-slider-custom input[type='range']::-ms-thumb {
   width: 0;
   height: 0;
   background: transparent;
@@ -89,13 +98,14 @@
   background: var(--gray-500);
 }
 
-.bgm-slider-custom input[type='range']:focus {
+.bgm-slider-custom input[type='range']:focus,
+.sfx-slider-custom input[type='range']:focus {
   outline: none;
   box-shadow: none;
 }
 
-.bgm-slider-custom input[type='range']:focus-visible {
+.bgm-slider-custom input[type='range']:focus-visible,
+.sfx-slider-custom input[type='range']:focus-visible {
   outline: 2px solid var(--gray-500);
   border-radius: 3.125rem;
 }
-
