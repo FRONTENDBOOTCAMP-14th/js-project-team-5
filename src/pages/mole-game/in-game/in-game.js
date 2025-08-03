@@ -1,4 +1,4 @@
-// import audioManager from '/src/scripts/audiomanager.js'; // 필요하면 포함
+import audioManager from '/src/scripts/audiomanager.js';
 
 // === 전역 변수 ===
 let moles = document.querySelectorAll('.mole');
@@ -354,10 +354,9 @@ function pauseGame() {
   });
 
   typingArea.disabled = true;
-  document.body.classList.add('paused');
 
-  // const pauseDialog = document.querySelector('dialog[data-type="pause"]');
-  // if (pauseDialog) pauseDialog.showModal();
+  const pauseDialog = document.querySelector('dialog[data-type="pause"]');
+  if (pauseDialog) pauseDialog.show();
 }
 
 function stopGame() {
@@ -380,7 +379,7 @@ function stopGame() {
   localStorage.setItem('moleGameScore', score);
 
   // 결과 페이지 로드
-  loadHTML('/src/pages/mole-game/mole-game-result/mole-game-result.html');
+  window.loadHTML('/src/pages/mole-game/mole-game-result/mole-game-result.html');
 }
 
 function startTimer() {
