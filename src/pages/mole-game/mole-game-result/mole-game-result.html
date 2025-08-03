@@ -5,29 +5,35 @@
     <link rel="icon" href="/assets/icons/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
-    <title>두더지잡기-결과</title>
+    <title>두더지잡기 결과 </title>
     <link rel="stylesheet" href="/fonts/KIMM.css" />
     <link rel="stylesheet" href="/src/styles/common/index.css" />
     <link rel="stylesheet" href="/src/pages/mole-game/mole-game-result/mole-game-result.css" />
     <link rel="stylesheet" href="/src/components/modal/modal.css" />
   </head>
   <body>
-    <div class="game-result-container">
-      <div class="score-container">
+    <div class="game-result-container" role="main">
+      <h1 class="sr-only">두더지 잡기 결과</h1>
+      <section class="score-container" aria-labelledby="score-text">
         <div class="score-text">최종 점수</div>
-        <div class="score-number">0</div>
+        <div class="score-number" aria-live="polite" role="status">0</div>
+      </section>
+      <div class="brown-mole" aria-hidden="true">
+        <img src="/assets/images/mole.webp" alt="" />
       </div>
-      <div class="brown-mole">
-        <img src="/assets/images/mole.png" alt="갈색두더지" />
-      </div>
-      <div class="golden-mole">
-        <img src="/assets/images/gold-mole.png" alt="황금두더지" />
+      <div class="golden-mole" aria-hidden="true">
+        <img src="/assets/images/gold-mole.webp" alt="" />
       </div>
       <!-- 돌아가기, 다시하기 등 페이지 이동 -->
       <div class="button-container">
-        <button type="button" class="leaderboard btn modal-open" data-type="register">점수판 등록</button>
-        <button type="button" class="move-main btn">메인화면</button>
-        <button type="button" class="regame btn">다시하기</button>
+        <button type="button" class="leaderboard btn modal-open" data-type="register" aria-describedby="leaderboard-desc">점수판 등록</button>
+        <span id="leaderboard-desc" class="sr-only">현재 점수를 리더보드에 등록합니다</span>
+
+        <button type="button" class="move-main btn" aria-describedby="main-desc">메인화면</button>
+        <span id="main-desc" class="sr-only">게임 메인 화면으로 돌아갑니다</span>
+
+        <button type="button" class="regame btn" aria-describedby="regame-desc">다시하기</button>
+        <span id="regame-desc" class="sr-only">같은 게임을 다시 시작합니다</span>
       </div>
 
       
@@ -41,10 +47,10 @@
                 <!-- 닉네임 입력 필드 -->
                 <input type="text" id="nickname-input" name="nickname" maxlength="10" placeholder="최대 10자" required autocomplete="off" />
                 <!-- 닉네임 중복 여부 확인 메시지 -->
-                <p class="nickname-check-message">이미 사용 중인 닉네임입니다.</p>
+                <p class="nickname-check-message" aria-live="polite" role="alert">이미 사용 중인 닉네임입니다.</p>
                 <div class="modal-button-container">
                   <button type="submit" class="register-submit-button">확인</button>
-                  <button type="button" class="modal-close-button">취소</button>
+                  <button type="button" class="modal-close-button" aria-label="모달 닫기">취소</button>
                 </div>
               </form>
             </div>

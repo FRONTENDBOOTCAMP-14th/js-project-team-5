@@ -5,7 +5,7 @@
     <link rel="icon" href="/assets/icons/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
-    <title>두더지잡기</title>
+    <title>두더지 잡기</title>
     <link rel="stylesheet" href="/fonts/KIMM.css" />
     <link rel="stylesheet" href="/src/styles/common/index.css" />
     <link rel="stylesheet" href="/src/pages/mole-game/in-game/in-game.css" />
@@ -19,82 +19,207 @@
     <script type="module" src="/src/scripts/audiomanager.js"></script>
   </head>
   <body>
-    <div class="mole-game-container" data-game="whack">
+    <div class="mole-game-container" data-game="whack" role="main">
+      <h1 class="sr-only">두더지 잡기</h1>
       <!-- 헤더 -->
-      <div class="status-bar">
-        <div class="score-info">
-          <span>점수: 0</span>
-          <span>시간: 60초</span>
+      <div class="status-bar" role="banner">
+        <div class="score-info" role="status" aria-live="polite">
+          <span aria-label="현재 점수">점수: 0</span>
+          <span aria-label="남은 시간">시간: 60초</span>
         </div>
 
-        <div class="icon-group">
-         <button id="soundToggleBtn" class="icon-button">
-            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드 아이콘" />
+        <div class="icon-group" aria-label="게임 설정">
+         <button id="soundToggleBtn" class="icon-button" aria-label="사운드 켜기/끄기" type="button">
+            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="" />
           </button>
           <button class="icon-button modal-open" aria-label="일시정지" data-type="pause">
-            <img src="/assets/icons/pause.svg" alt="일시정지 아이콘" />
+            <img src="/assets/icons/pause.svg" alt="" />
           </button>
         </div>
       </div>
-      <img class="mole-game-map" src="/assets/images/mole-game-theme.jpg" alt="두더지 게임 맵" />
-      <div class="mole-holes">
+      <picture>
+        <source srcset="/assets/images/mole-game-theme.avif" type="image/avif">
+        <source srcset="/assets/images/mole-game-theme.webp" type="image/webp">
+        <img 
+          class="mole-game-map" 
+          src="/assets/images/mole-game-theme.jpg" 
+          alt="두더지 게임 맵" 
+        />
+      </picture>
 
-  <div class="mole-holes">
+      
+  <section class="mole-holes">
   <!-- 두더지(구멍) 영역: 절대 위치/스케일 스타일 따로 적용 -->
   <div class="mole mole0 " data-index="0">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+    <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <div class="mole mole1" data-index="1">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+    <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <div class="mole mole2" data-index="2">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+    <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <div class="mole mole3" data-index="3">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+    <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <div class="mole mole4" data-index="4">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+    <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <div class="mole mole5" data-index="5">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+   <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <div class="mole mole6" data-index="6">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+    <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <div class="mole mole7" data-index="7">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+    <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <div class="mole mole8" data-index="8">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+    <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <div class="mole mole9" data-index="9">
-    <img src="/assets/images/mole.png" alt="일반 두더지" class="mole-img" />
+    <picture>
+            <source srcset="/assets/images/mole.avif" type="image/avif">
+            <source srcset="/assets/images/mole.webp" type="image/webp">
+            <img 
+              src="/assets/images/mole.png" 
+              alt="갈색 두더지" 
+              class="mole-img" 
+            />
+          </picture>
   </div>
   <!-- 단어 표시 영역: 부모 기준 절대 위치로 JS로 위치 잡아주면 됨 -->
-  <div class="mole-word-container">
-    <div class="mole-word" data-index="0"></div>
-    <div class="mole-word" data-index="1"></div>
-    <div class="mole-word" data-index="2"></div>
-    <div class="mole-word" data-index="3"></div>
-    <div class="mole-word" data-index="4"></div>
-    <div class="mole-word" data-index="5"></div>
-    <div class="mole-word" data-index="6"></div>
-    <div class="mole-word" data-index="7"></div>
-    <div class="mole-word" data-index="8"></div>
-    <div class="mole-word" data-index="9"></div>
+  <div class="mole-word-container" aria-live="polite" aria-label="두더지가 나오면서 표시되는 단어들">
+    <div class="mole-word" data-index="0" role="status" aria-label="첫 번째 두더지 단어"></div>
+    <div class="mole-word" data-index="1" role="status" aria-label="두 번째 두더지 단어"></div>
+    <div class="mole-word" data-index="2" role="status" aria-label="세 번째 두더지 단어"></div>
+    <div class="mole-word" data-index="3" role="status" aria-label="네 번째 두더지 단어"></div>
+    <div class="mole-word" data-index="4" role="status" aria-label="다섯 번째 두더지 단어"></div>
+    <div class="mole-word" data-index="5" role="status" aria-label="여섯 번째 두더지 단어"></div>
+    <div class="mole-word" data-index="6" role="status" aria-label="일곱 번째 두더지 단어"></div>
+    <div class="mole-word" data-index="7" role="status" aria-label="여덟 번째 두더지 단어"></div>
+    <div class="mole-word" data-index="8" role="status" aria-label="아홉 번째 두더지 단어"></div>
+    <div class="mole-word" data-index="9" role="status" aria-label="열 번째 두더지 단어"></div>
   </div>
-</div>
+</section>
       </div>
-        <input type="text" class="typing-area" aria-label="정답 입력란" placeholder="단어를 입력해 주세요" required spellcheck="false" autocomplete="off"/>
+       <section class="input-section" aria-label="게임 입력 영역">
+        <label for="typing-area" class="sr-only">두더지 위의 단어를 입력하세요</label>
+        <input 
+          type="text" 
+          id="typing-area"
+          class="typing-area" 
+          aria-describedby="game-instructions"
+          placeholder="단어를 입력해 주세요" 
+          required 
+          spellcheck="false" 
+          autocomplete="off"
+          autocapitalize="off"
+          inputmode="text"
+          maxlength="50"
+        />
+        <div id="game-instructions" class="sr-only">
+          화면에 나타나는 두더지 위의 단어를 정확히 입력하여 두더지를 잡으세요. 
+          올바른 단어를 입력하면 점수를 얻고, 틀리면 패널티가 있습니다.
+          Enter 키 또는 스페이스바를 눌러 답을 제출할 수 있습니다.
+        </div>
+      </section>
 <div class="modal-container">
-        <dialog class="modal" data-type="pause">
+        <dialog class="modal" data-type="pause"  aria-labelledby="pause-modal-title"
+          aria-describedby="pause-modal-desc"
+          role="dialog"
+          aria-modal="true">
           <div class="modal-inner">
-            <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
-            <div class="modal-content">
-              <button type="button" class="pause-modal continue-btn">계속 하기</button>
-              <button type="button" class="pause-modal retry-btn">다시 하기</button>
-              <button type="button" class="pause-modal main-btn">메인 화면</button>
+            <h2 id="pause-modal-title" class="modal-title">게임을 그만하시겠습니까?</h2>
+            <p id="pause-modal-desc" class="sr-only">
+              게임을 계속하거나, 다시 시작하거나, 메인 화면으로 돌아갈 수 있습니다.
+            </p>
+            <div class="modal-content" role="group" aria-label="게임 옵션">
+              <div class="modal-content" role="group" aria-label="게임 옵션">
+              <button type="button" class="pause-modal continue-btn" autofocus>
+                계속 하기
+                <span class="sr-only">현재 게임을 이어서 진행합니다</span>
+              </button>
+              <button type="button" class="pause-modal retry-btn">
+                다시 하기
+                <span class="sr-only">게임을 처음부터 다시 시작합니다</span>
+              </button>
+              <button type="button" class="pause-modal main-btn">
+                메인 화면
+                <span class="sr-only">게임 선택 화면으로 돌아갑니다</span>
+              </button>
             </div>
           </div>
         </dialog>
@@ -102,6 +227,5 @@
       </div>
       </div>
     <script type="module" src="/src/pages/mole-game/in-game/in-game.js"></script>
-    
   </body>
 </html>

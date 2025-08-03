@@ -22,55 +22,73 @@
   </head>
   <body>
     <div class="game-select-container">
-      <header class="game-header">
-        <button class="icon back-icon" id="back-btn" aria-label="뒤로가기">
+      <header class="game-header" role="banner">
+        <button class="icon back-icon" id="back-btn" aria-label="이전 페이지로 돌아가기" type="button">
           <img src="/assets/icons/back.svg" alt="" aria-hidden="true" />
         </button>
 
         <!-- 게임 이름 -->
-        <div class="game-title-wrapper">
-          <span class="game-title stroke">게임을 선택해 주세요!</span>
+        <div class="game-title-wrapper" role="banner">
+          <h1 class="sr-only">타이핑 게임 선택</h1>
+          <span class="game-title stroke" aria-hidden="true">게임을 선택해 주세요!</span>
           <span class="game-title body">게임을 선택해 주세요!</span>
         </div>
-        <div class="icon-group">
-          <button id="soundToggleBtn" class="icon-button">
-            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드" />
+        <div class="icon-group" aria-label="설정" role="navigation">
+          <button id="soundToggleBtn" class="icon-button" aria-label="배경음악 켜기/끄기" type="button">
+            <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="" aria-hidden="true" />
           </button>
-          <button class="icon-button modal-open" data-type="settings">
-            <img src="/assets/icons/option.svg" alt="설정" class="icon" />
+          <button class="icon-button modal-open" data-type="settings" aria-label="게임 설정 열기" aria-haspopup="dialog" type="button">
+            <img src="/assets/icons/option.svg" alt="설정" class="icon" aria-hidden="true" />
           </button>
         </div>
       </header>
       <!-- 게임 선택 -->
-      <main class="game-select-wrapper">
+      <main class="game-select-wrapper" role="main">
+        <h2 class="sr-only">게임 목록</h2>
+
         <div class="card-wrapper">
           <div class="card w340" tabindex="0" role="button">
             <div class="img-container">
-              <img src="/assets/icons/acidrain.png" alt="산성비" />
+              <picture>
+                <source srcset="/assets/icons/acidrain.webp" type="image/webp" />
+                <img src="/assets/icons/acidrain.png" alt="산성비 게임" />
+              </picture>
             </div>
             <h2 class="card-title">산성비</h2>
           </div>
         </div>
+
         <div class="card-wrapper">
           <div class="card w340" tabindex="0" role="button">
             <div class="img-container">
-              <img src="/assets/icons/defense.png" alt="산성비" />
+              <picture>
+                <source srcset="/assets/icons/defense.webp" type="image/webp" />
+                <img src="/assets/icons/defense.png" alt="디펜스 게임" />
+              </picture>
             </div>
             <h2 class="card-title">디펜스</h2>
           </div>
         </div>
+
         <div class="card-wrapper">
           <div class="card w340" tabindex="0" role="button">
             <div class="img-container">
-              <img src="/assets/icons/mole.png" alt="산성비" />
+              <picture>
+                <source srcset="/assets/icons/mole.webp" type="image/webp" />
+                <img src="/assets/icons/mole.png" alt="두더지 잡기" />
+              </picture>
             </div>
             <h2 class="card-title">두더지 잡기</h2>
           </div>
         </div>
+
         <div class="card-wrapper">
           <div class="card w340" tabindex="0" role="button">
             <div class="img-container">
-              <img src="/assets/icons/quiz-alternative.png" alt="산성비" />
+              <picture>
+                <source srcset="/assets/icons/quiz-alternative.webp" type="image/webp" />
+                <img src="/assets/icons/quiz-alternative.png" alt="퀴즈 게임" />
+              </picture>
             </div>
             <h2 class="card-title">퀴즈</h2>
           </div>
@@ -84,7 +102,8 @@
       <dialog class="modal" data-type="settings">
         <div class="modal-inner">
           <h2 class="modal-title">설정</h2>
-          <button class="modal-close-button" type="button"><img src="/assets/icons/close.svg" alt="닫기" /></button>
+
+          <button class="modal-close-button" type="button" aria-label="설정 창 닫기"><img src="/assets/icons/close.svg" aria-hidden="true" alt="" /></button>
           <div class="modal-content">
             <!-- 모달 콘텐츠 삽입 -->
             <div class="wrapper mode">
