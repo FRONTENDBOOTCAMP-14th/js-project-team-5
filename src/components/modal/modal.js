@@ -147,7 +147,6 @@ function trapFocusCloseHandler() {
   trapFocusState.dialog.removeEventListener('close', trapFocusCloseHandler);
   document.removeEventListener('focusin', trapFocusFocusInHandler);
 
-  // inert 해제
   const container = trapFocusState.dialog.closest('.monitor-frame');
   if (container) {
     Array.from(container.children).forEach((el) => {

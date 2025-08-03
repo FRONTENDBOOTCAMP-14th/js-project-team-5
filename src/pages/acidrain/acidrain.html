@@ -18,7 +18,7 @@
   </head>
 
   <body>
-    <div class="acidrain-bg">
+    <div class="acidrain-bg" data-game="acidrain">
       <!-- 카운트다운 -->
       <div class="countdown" id="countdown" hidden>3</div>
 
@@ -56,6 +56,18 @@
           </div>
         </div>
       </div>
+      <!-- 일시정지 모달 -->
+          <dialog class="modal" data-type="pause">
+        <div class="modal-inner">
+          <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
+          <div class="modal-content">
+            <button type="button" class="pause-modal continue-btn">계속 하기</button>
+            <button type="button" class="pause-modal retry-btn">다시 하기</button>
+            <button type="button" class="pause-modal main-btn">메인 화면</button>
+          </div>
+        </div>
+      </dialog>
+    </div>
     </div>
   </body>
   <script type="module" src="/src/pages/acidrain/acidrain.js"></script>

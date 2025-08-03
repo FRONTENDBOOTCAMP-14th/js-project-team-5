@@ -37,7 +37,7 @@
 
 /* 아이콘 이미지 크기 설정 */
 .icon {
-  inline-size: var(--icon-size);
-  block-size: var(--icon-size);
+  inline-size: 3.75rem; /* 또는 3.125rem (html 폰트 크기에 따라) */
+  block-size: 3.75rem;
   object-fit: contain;
 }
