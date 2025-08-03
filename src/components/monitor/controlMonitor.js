@@ -54,7 +54,6 @@ function scaleMonitorGroup() {
 
 window.addEventListener('resize', scaleMonitorGroup);
 window.addEventListener('DOMContentLoaded', scaleMonitorGroup);
-
 /**
  * SPA 방식으로 HTML + CSS + JS 로드
  * @param {string} url - 불러올 HTML 경로
@@ -130,7 +129,6 @@ function loadHTML(url, onLoaded) {
     })
     .catch(console.error);
 }
-
 /** 뒤로 가기 */
 export function goBack() {
   if (previousPage) {

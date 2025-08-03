@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/src/components/header/in-game-header.css" />
     <link rel="stylesheet" href="/src/components/input/input.css" />
     <link rel="stylesheet" href="/src/pages/game-defence/defence.css" />
+    <link rel="stylesheet" href="/src/components/modal/modal.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
@@ -28,12 +29,24 @@
           <button id="soundToggleBtn" class="icon-button" aria-label="사운드 켜기">
             <img id="soundIcon" src="/assets/icons/sound-on.svg" alt="사운드 아이콘" />
           </button>
-          <button class="icon-button" aria-label="일시정지">
+          <button class="icon-button modal-open" data-type="pause" data-game="defense" aria-label="일시정지">
             <img src="/assets/icons/pause.svg" alt="일시정지 아이콘" />
           </button>
         </div>
       </div>
       <input type="text" class="typing-input" placeholder="여기에 입력하세요" aria-label="타자 입력창" />
+      <div class="modal-container" data-game="defense">
+        <dialog class="modal" data-type="pause">
+          <div class="modal-inner">
+            <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
+            <div class="modal-content">
+              <button type="button" class="pause-modal continue-btn">계속 하기</button>
+              <button type="button" class="pause-modal retry-btn">다시 하기</button>
+              <button type="button" class="pause-modal main-btn">메인 화면</button>
+            </div>
+          </div>
+        </dialog>
+      </div>
     </div>
     <script type="module" src="/src/pages/game-defence/defence.js"></script>
     <script type="module" src="/src/pages/game-defence/dict.js"></script>

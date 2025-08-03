@@ -27,6 +27,7 @@ export function initModalEvents() {
     });
 
     button.addEventListener('click', () => {
+      console.log("테스트")
       const previouslyFocusedElement = document.activeElement;
 
       dialog.show();

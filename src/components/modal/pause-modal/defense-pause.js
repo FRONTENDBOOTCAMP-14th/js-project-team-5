@@ -1,4 +1,8 @@
 import { setupPauseDialogClickHandler } from './pause-util.js';
+import { gameStart, 
+  goToMainMenu, 
+  pauseGame, 
+  resumeGame  } from '/src/pages/game-defence/defence.js';
 
 /**
  * 디펜스(Defense) 게임에서 일시정지 모달의 버튼 클릭 핸들러를 설정한다.
@@ -14,21 +18,26 @@ import { setupPauseDialogClickHandler } from './pause-util.js';
  * @param {HTMLDialogElement} dialog - 일시정지 모달 '<dialog>' 요소
  */
 export function handleDefensePause(dialog) {
-  // console.log는 디버깅용으로 사용
-  // 분기와 이벤트 리스너가 잘 작동하는지 확인하고,
-  // 기존에 있던 console.log는 제거하고 필요한 로직만 남기기
+  // ① Pause 버튼 클릭 시 pauseGame() → 모달 열기
+  document.querySelectorAll('.modal-open[data-type="pause"]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      pauseGame();
+      dialog.showModal();
+    });
+  });
+
+  // ② 모달 버튼 핸들러
   setupPauseDialogClickHandler(dialog, {
     continue: () => {
-      console.log('디펜스 계속하기');
-      // 디펜스 계속하기 로직
+      // 모달 닫히면 다시 인터벌 재시작
+      resumeGame();
     },
     retry: () => {
-      console.log('디펜스 다시하기');
-      // 디펜스 다시하기 로직
+      gameStart();      // gameStart() 내부에서 gameOver(false) → 클리어 + 재시작
     },
     main: () => {
-      console.log('디펜스 메인 화면으로 이동');
-      // 메인 화면 이동 로직
+      goToMainMenu();   // goToMainMenu() 내부에서 gameOver(false)
     },
   });
 }
