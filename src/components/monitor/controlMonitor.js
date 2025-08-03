@@ -82,37 +82,42 @@ export function loadHTML(url, onLoaded) {
       // CSS 파일 동적 로드
       const cssLinks = Array.from(container.querySelectorAll('link[rel="stylesheet"]'));
       const loadCSS = Promise.all(
-        cssLinks.map((link) => new Promise((res, rej) => {
-          const el = document.createElement('link');
-          el.rel = 'stylesheet';
-          el.href = link.href;
-          el.onload = res;
-          el.onerror = rej;
-          document.head.appendChild(el);
-        }))
+        cssLinks.map(
+          (link) =>
+            new Promise((res, rej) => {
+              const el = document.createElement('link');
+              el.rel = 'stylesheet';
+              el.href = link.href;
+              el.onload = res;
+              el.onerror = rej;
+              document.head.appendChild(el);
+            })
+        )
       );
 
       loadCSS
         .then(() => {
           // JS 파일 동적 로드 (controlMonitor.js 제외)
-          const scriptTags = Array.from(container.querySelectorAll('script'))
-            .filter((s) => !s.src.includes('controlMonitor.js'));
+          const scriptTags = Array.from(container.querySelectorAll('script')).filter((s) => !s.src.includes('controlMonitor.js'));
 
           return Promise.all(
-            scriptTags.map((oldScript) => new Promise((res, rej) => {
-              const newScript = document.createElement('script');
-              newScript.type = oldScript.type || 'text/javascript';
-              if (oldScript.src) {
-                const urlObj = new URL(oldScript.src, location.href);
-                urlObj.searchParams.set('_ts', Date.now());
-                newScript.src = urlObj.toString();
-              } else {
-                newScript.textContent = oldScript.textContent;
-              }
-              newScript.onload = res;
-              newScript.onerror = rej;
-              document.body.appendChild(newScript);
-            }))
+            scriptTags.map(
+              (oldScript) =>
+                new Promise((res, rej) => {
+                  const newScript = document.createElement('script');
+                  newScript.type = oldScript.type || 'text/javascript';
+                  if (oldScript.src) {
+                    const urlObj = new URL(oldScript.src, location.href);
+                    urlObj.searchParams.set('_ts', Date.now());
+                    newScript.src = urlObj.toString();
+                  } else {
+                    newScript.textContent = oldScript.textContent;
+                  }
+                  newScript.onload = res;
+                  newScript.onerror = rej;
+                  document.body.appendChild(newScript);
+                })
+            )
           );
         })
         .then(() => {
@@ -136,7 +141,7 @@ export function goBack() {
 // 최초 IIFE 실행은 한 번만
 if (!window.__cmInitialized) {
   window.__cmInitialized = true;
-  (()=>{
+  (() => {
     if (!previousPage) {
       previousPage = '/src/components/booting/booting.html';
       loadHTML(previousPage);

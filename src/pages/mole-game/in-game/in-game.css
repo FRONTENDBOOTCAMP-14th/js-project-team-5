@@ -71,25 +71,30 @@ body {
 }
 
 .modal-inner {
-  z-index:9999;
+  z-index: 9999;
 }
 
 .typing-area:focus {
   outline: none;
   border: 3px solid black;
-  box-shadow: 0 0 0 1px black, 2px 2px 0 0 black, 4px 4px 0 0 black;
+  box-shadow:
+    0 0 0 1px black,
+    2px 2px 0 0 black,
+    4px 4px 0 0 black;
   image-rendering: pixelated;
 }
 .penalty-image {
-  position: fixed;
+  position: absolute;
   left: 50%;
   top: 50%;
-  width: 1600px;
+  width: 1500px;
   height: auto;
   transform: translate(-50%, -50%);
   z-index: 30;
   pointer-events: none;
   opacity: 0.75;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 40px);
 }
 
 .mole-holes {
@@ -288,7 +293,10 @@ body {
   opacity: 1;
   z-index: 10;
   border: 1px solid black;
-  box-shadow: 0 0 0 1px black, 2px 2px 0 0 black, 3px 3px 0 0 black;
+  box-shadow:
+    0 0 0 1px black,
+    2px 2px 0 0 black,
+    3px 3px 0 0 black;
   image-rendering: pixelated;
 }
 .mole-word.type2 {
@@ -311,11 +319,12 @@ body {
   opacity: 1;
   z-index: 10;
   border: 1px solid black;
-  box-shadow: 0 0 0 1px black, 2px 2px 0 0 black, 3px 3px 0 0 black;
+  box-shadow:
+    0 0 0 1px black,
+    2px 2px 0 0 black,
+    3px 3px 0 0 black;
   image-rendering: pixelated;
 }
-
-
 
 .typing-area {
   -webkit-text-decoration-skip: none;
@@ -327,8 +336,12 @@ body {
   animation: mole-rotate 0.2s forwards;
 }
 @keyframes mole-rotate {
-  0% { transform: translateY(0) rotate(0deg);}
-  100% { transform: translateY(0) rotate(-45deg);}
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-45deg);
+  }
 }
 
 /* 프라이팬 기본 위치 및 페이드 효과 */
@@ -338,7 +351,9 @@ body {
   height: 150px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s, transform 0.2s;
+  transition:
+    opacity 0.3s,
+    transform 0.2s;
   z-index: 9999;
   --frypan-scale: 1;
   transform: scale(var(--frypan-scale));
@@ -346,7 +361,6 @@ body {
 
 /* 두더지 올라올 때 frypan 페이드인 */
 .mole.show .frypan-img {
-  opacity: 1;
   transform: rotate(0deg) translateY(0);
 }
 
@@ -356,8 +370,12 @@ body {
 }
 
 @keyframes frypan-hit {
-  0%   { transform: scale(var(--frypan-scale)) rotate(0deg);}
-  100% { transform: scale(var(--frypan-scale)) rotate(-50deg);}
+  0% {
+    transform: scale(var(--frypan-scale)) rotate(0deg);
+  }
+  100% {
+    transform: scale(var(--frypan-scale)) rotate(-50deg);
+  }
 }
 
 /* 두더지와 후라이팬 내려감 */
@@ -369,61 +387,123 @@ body {
 
 .frypan-img.miss {
   opacity: 0;
-  transition: opacity 0.3s, transform 0.5s;
+  transition:
+    opacity 0.3s,
+    transform 0.5s;
   transform: scale(var(--frypan-scale)) translateY(100%) rotate(-45deg);
 }
 
 /* 각 두더지 인덱스별 scale 조정 */
-.frypan-img[data-mole="0"] { transform: scale(2.0); }
-.frypan-img[data-mole="1"] { transform: scale(1.3); }
-.frypan-img[data-mole="2"] { transform: scale(0.9); }
-.frypan-img[data-mole="3"] { transform: scale(1.8); }
-.frypan-img[data-mole="4"] { transform: scale(1.0); }
-.frypan-img[data-mole="5"] { transform: scale(1.6); }
-.frypan-img[data-mole="6"] { transform: scale(1.0); }
-.frypan-img[data-mole="7"] { transform: scale(1.7); }
-.frypan-img[data-mole="8"] { transform: scale(2.0); }
-.frypan-img[data-mole="9"] { transform: scale(1.9); }
+.frypan-img[data-mole='0'] {
+  transform: scale(2);
+}
+.frypan-img[data-mole='1'] {
+  transform: scale(1.3);
+}
+.frypan-img[data-mole='2'] {
+  transform: scale(0.9);
+}
+.frypan-img[data-mole='3'] {
+  transform: scale(1.8);
+}
+.frypan-img[data-mole='4'] {
+  transform: scale(1);
+}
+.frypan-img[data-mole='5'] {
+  transform: scale(1.6);
+}
+.frypan-img[data-mole='6'] {
+  transform: scale(1);
+}
+.frypan-img[data-mole='7'] {
+  transform: scale(1.7);
+}
+.frypan-img[data-mole='8'] {
+  transform: scale(2);
+}
+.frypan-img[data-mole='9'] {
+  transform: scale(1.9);
+}
 
 @keyframes frypan-hit-0 {
-  0% { transform: scale(2.0) rotate(0deg);}
-  100% { transform: scale(2.0) rotate(-50deg);}
+  0% {
+    transform: scale(2) rotate(0deg);
+  }
+  100% {
+    transform: scale(2) rotate(-50deg);
+  }
 }
 @keyframes frypan-hit-1 {
-  0% { transform: scale(1.3) rotate(0deg);}
-  100% { transform: scale(1.3) rotate(-50deg);}
+  0% {
+    transform: scale(1.3) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.3) rotate(-50deg);
+  }
 }
 @keyframes frypan-hit-2 {
-  0% { transform: scale(0.9) rotate(0deg);}
-  100% { transform: scale(0.9) rotate(-50deg);}
+  0% {
+    transform: scale(0.9) rotate(0deg);
+  }
+  100% {
+    transform: scale(0.9) rotate(-50deg);
+  }
 }
 @keyframes frypan-hit-3 {
-  0% { transform: scale(1.8) rotate(0deg);}
-  100% { transform: scale(1.8) rotate(-50deg);}
+  0% {
+    transform: scale(1.8) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.8) rotate(-50deg);
+  }
 }
 @keyframes frypan-hit-4 {
-  0% { transform: scale(1.0) rotate(0deg);}
-  100% { transform: scale(1.0) rotate(-50deg);}
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(-50deg);
+  }
 }
 @keyframes frypan-hit-5 {
-  0% { transform: scale(1.6) rotate(0deg);}
-  100% { transform: scale(1.6) rotate(-50deg);}
+  0% {
+    transform: scale(1.6) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.6) rotate(-50deg);
+  }
 }
 @keyframes frypan-hit-6 {
-  0% { transform: scale(1.0) rotate(0deg);}
-  100% { transform: scale(1.0) rotate(-50deg);}
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(-50deg);
+  }
 }
 @keyframes frypan-hit-7 {
-  0% { transform: scale(1.7) rotate(0deg);}
-  100% { transform: scale(1.7) rotate(-50deg);}
+  0% {
+    transform: scale(1.7) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.7) rotate(-50deg);
+  }
 }
 @keyframes frypan-hit-8 {
-  0% { transform: scale(2.0) rotate(0deg);}
-  100% { transform: scale(2.0) rotate(-50deg);}
+  0% {
+    transform: scale(2) rotate(0deg);
+  }
+  100% {
+    transform: scale(2) rotate(-50deg);
+  }
 }
 @keyframes frypan-hit-9 {
-  0% { transform: scale(1.9) rotate(0deg);}
-  100% { transform: scale(1.9) rotate(-50deg);}
+  0% {
+    transform: scale(1.9) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.9) rotate(-50deg);
+  }
 }
 
 .mole.hide .mole-img {
