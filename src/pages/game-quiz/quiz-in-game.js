@@ -1,5 +1,4 @@
 import audioManager from '/src/scripts/audiomanager.js';
-import { loadHTML } from '/src/components/monitor/controlMonitor.js';
 
 // 효과음 관리
 const correctSfx = new Audio('/assets/audio/sfx/quiz-correct.mp3');

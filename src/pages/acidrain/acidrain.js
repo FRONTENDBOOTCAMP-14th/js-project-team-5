@@ -1,5 +1,3 @@
-import { loadHTML } from '/src/components/monitor/controlMonitor.js';
-
 //=====================================
 // 🎵 오디오 매니저 설정 (유저 컨트롤 포함)
 // =====================================
@@ -388,7 +386,6 @@ typingInput.addEventListener('keydown', (e) => {
       wordEl.remove(); // 매칭 단어 제거
 
       playPopSound(); // ✅ 여기서만 효과음 재생
-
       break; // 하나만 처리
     }
   }
