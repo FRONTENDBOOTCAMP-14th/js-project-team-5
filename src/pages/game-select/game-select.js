@@ -5,7 +5,7 @@ let isPlaying = false;
 
 function playClickAndLoad(url) {
   if (!clickSfx || sessionStorage.getItem('isMuted') === 'true' || isPlaying) {
-    setTimeout(() => loadHTML(url), 80);
+    setTimeout(() => window.loadHTML(url), 80);
     return;
   }
   isPlaying = true;
@@ -20,7 +20,7 @@ function playClickAndLoad(url) {
       isPlaying = false;
       setTimeout(() => {
         clickSfx.pause();
-        loadHTML(url);
+        window.loadHTML(url);
       }, 80);
     });
 }

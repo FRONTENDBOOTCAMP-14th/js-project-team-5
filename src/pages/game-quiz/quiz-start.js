@@ -10,11 +10,11 @@ quizContainer.addEventListener('click', (e) => {
   e.preventDefault();
 
   if (button.classList.contains('quiz-exit-btn')) {
-    loadHTML('/src/pages/game-landing/quiz-landing.html');
+    window.loadHTML('/src/pages/game-landing/quiz-landing.html');
   } else if (button.classList.contains('quiz-focus-on-btn')) {
-    loadHTML('/src/pages/game-quiz/quiz-focus-on.html');
+    window.loadHTML('/src/pages/game-quiz/quiz-focus-on.html');
   } else if (button.classList.contains('quiz-time-attack-btn')) {
-    loadHTML('/src/pages/game-quiz/quiz-time-attack.html');
+    window.loadHTML('/src/pages/game-quiz/quiz-time-attack.html');
   }
 });
 

@@ -303,7 +303,7 @@ function endGame() {
     })
   );
   cleanupQuizGame();
-  loadHTML('/src/pages/game-quiz/quiz-result.html');
+  window.loadHTML('/src/pages/game-quiz/quiz-result.html');
 }
 
 // 15. 일시정지
@@ -364,7 +364,7 @@ export function goToMain() {
   countdownValue = null;
   clearAllIntervals();
   cleanupQuizGame();
-  loadHTML('/src/pages/game-quiz/quiz-start.html');
+  window.loadHTML('/src/pages/game-quiz/quiz-start.html');
 }
 
 // 17. 진행률 바

@@ -417,7 +417,7 @@ typingInput.addEventListener('keydown', (e) => {
 const goHomeBtn = document.getElementById('goHomeBtn');
 
 goHomeBtn.addEventListener('click', () => {
-  loadHTML('/src/pages/game-landing/acidrain-landing.html'); // ← 산성비 렌딩 페이지 경로
+  window.loadHTML('/src/pages/game-landing/acidrain-landing.html'); // ← 산성비 렌딩 페이지 경로
 });
 
 // Enter 또는 Space로 다시 시작 가능
@@ -484,7 +484,7 @@ function pauseGame() {
         restartFromPause();
       },
       main: () => {
-        loadHTML('/src/pages/game-landing/acidrain-landing.html');
+        window.loadHTML('/src/pages/game-landing/acidrain-landing.html');
       },
     });
   }
