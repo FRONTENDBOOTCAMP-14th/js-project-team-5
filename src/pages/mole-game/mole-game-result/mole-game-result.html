@@ -5,14 +5,14 @@
     <link rel="icon" href="/assets/icons/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
-    <title>두더지잡기 결과 </title>
+    <title>두더지잡기 결과</title>
     <link rel="stylesheet" href="/fonts/KIMM.css" />
     <link rel="stylesheet" href="/src/styles/common/index.css" />
     <link rel="stylesheet" href="/src/pages/mole-game/mole-game-result/mole-game-result.css" />
     <link rel="stylesheet" href="/src/components/modal/modal.css" />
   </head>
   <body>
-    <div class="game-result-container" role="main">
+    <div class="game-result-container" role="main" data-game="whack">
       <h1 class="sr-only">두더지 잡기 결과</h1>
       <section class="score-container" aria-labelledby="score-text">
         <div class="score-text">최종 점수</div>
@@ -35,29 +35,26 @@
         <button type="button" class="regame btn" aria-describedby="regame-desc">다시하기</button>
         <span id="regame-desc" class="sr-only">같은 게임을 다시 시작합니다</span>
       </div>
-
-      
-        <dialog class="modal" data-type="register">
-          <div class="modal-inner">
-            <h2 class="modal-title">닉네임을 입력해 주세요!</h2>
-            <div class="modal-content">
-              <!-- 모달 콘텐츠 삽입 -->
-              <form id="nickname-register-form">
-                <label for="nickname-input" class="sr-only">닉네임</label>
-                <!-- 닉네임 입력 필드 -->
-                <input type="text" id="nickname-input" name="nickname" maxlength="10" placeholder="최대 10자" required autocomplete="off" />
-                <!-- 닉네임 중복 여부 확인 메시지 -->
-                <p class="nickname-check-message" aria-live="polite" role="alert">이미 사용 중인 닉네임입니다.</p>
-                <div class="modal-button-container">
-                  <button type="submit" class="register-submit-button">확인</button>
-                  <button type="button" class="modal-close-button" aria-label="모달 닫기">취소</button>
-                </div>
-              </form>
-            </div>
+      <dialog class="modal" data-type="register">
+        <div class="modal-inner">
+          <h2 class="modal-title">닉네임을 입력해 주세요!</h2>
+          <div class="modal-content">
+            <!-- 모달 콘텐츠 삽입 -->
+            <form id="nickname-register-form">
+              <label for="nickname-input" class="sr-only">닉네임</label>
+              <!-- 닉네임 입력 필드 -->
+              <input type="text" id="nickname-input" name="nickname" maxlength="10" placeholder="최대 10자" required autocomplete="off" />
+              <!-- 닉네임 중복 여부 확인 메시지 -->
+              <p class="nickname-check-message" aria-live="polite" role="alert">이미 사용 중인 닉네임입니다.</p>
+              <div class="modal-button-container">
+                <button type="submit" class="register-submit-button">확인</button>
+                <button type="button" class="modal-close-button" aria-label="모달 닫기">취소</button>
+              </div>
+            </form>
           </div>
-        </dialog>
-      
+        </div>
+      </dialog>
     </div>
-    <script type="module" src="/src/pages/mole-game/mole-game-result/mole-game-result.js" /></script>
+    <script type="module" src="/src/pages/mole-game/mole-game-result/mole-game-result.js"></script>
   </body>
 </html>
