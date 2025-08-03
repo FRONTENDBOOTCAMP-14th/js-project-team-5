@@ -20,7 +20,7 @@ body {
 }
 
 .status-bar {
-  z-index: 9999;
+  z-index: 9998;
   position: absolute;
   top: 4.375rem;
 }
