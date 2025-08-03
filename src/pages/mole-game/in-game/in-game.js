@@ -121,6 +121,37 @@ let gameEnded = false;
 let moleTimers = [];
 let showMolesInterval = null; // 루프용 타이머 변수
 
+// === 오디오 설정 ===
+let bgmVolume = localStorage.getItem('bgmVolume');
+if (bgmVolume === null) bgmVolume = 0.3;
+else bgmVolume = Number(bgmVolume);
+
+let sfxVolume = localStorage.getItem('sfxVolume');
+if (sfxVolume === null) sfxVolume = 0.2;
+else sfxVolume = Number(sfxVolume);
+
+audioManager.setSource('/assets/audio/bgm/whack-Twelve-Speed-Slynk.mp3');
+audioManager.audio.volume = bgmVolume;
+audioManager.play();
+
+const hitAudio = new Audio('/assets/audio/sfx/hitsound.mp3');
+const laughAudio = new Audio('/assets/audio/sfx/laughsound.mp3');
+
+// 효과음의 원래 볼륨 저장
+hitAudio.defaultVolume = sfxVolume;
+laughAudio.defaultVolume = sfxVolume;
+
+hitAudio.volume = sfxVolume;
+laughAudio.volume = sfxVolume;
+
+// audiomanager에 등록
+audioManager.setSfx({ hitAudio, laughAudio });
+
+audioManager.setUI({
+  iconSelector: '#soundIcon',
+  buttonSelector: '#soundToggleBtn',
+});
+
 // --- 유틸 함수 ---
 function getUniqueRandomWord() {
   const candidates = wordList.filter((word) => !activeWords.has(word));
@@ -419,7 +450,6 @@ function handleCorrectAnswer(matchedIdx) {
   score += addedScore;
   animateScore(oldScore, score);
 
-  const hitAudio = new Audio('/assets/audio/sfx/hitsound.wav');
   hitAudio.play();
 
   wordBox.textContent = '';
@@ -480,7 +510,6 @@ function handleCorrectAnswer(matchedIdx) {
 }
 
 function handleWrongAnswer() {
-  const laughAudio = new Audio('/assets/audio/sfx/laughsound.mp3');
   laughAudio.play();
 
   typingArea.value = '';
