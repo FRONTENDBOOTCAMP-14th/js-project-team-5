@@ -120,9 +120,10 @@ function loadHTML(url, onLoaded) {
     .then(() => {
       hookGlobalAPIs();
       if (window.initModalEvents) window.initModalEvents(); // 모달 항상 초기화
-      // 인게임이 아니면 슬라이더 초기화
+      // 인게임/윈도우 페이지 구분
       const isInGamePage = /\/acidrain\//.test(url) || /\/mole-game\//.test(url) || /\/game-quiz\//.test(url) || /\/game-defence\//.test(url);
-      if (!isInGamePage && window.initSliderEvents) {
+      const isWindowPage = /\/components\/window\/window.html$/.test(url);
+      if (!isInGamePage && !isWindowPage && window.initSliderEvents) {
         window.initSliderEvents();
       }
       if (typeof onLoaded === 'function') onLoaded();

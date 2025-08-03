@@ -90,36 +90,36 @@ export function initSliderEvents() {
     return el.closest(INTERACTIVE_SELECTOR);
   }
 
-  // monitor-frame 내 상호작용 효과음
+  // monitor-frame이 있으면 그 안에서만, 없으면 document 전체에 바인딩
   const monitorFrame = document.querySelector('.monitor-frame');
+  const clickTarget = monitorFrame || document;
   const mainStart = monitorFrame?.querySelector('.main-start');
 
-  if (monitorFrame) {
-    // 클릭 효과음
-    monitorFrame.addEventListener('click', (e) => {
-      if (isInteractiveElement(e.target)) {
-        clickSfx.currentTime = 0;
-        clickSfx.play();
-      }
-    });
-
-    // 키보드로 Enter/Space로 활성화 시 효과음
-    monitorFrame.addEventListener('keydown', (e) => {
-      if ((e.key === 'Enter' || e.key === ' ') && isInteractiveElement(e.target)) {
-        clickSfx.currentTime = 0;
-        clickSfx.play();
-      }
-    });
-
-    // mainStart가 있을 때만 이벤트 등록
-    if (mainStart) {
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          clickSfx.currentTime = 0;
-          clickSfx.play();
-        }
-      });
+  // 클릭 효과음
+  clickTarget.addEventListener('click', (e) => {
+    if (isInteractiveElement(e.target)) {
+      clickSfx.currentTime = 0;
+      clickSfx.play();
     }
+  });
+
+  // 키보드로 Enter/Space로 활성화 시 효과음
+  clickTarget.addEventListener('keydown', (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && isInteractiveElement(e.target)) {
+      clickSfx.currentTime = 0;
+      clickSfx.play();
+    }
+  });
+
+  // mainStart가 있을 때만 이벤트 등록
+  if (mainStart) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        console.log('Main Start Enter key pressed');
+        clickSfx.currentTime = 0;
+        clickSfx.play();
+      }
+    });
   }
 
   /* =========================
