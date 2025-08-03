@@ -17,6 +17,7 @@
   display: flex;
   gap: 40px;
   z-index: 10;
+  padding: 2rem;
 }
 
 /* 입력창 */

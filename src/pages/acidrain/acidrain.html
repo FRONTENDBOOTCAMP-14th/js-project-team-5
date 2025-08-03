@@ -23,7 +23,7 @@
       <div class="countdown" id="countdown" hidden>3</div>
 
       <!-- 상단 상태바 -->
-      <div class="status-bar">
+      <header class="status-bar">
         <div class="score-info">
           <span id="score">점수: 0</span>
           <span id="time">시간: 60초</span>
@@ -37,7 +37,7 @@
             <img src="/assets/icons/pause.svg" alt="일시정지 아이콘" />
           </button>
         </div>
-      </div>
+      </header>
 
       <!-- 게임 영역 -->
       <div class="game-body">
@@ -57,7 +57,7 @@
         </div>
       </div>
       <!-- 일시정지 모달 -->
-          <dialog class="modal" data-type="pause">
+      <dialog class="modal" data-type="pause">
         <div class="modal-inner">
           <h2 class="modal-title">게임을 그만하시겠습니까?</h2>
           <div class="modal-content">
@@ -67,7 +67,6 @@
           </div>
         </div>
       </dialog>
-    </div>
     </div>
   </body>
   <script type="module" src="/src/pages/acidrain/acidrain.js"></script>
