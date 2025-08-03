@@ -13,22 +13,11 @@ import { setupPauseDialogClickHandler } from './pause-util.js';
  *
  * @param {HTMLDialogElement} dialog - 일시정지 모달 '<dialog>' 요소
  */
-export function handleAcidRainPause(dialog) {
-  // console.log는 디버깅용으로 사용
-  // 분기와 이벤트 리스너가 잘 작동하는지 확인하고,
-  // 기존에 있던 console.log는 제거하고 필요한 로직만 남기기
-  setupPauseDialogClickHandler(dialog, {
-    continue: () => {
-      console.log('산성비 계속하기');
-      // 산성비 타이머 계속하기 로직
-    },
-    retry: () => {
-      console.log('산성비 다시하기');
-      // 산성비 다시하기 로직
-    },
-    main: () => {
-      console.log('산성비 메인 화면으로 이동');
-      // 메인 화면 이동 로직
-    },
-  });
+/**
+ * 산성비(Acid Rain) 게임에서 일시정지 모달의 버튼 클릭 핸들러를 바인딩한다.
+ * @param {HTMLDialogElement} dialog - 일시정지 모달 <dialog> 요소
+ * @param {Object} handlers - { continue, retry, main } 핸들러 객체
+ */
+export function handleAcidRainPause(dialog, handlers) {
+  setupPauseDialogClickHandler(dialog, handlers);
 }

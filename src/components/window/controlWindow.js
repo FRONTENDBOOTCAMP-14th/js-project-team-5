@@ -1,5 +1,3 @@
-import { loadHTML } from '/src/components/monitor/controlMonitor.js';
-
 (() => {
   const audio = document.getElementById('bg-audio');
   const image = document.querySelector('.window-start-image');
@@ -44,7 +42,7 @@ document.querySelectorAll('.window-icon-item').forEach((item) => {
     if (role === 'new-tab') {
       window.open(url, '_blank');
     } else if (role === 'new-page') {
-      loadHTML('/src/pages/main-start-page/main-start-page.html');
+      window.loadHTML('/src/pages/main-start-page/main-start-page.html');
     } else {
       console.warn('알 수 없는 역할:', role);
     }

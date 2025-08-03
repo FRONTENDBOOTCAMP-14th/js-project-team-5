@@ -14,9 +14,7 @@
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-    <audio id="bg-audio-title" src="/assets/audio/bgm/defense-Komputo-FrancisPreve.mp3" loop preload="auto"></audio>
-    <audio id="bg-audio-game" src="/assets/audio/bgm/defense-play.mp3" loop preload="auto"></audio>
-    <div class="game-wrapper">
+    <div class="game-wrapper" data-game="defense">
       <canvas class="defence-game-frame"></canvas>
 
       <!-- canvas 위에 띄울 실제 UI -->
@@ -39,5 +37,6 @@
     </div>
     <script type="module" src="/src/pages/game-defence/defence.js"></script>
     <script type="module" src="/src/pages/game-defence/dict.js"></script>
+    <script type="module" src="/src/components/modal/modal.js"></script>
   </body>
 </html>

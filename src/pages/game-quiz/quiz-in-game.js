@@ -1,5 +1,4 @@
 import audioManager from '/src/scripts/audiomanager.js';
-import { loadHTML } from '/src/components/monitor/controlMonitor.js';
 
 // 효과음 관리
 const correctSfx = new Audio('/assets/audio/sfx/quiz-correct.mp3');
@@ -304,7 +303,7 @@ function endGame() {
     })
   );
   cleanupQuizGame();
-  loadHTML('/src/pages/game-quiz/quiz-result.html');
+  window.loadHTML('/src/pages/game-quiz/quiz-result.html');
 }
 
 // 15. 일시정지
@@ -365,7 +364,7 @@ export function goToMain() {
   countdownValue = null;
   clearAllIntervals();
   cleanupQuizGame();
-  loadHTML('/src/pages/game-quiz/quiz-start.html');
+  window.loadHTML('/src/pages/game-quiz/quiz-start.html');
 }
 
 // 17. 진행률 바
@@ -447,27 +446,40 @@ function initModeSettings() {
 
 // 20. 오디오 초기화
 function initAudio() {
-  let volume = localStorage.getItem('quizVolume');
-  if (volume === null) volume = 0.3;
+  let bgmVolume = localStorage.getItem('bgmVolume');
+  if (bgmVolume === null) bgmVolume = 0.3;
+  else bgmVolume = Number(bgmVolume);
 
+  let sfxVolume = localStorage.getItem('sfxVolume');
+  if (sfxVolume === null) sfxVolume = 0.2;
+  else sfxVolume = Number(sfxVolume);
+
+  // 효과음의 원래 볼륨 저장
+  correctSfx.defaultVolume = sfxVolume;
+  wrongSfx.defaultVolume = sfxVolume;
+
+  // audioManager에 등록
+  audioManager.setSfx({ correctSfx, wrongSfx });
+
+  audioManager.audio && (audioManager.audio.volume = bgmVolume);
+  correctSfx.volume = sfxVolume;
+  wrongSfx.volume = Math.max(0, sfxVolume - 0.1);
+
+  // 이미 같은 BGM이 재생 중이면 UI만 갱신하고 리턴
   if (audioManager.audio && audioManager.audio.src.includes('quiz-WildPogo-Francis-Preve.mp3') && !audioManager.audio.paused) {
-    audioManager.audio.volume = volume;
     audioManager.setUI({
       iconSelector: '#soundIcon',
       buttonSelector: '#soundToggleBtn',
     });
-    correctSfx.volume = volume;
-    wrongSfx.volume = volume - 0.1;
     return;
   }
 
+  // 아니면 새로 세팅
   audioManager.setSource('/assets/audio/bgm/quiz-WildPogo-Francis-Preve.mp3');
-  audioManager.audio.volume = volume;
+  audioManager.audio.volume = bgmVolume;
   audioManager.play();
   audioManager.setUI({
     iconSelector: '#soundIcon',
     buttonSelector: '#soundToggleBtn',
   });
-  correctSfx.volume = volume;
-  wrongSfx.volume = volume - 0.1;
 }

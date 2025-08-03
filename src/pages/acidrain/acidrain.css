@@ -1,29 +1,15 @@
-/* 전체 화면 설정 및 배경 */
-body {
-  font-family: 'KIMM', Arial, sans-serif;
-  inline-size: 100vw;
-  block-size: 100vh;
-  background-color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .acidrain-bg {
-  position: relative;
-  inline-size: 1600px;
-  block-size: 800px;
+  inline-size: 100rem;
+  block-size: 50rem;
   background: url('/assets/images/acidrain-background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-/* 상태바 영역*/
-
-.status-bar {
-  padding-top: 3rem; /* 상단 여백 */
+  padding: 2rem;
 }
 
 /* 게임 인풋 영역 */
@@ -34,8 +20,6 @@ body {
   align-items: flex-end; /* 하단 정렬 */
   inline-size: 100%;
   padding-top: 38rem; /* 상단 여백 */
-  padding-block-end: 2.5rem;
-  box-sizing: border-box;
 }
 
 .typing-input {

@@ -1,4 +1,5 @@
 import { wordList } from './dict.js';
+import audioManager from '/src/scripts/audiomanager.js';
 
 //상태 변수
 let gameState = 'title'; // 'title' | 'fadeout' | 'game' | 'gameover'
@@ -27,8 +28,10 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1600;
 canvas.height = 800;
 
-const audioTitle = document.getElementById('bg-audio-title');
-const audioGame = document.getElementById('bg-audio-game');
+// BGM 파일 경로
+const TITLE_BGM = '/assets/audio/bgm/defense-Komputo-FrancisPreve.mp3';
+const GAME_BGM = '/assets/audio/bgm/defense-play.mp3';
+
 const statusBar = document.querySelector('.status-bar');
 const typingIn = document.querySelector('.typing-input');
 
@@ -36,13 +39,19 @@ const typingIn = document.querySelector('.typing-input');
 statusBar.style.display = 'none';
 typingIn.style.display = 'none';
 
-//타이틀 브금 자동 재생
+// 타이틀 브금 자동 재생 (audioManager 사용)
 (() => {
-  if (audioTitle) {
-    audioTitle.volume = 0.5;
-    audioTitle.currentTime = 0;
-    audioTitle.play().catch((err) => console.warn('타이틀 브금 재생 실패:', err));
-  }
+  let bgmVolume = localStorage.getItem('bgmVolume');
+  if (bgmVolume === null) bgmVolume = 0.3;
+  else bgmVolume = Number(bgmVolume);
+
+  audioManager.setSource(TITLE_BGM);
+  audioManager.audio.volume = bgmVolume;
+  audioManager.play();
+  audioManager.setUI({
+    iconSelector: '#soundIcon',
+    buttonSelector: '#soundToggleBtn',
+  });
 })();
 
 //이미지 전체 로드
@@ -383,10 +392,10 @@ canvas.addEventListener('click', (e) => {
           gameStart();
         }
         if (btn.action === 'main') {
-          audioGame.pause();
-          audioTitle.volume = 0.5;
-          audioTitle.currentTime = 0;
-          audioTitle.play().catch((err) => console.warn('타이틀 브금 재생 실패:', err));
+          // 게임 BGM 정지, 타이틀 BGM 재생 (audioManager)
+          audioManager.setSource(TITLE_BGM);
+          audioManager.audio.volume = 0.5;
+          audioManager.play();
           gameState = 'title';
         }
         if (btn.action === 'leaderboard') alert('리더보드 등록 기능은 준비 중입니다.');
@@ -399,8 +408,8 @@ function gameStart() {
   gameState = 'fadeout';
   fadeAlpha = 0;
   statusBar.querySelectorAll('span')[1].textContent = `시간: ${timer}초`;
-  audioTitle.pause();
-  audioGame.volume = 0.5;
-  audioGame.currentTime = 0;
-  audioGame.play().catch(() => {});
+  // 타이틀 BGM 정지, 게임 BGM 재생 (audioManager)
+  audioManager.setSource(GAME_BGM);
+  audioManager.audio.volume = 0.5;
+  audioManager.play();
 }

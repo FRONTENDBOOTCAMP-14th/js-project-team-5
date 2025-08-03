@@ -4,7 +4,11 @@ import { handleSettingsModal } from './settings.js';
 import { handlePauseModal } from './pause-modal.js';
 import { handleRegisterModal } from './register-modal.js';
 
-{
+/**
+ * 모달 이벤트 바인딩 및 포커스 트랩 초기화 함수
+ * SPA 환경에서 loadHTML 후 호출해야 정상 동작
+ */
+export function initModalEvents() {
   const modalOpenButtons = document.querySelectorAll('.modal-open');
 
   modalOpenButtons.forEach((button) => {
@@ -67,6 +71,9 @@ import { handleRegisterModal } from './register-modal.js';
     }
   });
 }
+
+// SPA 환경에서 loadHTML 후 호출할 수 있도록 window에 등록
+window.initModalEvents = initModalEvents;
 
 // trapFocus 관련 전역 변수
 const trapFocusState = {

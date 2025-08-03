@@ -1,4 +1,5 @@
 import audioManager from '/src/scripts/audiomanager.js';
+import { handleWhackPause } from '/src/components/modal/pause-modal/whack-pause.js';
 
 // === 전역 변수 ===
 let moles = document.querySelectorAll('.mole');
@@ -119,6 +120,37 @@ let score = 0;
 let gameEnded = false;
 let moleTimers = [];
 let showMolesInterval = null; // 루프용 타이머 변수
+
+// === 오디오 설정 ===
+let bgmVolume = localStorage.getItem('bgmVolume');
+if (bgmVolume === null) bgmVolume = 0.3;
+else bgmVolume = Number(bgmVolume);
+
+let sfxVolume = localStorage.getItem('sfxVolume');
+if (sfxVolume === null) sfxVolume = 0.2;
+else sfxVolume = Number(sfxVolume);
+
+audioManager.setSource('/assets/audio/bgm/whack-Twelve-Speed-Slynk.mp3');
+audioManager.audio.volume = bgmVolume;
+audioManager.play();
+
+const hitAudio = new Audio('/assets/audio/sfx/hitsound.mp3');
+const laughAudio = new Audio('/assets/audio/sfx/laughsound.mp3');
+
+// 효과음의 원래 볼륨 저장
+hitAudio.defaultVolume = sfxVolume;
+laughAudio.defaultVolume = sfxVolume;
+
+hitAudio.volume = sfxVolume;
+laughAudio.volume = sfxVolume;
+
+// audiomanager에 등록
+audioManager.setSfx({ hitAudio, laughAudio });
+
+audioManager.setUI({
+  iconSelector: '#soundIcon',
+  buttonSelector: '#soundToggleBtn',
+});
 
 // --- 유틸 함수 ---
 function getUniqueRandomWord() {
@@ -356,7 +388,14 @@ function pauseGame() {
   typingArea.disabled = true;
 
   const pauseDialog = document.querySelector('dialog[data-type="pause"]');
-  if (pauseDialog) pauseDialog.show();
+  if (pauseDialog) {
+    handleWhackPause(pauseDialog, {
+      continue: onContinueClick,
+      retry: onRetryClick,
+      main: onMainClick,
+    });
+    // pauseDialog.show();
+  }
 }
 
 function stopGame() {
@@ -411,7 +450,6 @@ function handleCorrectAnswer(matchedIdx) {
   score += addedScore;
   animateScore(oldScore, score);
 
-  const hitAudio = new Audio('/assets/audio/sfx/hitsound.wav');
   hitAudio.play();
 
   wordBox.textContent = '';
@@ -472,7 +510,6 @@ function handleCorrectAnswer(matchedIdx) {
 }
 
 function handleWrongAnswer() {
-  const laughAudio = new Audio('/assets/audio/sfx/laughsound.mp3');
   laughAudio.play();
 
   typingArea.value = '';
@@ -514,10 +551,6 @@ function onPauseButtonClick() {
 
 // === 여기에서 중요한 부분 ===
 function onContinueClick() {
-  const pauseDialog = document.querySelector('dialog[data-type="pause"]');
-  if (pauseDialog) pauseDialog.close();
-
-  document.body.classList.remove('paused');
   gameEnded = false;
   typingArea.disabled = false;
   timerStarted = false;
@@ -555,9 +588,6 @@ function onContinueClick() {
 }
 
 function onRetryClick() {
-  const pauseDialog = document.querySelector('dialog[data-type="pause"]');
-  if (pauseDialog) pauseDialog.close();
-
   document.querySelectorAll('.penalty-image').forEach((img) => img.remove());
 
   gameEnded = false;
@@ -596,7 +626,7 @@ function onRetryClick() {
 }
 
 function onMainClick() {
-  loadHTML('/src/pages/game-landing/whack-landing.html');
+  window.loadHTML('/src/pages/game-landing/whack-landing.html');
 }
 
 function onWindowResize() {
@@ -676,22 +706,8 @@ function attachEventListeners() {
   typingArea.addEventListener('keydown', onTypingKeyDown);
   typingArea.addEventListener('input', onTypingInput);
 
-  const continueBtn = document.querySelector('.continue-btn');
-  const retryBtn = document.querySelector('.retry-btn');
-  const mainBtn = document.querySelector('.main-btn');
+  // pause 모달 버튼은 whack-pause.js에서만 바인딩
 
-  if (continueBtn) {
-    continueBtn.removeEventListener('click', onContinueClick);
-    continueBtn.addEventListener('click', onContinueClick);
-  }
-  if (retryBtn) {
-    retryBtn.removeEventListener('click', onRetryClick);
-    retryBtn.addEventListener('click', onRetryClick);
-  }
-  if (mainBtn) {
-    mainBtn.removeEventListener('click', onMainClick);
-    mainBtn.addEventListener('click', onMainClick);
-  }
   const iconButtons = document.querySelectorAll('.icon-group .icon-button');
   const pauseBtn = iconButtons[1]; // 두 번째 버튼 (일시정지)
   if (pauseBtn) {

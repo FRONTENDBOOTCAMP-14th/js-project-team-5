@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', scaleMonitorGroup);
  * @param {string} url - 불러올 HTML 경로
  * @param {Function} [onLoaded] - 페이지 로드 완료 콜백
  */
-export function loadHTML(url, onLoaded) {
+function loadHTML(url, onLoaded) {
   const container = document.querySelector('.monitor-frame');
   if (!container) return;
 
@@ -78,10 +78,9 @@ export function loadHTML(url, onLoaded) {
     })
     .then((html) => {
       container.innerHTML = html;
-
       // CSS 파일 동적 로드
       const cssLinks = Array.from(container.querySelectorAll('link[rel="stylesheet"]'));
-      const loadCSS = Promise.all(
+      return Promise.all(
         cssLinks.map(
           (link) =>
             new Promise((res, rej) => {
@@ -94,37 +93,40 @@ export function loadHTML(url, onLoaded) {
             })
         )
       );
-
-      loadCSS
-        .then(() => {
-          // JS 파일 동적 로드 (controlMonitor.js 제외)
-          const scriptTags = Array.from(container.querySelectorAll('script')).filter((s) => !s.src.includes('controlMonitor.js'));
-
-          return Promise.all(
-            scriptTags.map(
-              (oldScript) =>
-                new Promise((res, rej) => {
-                  const newScript = document.createElement('script');
-                  newScript.type = oldScript.type || 'text/javascript';
-                  if (oldScript.src) {
-                    const urlObj = new URL(oldScript.src, location.href);
-                    urlObj.searchParams.set('_ts', Date.now());
-                    newScript.src = urlObj.toString();
-                  } else {
-                    newScript.textContent = oldScript.textContent;
-                  }
-                  newScript.onload = res;
-                  newScript.onerror = rej;
-                  document.body.appendChild(newScript);
-                })
-            )
-          );
-        })
-        .then(() => {
-          hookGlobalAPIs();
-          if (typeof onLoaded === 'function') onLoaded();
-        })
-        .catch(console.error);
+    })
+    .then(() => {
+      // JS 파일 동적 로드 (controlMonitor.js 제외)
+      const scriptTags = Array.from(container.querySelectorAll('script')).filter((s) => !s.src.includes('controlMonitor.js'));
+      return Promise.all(
+        scriptTags.map(
+          (oldScript) =>
+            new Promise((res, rej) => {
+              const newScript = document.createElement('script');
+              newScript.type = oldScript.type || 'text/javascript';
+              if (oldScript.src) {
+                const urlObj = new URL(oldScript.src, location.href);
+                urlObj.searchParams.set('_ts', Date.now());
+                newScript.src = urlObj.toString();
+              } else {
+                newScript.textContent = oldScript.textContent;
+              }
+              newScript.onload = res;
+              newScript.onerror = rej;
+              document.body.appendChild(newScript);
+            })
+        )
+      );
+    })
+    .then(() => {
+      hookGlobalAPIs();
+      if (window.initModalEvents) window.initModalEvents(); // 모달 항상 초기화
+      // 인게임/윈도우 페이지 구분
+      const isInGamePage = /\/acidrain\//.test(url) || /\/mole-game\//.test(url) || /\/game-quiz\//.test(url) || /\/game-defence\//.test(url);
+      const isWindowPage = /\/components\/window\/window.html$/.test(url);
+      if (!isInGamePage && !isWindowPage && window.initSliderEvents) {
+        window.initSliderEvents();
+      }
+      if (typeof onLoaded === 'function') onLoaded();
     })
     .catch(console.error);
 }

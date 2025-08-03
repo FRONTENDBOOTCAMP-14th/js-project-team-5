@@ -9,7 +9,6 @@
   max-inline-size: 100rem; /* 1600px */
   margin: 0 auto;
   box-sizing: border-box;
-  position: relative;
   font-size: var(--text-16);
 }
 
