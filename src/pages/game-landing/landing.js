@@ -6,8 +6,7 @@ backButton.addEventListener('click', () => {
 document.querySelectorAll('#game-start-card').forEach((card) => {
   card.addEventListener('click', () => {
     const link = card.getAttribute('data-link');
-    
+
     window.loadHTML(link);
   });
 });
-

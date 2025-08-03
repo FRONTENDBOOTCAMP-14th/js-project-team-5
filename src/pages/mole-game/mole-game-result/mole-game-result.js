@@ -11,12 +11,12 @@ export function initializeResultPage() {
 
   if (regameBtn) {
     regameBtn.addEventListener('click', () => {
-      loadHTML('/src/pages/mole-game/in-game/in-game.html');
+      window.loadHTML('/src/pages/mole-game/in-game/in-game.html');
     });
   }
   if (moveMainBtn) {
     moveMainBtn.addEventListener('click', () => {
-      loadHTML('/src/pages/game-landing/whack-landing.html');
+      window.loadHTML('/src/pages/game-landing/whack-landing.html');
     });
   }
 }

@@ -341,7 +341,7 @@ function stopGame() {
   localStorage.setItem('moleGameScore', score);
 
   // 결과 페이지 로드
-  loadHTML('/src/pages/mole-game/mole-game-result/mole-game-result.html');
+  window.loadHTML('/src/pages/mole-game/mole-game-result/mole-game-result.html');
 }
 
 function startTimer() {
@@ -516,7 +516,7 @@ function onRetryClick() {
 }
 
 function onMainClick() {
-  loadHTML('/src/pages/game-landing/whack-landing.html');
+  window.loadHTML('/src/pages/game-landing/whack-landing.html');
 }
 
 function onWindowResize() {
