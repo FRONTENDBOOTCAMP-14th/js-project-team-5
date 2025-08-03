@@ -53,10 +53,10 @@ function scaleMonitorGroup() {
 window.addEventListener('resize', scaleMonitorGroup);
 window.addEventListener('DOMContentLoaded', scaleMonitorGroup);
 
-function removeDynamicScripts() {
-  console.log('안된다?');
-  document.querySelectorAll('script[data-dynamic]').forEach((el) => el.remove());
-}
+// function removeDynamicScripts() {
+//   console.log('안된다?');
+//   document.querySelectorAll('script[data-dynamic]').forEach((el) => el.remove());
+// }
 
 export function loadHTML(url) {
   const container = document.querySelector('.monitor-frame');
