@@ -69,17 +69,7 @@ function initAudio() {
     audioManager.audio.pause();
   } else {
     gameOverSfx.play();
-    audioManager.audio.play();
   }
-
-  // 게임 오버 사운드가 끝나면 배경음악 재생
-  gameOverSfx.onended = () => {
-    // 재생 전에도 음소거 상태 체크
-    const isMuted = getIsMuted();
-    if (!isMuted) {
-      audioManager.play();
-    }
-  };
 }
 
 /**
