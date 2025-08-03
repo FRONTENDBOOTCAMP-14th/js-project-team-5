@@ -48,6 +48,10 @@ typingIn.style.display = 'none';
   audioManager.setSource(TITLE_BGM);
   audioManager.audio.volume = bgmVolume;
   audioManager.play();
+  audioManager.setUI({
+    iconSelector: '#soundIcon',
+    buttonSelector: '#soundToggleBtn',
+  });
 })();
 
 //이미지 전체 로드
