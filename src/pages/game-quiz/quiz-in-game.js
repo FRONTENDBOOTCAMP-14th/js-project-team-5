@@ -163,6 +163,7 @@ function initQuizGame() {
     })
     .then((data) => {
       generalQuizList = shuffleQuestion(data);
+      // generalQuizList = data;
       const modeSettings = initModeSettings();
       totalQuestions = modeSettings.totalQuestions;
       startTime = modeSettings.startTime;
