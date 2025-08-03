@@ -4,8 +4,13 @@
 import audioManager from '/src/scripts/audiomanager.js';
 
 // BGM 설정 및 재생 시작
+// 로컬 스토리지에서 볼륨값 가져오기 (없으면 기본값 0.3)
+let bgmVolume = localStorage.getItem('bgmVolume');
+if (bgmVolume === null) bgmVolume = 0.3;
+else bgmVolume = Number(bgmVolume);
+
 audioManager.setSource('/assets/audio/bgm/acidrain-DiscoHeart-Coyote-Hearing.mp3');
-audioManager.audio.volume = 0.1;
+audioManager.audio.volume = bgmVolume;
 audioManager.play();
 
 // 사운드 토글 UI 연결
@@ -363,9 +368,21 @@ function dropWord() {
 // =====================================
 // 단어 제거 효과음 함수
 // =====================================
+let sfxVolume = localStorage.getItem('sfxVolume');
+if (sfxVolume === null) sfxVolume = 0.2;
+else sfxVolume = Number(sfxVolume);
+
 function playPopSound() {
   const popSound = new Audio('/assets/audio/sfx/droplet-sound.mp3'); // 효과음 경로
-  popSound.volume = 0.7;
+
+  popSound.volume = sfxVolume;
+
+  // 효과음의 원래 볼륨 저장
+  popSound.defaultVolume = sfxVolume;
+
+  // audiomanager에 등록
+  audioManager.setSfx({ popSound });
+
   popSound.playbackRate = 2.0; // 더 빠르게 재생 (기본은 1.0)
   popSound.play();
 }
