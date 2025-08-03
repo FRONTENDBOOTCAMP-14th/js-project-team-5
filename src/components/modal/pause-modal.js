@@ -28,7 +28,7 @@ export function handlePauseModal(dialog) {
 
   switch (gameType) {
     case 'whack':
-      handleWhackPause(dialog);
+      handleWhackPause(dialog, handlers);
       break;
     case 'quiz':
       handleQuizPause(dialog);
