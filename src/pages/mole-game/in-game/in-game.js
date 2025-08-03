@@ -1,4 +1,4 @@
-// import audioManager from '/src/scripts/audiomanager.js'; // 필요하면 포함
+import audioManager from '/src/scripts/audiomanager.js';
 
 // === 전역 변수 ===
 let moles = document.querySelectorAll('.mole');
@@ -110,7 +110,6 @@ const wordList = [
   '연극',
   '노래',
 ];
-
 const activeWords = new Set();
 
 let timer = null;
@@ -121,7 +120,7 @@ let gameEnded = false;
 let moleTimers = [];
 let showMolesInterval = null; // 루프용 타이머 변수
 
-// === 유틸 함수 ===
+// --- 유틸 함수 ---
 function getUniqueRandomWord() {
   const candidates = wordList.filter((word) => !activeWords.has(word));
   if (candidates.length === 0) {
@@ -150,7 +149,7 @@ function getScoreByLength(word) {
   return 0;
 }
 
-// === DOM 조작 및 UI 함수 ===
+// --- DOM 조작 및 UI 함수 ---
 function showFrypanForMole(idx) {
   const mole = moles[idx];
   if (!wordContainer) return;
@@ -230,12 +229,23 @@ function showPenaltyImage() {
   img.src = '/assets/images/molegame - penalty.png';
   img.alt = '패널티';
   img.className = 'penalty-image';
-  document.body.appendChild(img);
 
-  setTimeout(() => img.remove(), 8000);
+  // 게임 컨테이너 내부에 추가 (body 대신)
+  const gameContainer = document.querySelector('.mole-game-container');
+  if (gameContainer) {
+    gameContainer.appendChild(img);
+  } else {
+    document.body.appendChild(img);
+  }
+
+  setTimeout(() => {
+    if (img.parentNode) {
+      img.parentNode.removeChild(img);
+    }
+  }, 8000);
 }
 
-// === 게임 주요 기능 ===
+// --- 주요 게임 기능 ---
 function findMatchingVisibleMole(input) {
   for (let i = 0; i < moles.length; i++) {
     if (moles[i].classList.contains('show')) {
@@ -247,6 +257,7 @@ function findMatchingVisibleMole(input) {
 }
 
 function showRandomMoles() {
+  // 기존에 show 중인 두더지 초기화
   moles.forEach((mole, idx) => {
     if (!mole.classList.contains('show')) {
       mole.classList.remove('show');
@@ -269,17 +280,18 @@ function showRandomMoles() {
     if (!indexes.includes(randIdx)) indexes.push(randIdx);
   }
 
-  // 각 두더지마다 무작위 타이밍(delay) 적용
   indexes.forEach((idx) => {
-    const delay = Math.floor(Math.random() * 1200); // 0~1200ms 사이 랜덤 딜레이
+    const delay = Math.floor(Math.random() * 1200); // 0~1200ms 랜덤 딜레이
 
     const showTimer = setTimeout(() => {
       if (gameEnded) return;
       if (moles[idx].classList.contains('show')) return;
+
       moles[idx].classList.add('show');
 
       showFrypanForMole(idx);
 
+      // 두더지 등장 시 단어 지정 및 위치 조정
       const wordTimer = setTimeout(() => {
         if (gameEnded) return;
         const uniqueWord = getUniqueRandomWord();
@@ -290,8 +302,10 @@ function showRandomMoles() {
       }, 800);
       moleTimers.push(wordTimer);
 
+      // 두더지 hideTimeout 예약 + hideEndTime 저장
       if (moles[idx].hideTimeout) clearTimeout(moles[idx].hideTimeout);
-
+      const hideDelay = 2200 + delay;
+      moles[idx].hideEndTime = Date.now() + hideDelay;
       moles[idx].hideTimeout = setTimeout(() => {
         if (gameEnded) return;
         const wordToRemove = normalize(words[idx].textContent);
@@ -308,7 +322,7 @@ function showRandomMoles() {
           frypan.style.opacity = 0;
           frypan.style.transform = '';
         }
-      }, 2200 + delay);
+      }, hideDelay);
     }, delay);
 
     moleTimers.push(showTimer);
@@ -317,27 +331,51 @@ function showRandomMoles() {
 
 function pauseGame() {
   if (gameEnded) return;
-  // 모든 루프, 타이머 멈춤
-  if (timer) clearInterval(timer);
-  if (showMolesInterval) clearInterval(showMolesInterval);
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+  if (showMolesInterval) {
+    clearInterval(showMolesInterval);
+    showMolesInterval = null;
+  }
   moleTimers.forEach(clearTimeout);
+  moleTimers = [];
+
+  // 각 두더지 hideTimeout를 클리어하고 남은 시간 계산
+  moles.forEach((mole) => {
+    if (mole.hideTimeout) {
+      clearTimeout(mole.hideTimeout);
+      mole.pauseRemain = mole.hideEndTime - Date.now();
+      mole.hideTimeout = null;
+    } else {
+      mole.pauseRemain = 0;
+    }
+  });
+
   typingArea.disabled = true;
-  // 모달창 띄우기
+
   const pauseDialog = document.querySelector('dialog[data-type="pause"]');
-  if (pauseDialog) pauseDialog.showModal();
+  if (pauseDialog) pauseDialog.show();
 }
 
 function stopGame() {
   if (gameEnded) return;
   gameEnded = true;
 
-  if (timer) clearInterval(timer);
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+  if (showMolesInterval) {
+    clearInterval(showMolesInterval);
+    showMolesInterval = null;
+  }
+
   moleTimers.forEach(clearTimeout);
   moleTimers = [];
 
   typingArea.disabled = true;
-
-  // 최종 점수를 localStorage에 저장
   localStorage.setItem('moleGameScore', score);
 
   // 결과 페이지 로드
@@ -355,9 +393,9 @@ function startTimer() {
 
     if (timeLeft <= 0) {
       clearInterval(timer);
+      timer = null;
       timeSpan.textContent = '시간: 0초';
       stopGame();
-      alert('게임 종료!');
     }
   }, 1000);
 }
@@ -386,6 +424,9 @@ function handleCorrectAnswer(matchedIdx) {
   if (frypan && moleImg) {
     frypan.classList.remove('miss');
     frypan.classList.add('hit');
+
+    frypan.style.opacity = '1'; // 후라이팬 보이도록 opacity 조절
+
     wordBox.classList.add('rotate');
 
     const onFrypanAnimationEnd = (event) => {
@@ -402,17 +443,17 @@ function handleCorrectAnswer(matchedIdx) {
           setTimeout(() => {
             moleImg.classList.remove('rotate');
             visibleMole.classList.remove('hide');
-            wordBox.classList.remove('rotate'); // 회전 클래스 제거
-            wordBox.style.opacity = '0'; // 다음 등장에 대비
+            wordBox.classList.remove('rotate');
+            wordBox.style.opacity = '0';
+
+            // 후라이팬 숨기기
+            frypan.style.opacity = '0';
+            frypan.classList.remove('hit');
           }, 500);
         }, 200);
       }
     };
     frypan.addEventListener('animationend', onFrypanAnimationEnd);
-
-    setTimeout(() => {
-      frypan.style.opacity = 0;
-    }, 1000);
   } else {
     visibleMole.classList.add('hide');
     visibleMole.classList.remove('show', 'hit');
@@ -471,13 +512,45 @@ function onPauseButtonClick() {
   pauseGame();
 }
 
+// === 여기에서 중요한 부분 ===
 function onContinueClick() {
   const pauseDialog = document.querySelector('dialog[data-type="pause"]');
   if (pauseDialog) pauseDialog.close();
+
+  document.body.classList.remove('paused');
   gameEnded = false;
   typingArea.disabled = false;
   timerStarted = false;
   startTimer();
+
+  if (showMolesInterval) clearInterval(showMolesInterval);
+  showMolesInterval = setInterval(() => {
+    if (!gameEnded) showRandomMoles();
+  }, 4000);
+
+  moles.forEach((mole, idx) => {
+    if (mole.pauseRemain > 0) {
+      mole.hideEndTime = Date.now() + mole.pauseRemain;
+      mole.hideTimeout = setTimeout(() => {
+        const wordToRemove = normalize(words[idx].textContent);
+        if (wordToRemove) activeWords.delete(wordToRemove);
+
+        mole.classList.remove('show', 'hit');
+        words[idx].textContent = '';
+        words[idx].style.opacity = '0';
+        mole.hideTimeout = null;
+
+        const frypan = document.querySelector(`.frypan-img[data-mole="${idx}"]`);
+        if (frypan) {
+          frypan.classList.remove('hit', 'miss');
+          frypan.style.opacity = 0;
+          frypan.style.transform = '';
+        }
+      }, mole.pauseRemain);
+      mole.pauseRemain = 0;
+    }
+  });
+
   setTimeout(() => typingArea.focus(), 0);
 }
 
@@ -495,6 +568,7 @@ function onRetryClick() {
   animateScore(0, 0);
   typingArea.value = '';
   typingArea.disabled = false;
+
   moles.forEach((mole, idx) => {
     mole.classList.remove('show', 'hit');
     words[idx].textContent = '';
@@ -512,6 +586,12 @@ function onRetryClick() {
   moleTimers.forEach(clearTimeout);
   moleTimers = [];
   showRandomMoles();
+
+  if (showMolesInterval) clearInterval(showMolesInterval);
+  showMolesInterval = setInterval(() => {
+    if (!gameEnded) showRandomMoles();
+  }, 4000);
+
   setTimeout(() => typingArea.focus(), 0);
 }
 
@@ -531,13 +611,11 @@ function onWindowResize() {
 
 // === 초기화 함수 ===
 function initializeGame() {
-  // 이전 루프용 타이머 클리어
   if (showMolesInterval) {
     clearInterval(showMolesInterval);
     showMolesInterval = null;
   }
 
-  // 상태 초기화
   timerStarted = false;
   gameEnded = false;
   timeLeft = 60;
@@ -545,70 +623,55 @@ function initializeGame() {
   updateTimeDisplay();
   animateScore(0, 0);
 
-  // hideTimeout 초기화 및 두더지 초기 상태 세팅
   moles.forEach((mole) => {
     if (mole.hideTimeout) clearTimeout(mole.hideTimeout);
     mole.hideTimeout = null;
     mole.classList.remove('show', 'hit', 'hide');
   });
 
-  // 단어 초기화
   words.forEach((word) => {
     word.textContent = '';
     word.style.opacity = '1';
   });
 
-  // frypan 초기화
   document.querySelectorAll('.frypan-img').forEach((fp) => {
     fp.classList.remove('hit', 'miss');
     fp.style.opacity = 0;
     fp.style.transform = '';
   });
 
-  // 타이머 클리어
-  if (timer) clearInterval(timer);
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
   moleTimers.forEach(clearTimeout);
   moleTimers = [];
 
-  // 단어 위치 및 크기 업데이트
   words.forEach((_, idx) => {
     positionWordAtMole(idx);
     updateWordBoxScale(idx);
   });
 
-  // 최초 두더지 등장
   showRandomMoles();
 
-  // 루프용 타이머 설정: 4초마다 showRandomMoles 반복
   showMolesInterval = setInterval(() => {
     if (!gameEnded) showRandomMoles();
   }, 4000);
 
-  // 이벤트 초기화 및 바인딩
   attachEventListeners();
 
-  // 타자 입력창 초기화 및 포커스
   typingArea.value = '';
   typingArea.disabled = false;
   typingArea.focus();
 
-  // 창 크기 조정 시 위치 다시 계산 이벤트 바인딩
   window.removeEventListener('resize', onWindowResize);
   window.addEventListener('resize', onWindowResize);
 }
 
 // 이벤트 리스너 바인딩 함수
 function attachEventListeners() {
-  // 이벤트 중복 부착 방지 위해 기존 이벤트 제거 후 재등록
   typingArea.removeEventListener('keydown', onTypingKeyDown);
   typingArea.removeEventListener('input', onTypingInput);
-
-  document.querySelectorAll('.icon-button').forEach((btn) => {
-    btn.removeEventListener('click', onPauseButtonClick);
-  });
-  document.querySelectorAll('.icon-button').forEach((btn) => {
-    btn.addEventListener('click', onPauseButtonClick);
-  });
 
   typingArea.addEventListener('keydown', onTypingKeyDown);
   typingArea.addEventListener('input', onTypingInput);
@@ -629,18 +692,18 @@ function attachEventListeners() {
     mainBtn.removeEventListener('click', onMainClick);
     mainBtn.addEventListener('click', onMainClick);
   }
-  const pauseBtn = document.querySelector('.icon-button.modal-open[data-type="pause"]');
+  const iconButtons = document.querySelectorAll('.icon-group .icon-button');
+  const pauseBtn = iconButtons[1]; // 두 번째 버튼 (일시정지)
   if (pauseBtn) {
     pauseBtn.removeEventListener('click', onPauseButtonClick);
     pauseBtn.addEventListener('click', onPauseButtonClick);
   }
   const soundIconBtn = document.getElementById('soundToggleBtn');
   if (soundIconBtn) {
-    soundIconBtn.removeEventListener('click', pauseGame);
-    soundIconBtn.addEventListener('click', pauseGame);
+    soundIconBtn.removeEventListener('click', audioManager.toggleSound);
+    soundIconBtn.addEventListener('click', audioManager.toggleSound);
   }
 }
 
-// === 초기화 자동 실행 ===
-// 만약 loadHTML 후 호출해야 한다면 loadHTML 이후에 호출해주세요.
+// 초기 실행
 initializeGame();
