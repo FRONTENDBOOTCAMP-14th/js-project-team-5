@@ -18,8 +18,8 @@
   <body>
     <div class="landing" data-game="defense">
       <header class="game-header">
-        <button>
-          <img src="/assets/icons/back.svg" alt="뒤로가기" class="icon back-icon" />
+        <button class="icon back-icon" id="back-btn" aria-label="뒤로가기">
+          <img src="/assets/icons/back.svg" alt="" aria-hidden="true" />
         </button>
         <h1 class="game-title">디펜스</h1>
         <div class="icon-group">
@@ -38,7 +38,7 @@
           </div>
           <h2 class="card-title">게임 설명</h2>
         </div>
-        <div class="card w400" tabindex="0" role="button">
+        <div id="game-start-card" data-link="/src/pages/game-defence/defence.html" class="card w400" tabindex="0" role="button">
           <div class="img-container">
             <img src="/assets/icons/defense.png" alt="게임 시작" />
           </div>
