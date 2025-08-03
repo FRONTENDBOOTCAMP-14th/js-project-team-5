@@ -5,6 +5,8 @@ import audioManager from '/src/scripts/audiomanager.js';
  * SPA 환경에서 loadHTML 후 호출해야 정상 동작
  */
 export function initSliderEvents() {
+  // 효과음 중복 재생 방지용 플래그
+  let isPlaying = false;
   /* =========================
      BGM(배경음악) 관련 코드
   ========================= */
@@ -51,16 +53,17 @@ export function initSliderEvents() {
   // 클릭 효과음 객체
   const clickSfx = new Audio('/assets/audio/sfx/click.wav');
 
+  // audioManager에 등록
+  audioManager.setSfx({ clickSfx });
+
   let sfxVolume = localStorage.getItem('sfxVolume');
   if (sfxVolume === null) sfxVolume = 0.2;
   else sfxVolume = Number(sfxVolume);
-  clickSfx.volume = sfxVolume;
 
   // 효과음의 원래 볼륨 저장
   clickSfx.defaultVolume = sfxVolume;
 
-  // audioManager에 등록
-  audioManager.setSfx({ clickSfx });
+  clickSfx.volume = sfxVolume;
 
   const sfxRange = document.getElementById('sfx-range');
   const progressSfxFill = sfxRange?.closest('.sfx-slider-custom')?.querySelector('.progress-fill');
@@ -75,7 +78,22 @@ export function initSliderEvents() {
       clickSfx.volume = value / 100;
       updateProgressFill(progressSfxFill, value);
       localStorage.setItem('sfxVolume', value / 100);
+      // SFX 볼륨 조정 시 뮤트 상태도 동기화
+      const isMuted = sessionStorage.getItem('isMuted') === 'true';
+      if (isMuted) {
+        audioManager.muteSfx();
+      } else {
+        audioManager.unmuteSfx();
+      }
     });
+  }
+
+  // SFX 뮤트 상태 동기화 (초기 진입 시)
+  const isMuted = sessionStorage.getItem('isMuted') === 'true';
+  if (isMuted) {
+    audioManager.muteSfx();
+  } else {
+    audioManager.unmuteSfx();
   }
 
   /* =========================
@@ -95,19 +113,39 @@ export function initSliderEvents() {
   const clickTarget = monitorFrame || document;
   const mainStart = monitorFrame?.querySelector('.main-start');
 
-  // 클릭 효과음
+  // 클릭 효과음 (뮤트 상태에서는 play() 호출 안 함, AbortError 무시)
   clickTarget.addEventListener('click', (e) => {
     if (isInteractiveElement(e.target)) {
+      if (sessionStorage.getItem('isMuted') === 'true' || isPlaying) return;
+      isPlaying = true;
       clickSfx.currentTime = 0;
-      clickSfx.play();
+      clickSfx
+        .play()
+        .catch((err) => {
+          if (err && err.name === 'AbortError') return;
+          console.error(err);
+        })
+        .finally(() => {
+          isPlaying = false;
+        });
     }
   });
 
-  // 키보드로 Enter/Space로 활성화 시 효과음
+  // 키보드로 Enter/Space로 활성화 시 효과음 (뮤트 상태에서는 play() 호출 안 함, AbortError 무시)
   clickTarget.addEventListener('keydown', (e) => {
     if ((e.key === 'Enter' || e.key === ' ') && isInteractiveElement(e.target)) {
+      if (sessionStorage.getItem('isMuted') === 'true' || isPlaying) return;
+      isPlaying = true;
       clickSfx.currentTime = 0;
-      clickSfx.play();
+      clickSfx
+        .play()
+        .catch((err) => {
+          if (err && err.name === 'AbortError') return;
+          console.error(err);
+        })
+        .finally(() => {
+          isPlaying = false;
+        });
     }
   });
 
@@ -115,9 +153,18 @@ export function initSliderEvents() {
   if (mainStart) {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
-        console.log('Main Start Enter key pressed');
+        if (sessionStorage.getItem('isMuted') === 'true' || isPlaying) return;
+        isPlaying = true;
         clickSfx.currentTime = 0;
-        clickSfx.play();
+        clickSfx
+          .play()
+          .catch((err) => {
+            if (err && err.name === 'AbortError') return;
+            console.error(err);
+          })
+          .finally(() => {
+            isPlaying = false;
+          });
       }
     });
   }
