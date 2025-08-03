@@ -74,7 +74,7 @@ if (sfxRange) {
 
 // 인터랙티브 요소 판별 함수
 // TODO: 새로운 interactive 요소가 생기면 이 배열에 추가하기
-const INTERACTIVE_SELECTOR = ['button', 'a', 'input', 'label', '.card', '.game-btn', '[role="button"]'].join(',');
+const INTERACTIVE_SELECTOR = ['button', 'a', 'input', 'label', '.card', '.card-wrapper', '[role="button"]'].join(',');
 
 function isInteractiveElement(el) {
   return el.closest(INTERACTIVE_SELECTOR);
