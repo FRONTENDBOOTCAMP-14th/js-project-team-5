@@ -15,7 +15,7 @@ export default defineConfig({
       },
     },
   },
-  appType: 'mpa', // fallback 사용안함
+  appType: 'spa', // fallback 사용안함
   server: {
     // open: 'src/pages/main/index.html', // 서버 시작 시 브라우저에서 지정페이지 자동으로 열기
   },
