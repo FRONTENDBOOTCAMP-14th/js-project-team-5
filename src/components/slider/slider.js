@@ -14,7 +14,7 @@ if (bgmVolume === null) bgmVolume = 0.3;
 else bgmVolume = Number(bgmVolume);
 
 // BGM이 다르거나, 아직 재생 중이 아니면만 setSource/재생
-if (!audioManager.audio || audioManager.audio.src !== location.origin + BGM_SRC) {
+if (!audioManager.audio || !audioManager.audio.src.endsWith(BGM_SRC) || audioManager.audio.paused || audioManager.audio.ended) {
   audioManager.setSource(BGM_SRC);
   audioManager.audio.volume = bgmVolume;
   audioManager.play();
@@ -73,6 +73,7 @@ if (sfxRange) {
 }
 
 // 인터랙티브 요소 판별 함수
+// TODO: 새로운 interactive 요소가 생기면 이 배열에 추가하기
 const INTERACTIVE_SELECTOR = ['button', 'a', 'input', 'label', '.card', '.game-btn', '[role="button"]'].join(',');
 
 function isInteractiveElement(el) {

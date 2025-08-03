@@ -105,7 +105,9 @@ class AudioManager {
 
   muteSfx() {
     if (!this.sfxList) return;
-    Object.values(this.sfxList).forEach((sfx) => (sfx.volume = 0));
+    Object.values(this.sfxList).forEach((sfx) => {
+      sfx.volume = 0;
+    });
   }
 
   unmuteSfx() {

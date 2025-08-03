@@ -65,7 +65,7 @@ function initAudio() {
   gameOverSfx.playbackRate = 1.2;
 
   // === 음소거 상태에 따라 play/pause 분기 ===
-  const isMuted = sessionStorage.getItem('isMuted') === 'true';
+  const isMuted = getIsMuted();
   if (isMuted) {
     audioManager.audio.pause();
   } else {
@@ -76,9 +76,17 @@ function initAudio() {
   // 게임 오버 사운드가 끝나면 배경음악 재생
   gameOverSfx.onended = () => {
     // 재생 전에도 음소거 상태 체크
-    const isMuted = sessionStorage.getItem('isMuted') === 'true';
+    const isMuted = getIsMuted();
     if (!isMuted) {
       audioManager.play();
     }
   };
+}
+
+/**
+ * 세션 스토리지에서 음소거 상태를 가져오는 함수
+ * @return {boolean} 음소거 상태 여부
+ */
+function getIsMuted() {
+  return sessionStorage.getItem('isMuted') === 'true';
 }
