@@ -437,10 +437,7 @@ document.addEventListener('keydown', (e) => {
 let isPaused = false;
 let wasPausedByModal = false;
 
-// 일시정지 모달 내부 버튼
-const pauseContinueBtn = document.querySelector('.continue-btn');
-const pauseRetryBtn = document.querySelector('.retry-btn');
-const pauseHomeBtn = document.querySelector('.main-btn');
+import { handleAcidRainPause } from '/src/components/modal/pause-modal/acidrain-pause.js';
 
 // 일시정지 버튼 요소 (상단바)
 const pauseOpenBtn = document.querySelector('.modal-open[data-type="pause"]');
@@ -448,9 +445,7 @@ if (pauseOpenBtn) {
   pauseOpenBtn.addEventListener('click', pauseGame); // 🔧 모달 열기 전에 게임 멈추기
 }
 
-// =====================================
-// 일시정지 처리 함수
-// =====================================
+// 일시정지 처리 함수 및 resume/retry/main 핸들러 분리
 function pauseGame() {
   if (isPaused) return;
 
@@ -461,11 +456,23 @@ function pauseGame() {
   clearInterval(timerInterval);
   fallingIntervals.forEach(clearInterval);
   typingInput.disabled = true;
+
+  const pauseDialog = document.querySelector('dialog[data-type="pause"]');
+  if (pauseDialog) {
+    handleAcidRainPause(pauseDialog, {
+      continue: () => {
+        resumeGame();
+      },
+      retry: () => {
+        restartFromPause();
+      },
+      main: () => {
+        loadHTML('/src/pages/game-landing/acidrain-landing.html');
+      },
+    });
+  }
 }
 
-// =====================================
-// 일시정지 해제 후 게임 재개 (카운트다운 포함)
-// =====================================
 function resumeGame() {
   if (!isPaused) return;
 
@@ -477,7 +484,6 @@ function resumeGame() {
     typingInput.disabled = false;
     typingInput.focus();
 
-    // ✅ 여기에 넣으면 됨
     document.querySelectorAll('.falling-word').forEach((wordEl) => {
       resumeFallingWord(wordEl);
     });
@@ -485,37 +491,28 @@ function resumeGame() {
 }
 
 function resumeFallingWord(wordEl) {
-  let y = parseInt(wordEl.style.top || '0', 10); // 현재 위치
-
+  let y = parseInt(wordEl.style.top || '0', 10);
   let hasFallen = false;
-
   const interval = setInterval(() => {
     if (isPaused || !document.body.contains(wordEl)) {
       clearInterval(interval);
       return;
     }
-
     y += 2;
     wordEl.style.top = `${y}px`;
-
     if (y > 700 && !hasFallen) {
       hasFallen = true;
       clearInterval(interval);
       wordEl.remove();
-
       time -= 5;
       if (time < 0) time = 0;
       updateTime();
       if (time <= 0) gameOver();
     }
   }, 30);
-
   fallingIntervals.push(interval);
 }
 
-// =====================================
-// 일시정지 상태에서 게임 완전 재시작 (카운트다운 포함)
-// =====================================
 function restartFromPause() {
   clearInterval(dropInterval);
   clearInterval(timerInterval);
@@ -531,30 +528,6 @@ function restartFromPause() {
     startGame();
   });
 }
-
-// =====================================
-// 계속하기 버튼 → 게임 이어서 계속
-// =====================================
-pauseContinueBtn.addEventListener('click', () => {
-  document.querySelector('dialog[data-type="pause"]')?.close();
-  resumeGame();
-});
-
-// =====================================
-// 다시하기 버튼 → 초기화 + 카운트다운 후 게임 새로 시작
-// =====================================
-pauseRetryBtn.addEventListener('click', () => {
-  document.querySelector('dialog[data-type="pause"]')?.close();
-  restartFromPause();
-});
-
-// =====================================
-// 메인화면 버튼 → 게임 선택(랜딩) 페이지로 이동
-// =====================================
-pauseHomeBtn.addEventListener('click', () => {
-  document.querySelector('dialog[data-type="pause"]')?.close();
-  loadHTML('/src/pages/game-landing/acidrain-landing.html');
-});
 
 // =====================================
 // 단어 낙하 재개 함수 (resume에서 사용)

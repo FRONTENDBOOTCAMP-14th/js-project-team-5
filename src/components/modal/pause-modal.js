@@ -16,7 +16,7 @@ import { handleWhackPause } from './pause-modal/whack-pause.js';
  *
  * @throws {Error} 알 수 없는 게임 타입이 지정된 경우 예외를 발생시킨다.
  */
-export function handlePauseModal(dialog) {
+export function handlePauseModal(dialog, handlers) {
   // 1. 게임 타입 확인 (acidrain, defense, whack, quiz)
   const container = dialog.closest('[data-game]');
   const gameType = container?.dataset.game;
@@ -37,7 +37,7 @@ export function handlePauseModal(dialog) {
       handleDefensePause(dialog);
       break;
     case 'acidrain':
-      handleAcidRainPause(dialog);
+      handleAcidRainPause(dialog, handlers);
       break;
     default:
       throw new Error(`Unknown pause modal type: ${gameType}`);
