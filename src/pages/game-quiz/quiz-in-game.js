@@ -22,6 +22,9 @@ const pauseButton = document.querySelector('[data-type="pause"]');
 const QUIZ_LIST_NORMAL = '/data/quiz-normal.json'; // 일반 모드
 const QUIZ_LIST_DEV = '/data/quiz-dev.json'; // 개발자 모드
 
+const savedMode = localStorage.getItem('dev-or-normal') || 'normal';
+const QUIZ_LIST_SRC = savedMode === 'dev' ? QUIZ_LIST_DEV : QUIZ_LIST_NORMAL;
+
 let generalQuizList = [];
 let currentQuestion = 0;
 let timer = 0;
@@ -121,13 +124,13 @@ function initQuizGame() {
 
   initAudio();
 
-  fetch(QUIZ_LIST_DEV)
+  fetch(QUIZ_LIST_SRC)
     .then((response) => {
       if (!response.ok) throw new Error('문제 데이터를 불러오지 못했습니다.');
       return response.json();
     })
     .then((data) => {
-      generalQuizList = data;
+      generalQuizList = shuffleQuestion(data);
       ({ totalQuestions, startTime } = initModeSettings());
       timer = startTime;
       showCountdown();
