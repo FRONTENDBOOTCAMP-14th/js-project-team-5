@@ -8,109 +8,22 @@ let wordContainer = document.querySelector('.mole-word-container');
 let typingArea = document.querySelector('.typing-area');
 let timeSpan = document.querySelector('.score-info span:nth-child(2)');
 let scoreSpan = document.querySelector('.score-info span:first-child');
+// 문제 데이터 경로 및 상태 변수 선언
+const WORD_LIST_NORMAL = '/data/word-normal.json'; // 일반 모드
+const WORD_LIST_DEV = '/data/word-dev.json'; // 개발자 모드
 
-const wordList = [
-  '사과',
-  '바나나',
-  '포도',
-  '딸기',
-  '자두',
-  '고양이',
-  '강아지',
-  '토끼',
-  '곰',
-  '펭귄',
-  '물고기',
-  '코끼리',
-  '호랑이',
-  '원숭이',
-  '사자',
-  '자동차',
-  '버스',
-  '기차',
-  '비행기',
-  '지하철',
-  '책상',
-  '의자',
-  '연필',
-  '지우개',
-  '노트',
-  '컴퓨터',
-  '마우스',
-  '키보드',
-  '모니터',
-  '전화기',
-  '라면',
-  '김밥',
-  '삼겹살',
-  '불고기',
-  '햄버거',
-  '감자',
-  '고구마',
-  '수박',
-  '오이',
-  '당근',
-  '커피',
-  '우유',
-  '주스',
-  '물',
-  '차',
-  '축구',
-  '농구',
-  '야구',
-  '배구',
-  '탁구',
-  '학교',
-  '도서관',
-  '병원',
-  '식당',
-  '시장',
-  '친구',
-  '가족',
-  '어머니',
-  '아버지',
-  '동생',
-  '태양',
-  '달',
-  '별',
-  '하늘',
-  '바람',
-  '봄',
-  '여름',
-  '가을',
-  '겨울',
-  '비',
-  '빵',
-  '과자',
-  '아이스크림',
-  '치즈',
-  '피자',
-  '시계',
-  '손톱',
-  '가방',
-  '신발',
-  '장갑',
-  '창문',
-  '문',
-  '벽',
-  '바닥',
-  '천장',
-  '선생님',
-  '학생',
-  '화가',
-  '의사',
-  '요리사',
-  '경찰',
-  '소방관',
-  '군인',
-  '가수',
-  '배우',
-  '텔레비전',
-  '신문',
-  '사진',
-  '연극',
-  '노래',
-];
+const savedMode = localStorage.getItem('dev-or-normal') || 'normal';
+const WORD_LIST_SRC = savedMode === 'dev' ? WORD_LIST_DEV : WORD_LIST_NORMAL;
+
+let wordList = [];
+
+// 비동기로 단어 리스트 불러오기
+fetch(WORD_LIST_SRC)
+  .then((res) => res.json())
+  .then((data) => {
+    wordList = data;
+  });
+
 const activeWords = new Set();
 
 let timer = null;
