@@ -28,10 +28,10 @@ function playClickAndLoad(url) {
 let backButton = document.querySelector('#back-btn');
 backButton.addEventListener('click', (e) => {
   e.preventDefault();
-  playClickAndLoad('/src/pages/main-start-page/main-start-page.html');
+  playClickAndLoad('/src/pages/game-select/game-select.html');
 });
 
-document.querySelectorAll('.card-wrapper .card').forEach((card) => {
+document.querySelectorAll('#game-start-card').forEach((card) => {
   card.addEventListener('click', (e) => {
     e.preventDefault();
     const link = card.getAttribute('data-link');

@@ -1,5 +1,9 @@
-let cleanupTasks = [];
+// src/controlMonitor.js
 
+let cleanupTasks = [];
+let previousPage = null;
+
+// 전역 API 훅킹: setInterval, requestAnimationFrame, addEventListener 자동 수집
 function hookGlobalAPIs() {
   const originalSetInterval = window.setInterval;
   window.setInterval = function (...args) {
@@ -22,6 +26,7 @@ function hookGlobalAPIs() {
   };
 }
 
+// 이전 페이지의 타이머·이벤트 정리
 function clearCleanupTasks() {
   cleanupTasks.forEach((fn) => {
     try {
@@ -33,37 +38,37 @@ function clearCleanupTasks() {
   cleanupTasks = [];
 }
 
+// 모니터 그룹 스케일링
 function scaleMonitorGroup() {
   const wrapper = document.querySelector('.monitor-frame-wrapper');
   const group = document.querySelector('.monitor-frame-group');
-
   if (!wrapper || !group) return;
 
-  // 실측 기준: 프레임 외곽 사이즈 1660x860 + 넥 여유 포함 약 920px
   const designWidth = 1660;
   const designHeight = 920;
-
   const scaleX = wrapper.clientWidth / designWidth;
   const scaleY = wrapper.clientHeight / designHeight;
   const scale = Math.min(scaleX, scaleY);
-
   group.style.transform = `scale(${scale})`;
 }
 
 window.addEventListener('resize', scaleMonitorGroup);
 window.addEventListener('DOMContentLoaded', scaleMonitorGroup);
-
-// function removeDynamicScripts() {
-//   console.log('안된다?');
-//   document.querySelectorAll('script[data-dynamic]').forEach((el) => el.remove());
-// }
-
-export function loadHTML(url) {
+/**
+ * SPA 방식으로 HTML + CSS + JS 로드
+ * @param {string} url - 불러올 HTML 경로
+ * @param {Function} [onLoaded] - 페이지 로드 완료 콜백
+ */
+function loadHTML(url, onLoaded) {
   const container = document.querySelector('.monitor-frame');
   if (!container) return;
 
+  const currentPage = container.getAttribute('data-current-page');
+  if (currentPage) previousPage = currentPage;
+
   clearCleanupTasks();
   container.innerHTML = '';
+  container.setAttribute('data-current-page', url);
 
   fetch(url)
     .then((res) => {
@@ -72,28 +77,78 @@ export function loadHTML(url) {
     })
     .then((html) => {
       container.innerHTML = html;
-
-      const scripts = Array.from(container.querySelectorAll('script'));
-      scripts.forEach((s) => s.remove());
-
-      scripts.forEach((oldScript) => {
-        const newScript = document.createElement('script');
-        newScript.type = oldScript.type || 'text/javascript';
-
-        if (oldScript.src) {
-          const scriptURL = new URL(oldScript.src, location.href);
-          scriptURL.searchParams.set('_ts', Date.now());
-          newScript.src = scriptURL.toString();
-        } else {
-          newScript.textContent = oldScript.textContent;
-        }
-
-        document.body.appendChild(newScript);
-      });
-
+      // CSS 파일 동적 로드
+      const cssLinks = Array.from(container.querySelectorAll('link[rel="stylesheet"]'));
+      return Promise.all(
+        cssLinks.map(
+          (link) =>
+            new Promise((res, rej) => {
+              const el = document.createElement('link');
+              el.rel = 'stylesheet';
+              el.href = link.href;
+              el.onload = res;
+              el.onerror = rej;
+              document.head.appendChild(el);
+            })
+        )
+      );
+    })
+    .then(() => {
+      // JS 파일 동적 로드 (controlMonitor.js 제외)
+      const scriptTags = Array.from(container.querySelectorAll('script')).filter((s) => !s.src.includes('controlMonitor.js'));
+      return Promise.all(
+        scriptTags.map(
+          (oldScript) =>
+            new Promise((res, rej) => {
+              const newScript = document.createElement('script');
+              newScript.type = oldScript.type || 'text/javascript';
+              if (oldScript.src) {
+                const urlObj = new URL(oldScript.src, location.href);
+                urlObj.searchParams.set('_ts', Date.now());
+                newScript.src = urlObj.toString();
+              } else {
+                newScript.textContent = oldScript.textContent;
+              }
+              newScript.onload = res;
+              newScript.onerror = rej;
+              document.body.appendChild(newScript);
+            })
+        )
+      );
+    })
+    .then(() => {
       hookGlobalAPIs();
+      if (window.initModalEvents) window.initModalEvents(); // 모달 항상 초기화
+      // 인게임/윈도우 페이지 구분
+      const isInGamePage = /\/acidrain\//.test(url) || /\/mole-game\//.test(url) || /\/game-quiz\//.test(url) || /\/game-defence\//.test(url);
+      const isWindowPage = /\/components\/window\/window.html$/.test(url);
+      if (!isInGamePage && !isWindowPage && window.initSliderEvents) {
+        window.initSliderEvents();
+      }
+      if (typeof onLoaded === 'function') onLoaded();
     })
     .catch(console.error);
 }
+/** 뒤로 가기 */
+export function goBack() {
+  if (previousPage) {
+    loadHTML(previousPage);
+  } else {
+    console.warn('뒤로 갈 페이지가 없습니다.');
+  }
+}
 
+// 최초 IIFE 실행은 한 번만
+if (!window.__cmInitialized) {
+  window.__cmInitialized = true;
+  (() => {
+    if (!previousPage) {
+      previousPage = '/src/components/booting/booting.html';
+      loadHTML(previousPage);
+    }
+  })();
+}
+
+// 전역으로 노출
 window.loadHTML = loadHTML;
+window.goBack = goBack;

@@ -1,5 +1,4 @@
 import audioManager from '/src/scripts/audiomanager.js';
-import { loadHTML } from '/src/components/monitor/controlMonitor.js';
 
 const quizContainer = document.querySelector('.quiz-container');
 
@@ -10,13 +9,12 @@ quizContainer.addEventListener('click', (e) => {
   if (!button) return;
   e.preventDefault();
 
-  // 페이지 연결은 추후에 다시 연결할 예정
   if (button.classList.contains('quiz-exit-btn')) {
-    loadHTML('/src/pages/game-landing/quiz-landing.html');
+    window.loadHTML('/src/pages/game-landing/quiz-landing.html');
   } else if (button.classList.contains('quiz-focus-on-btn')) {
-    loadHTML('/src/pages/game-quiz/quiz-focus-on.html');
+    window.loadHTML('/src/pages/game-quiz/quiz-focus-on.html');
   } else if (button.classList.contains('quiz-time-attack-btn')) {
-    loadHTML('/src/pages/game-quiz/quiz-time-attack.html');
+    window.loadHTML('/src/pages/game-quiz/quiz-time-attack.html');
   }
 });
 
@@ -33,16 +31,19 @@ if (title) {
 }
 
 /**
- * 오디오 매니저 초기화하고, 볼륨 및 UI를 설정
+ * 오디오 매니저 초기화하고, 볼륨 설정
  */
 function initAudio() {
-  let volume = localStorage.getItem('quizVolume');
-  if (volume === null) volume = 0.3;
+  let bgmVolume = localStorage.getItem('bgmVolume');
+  if (bgmVolume === null) bgmVolume = 0.3;
   audioManager.setSource('/assets/audio/bgm/quiz-WildPogo-Francis-Preve.mp3');
-  audioManager.audio.volume = volume;
-  audioManager.play();
-  audioManager.setUI({
-    iconSelector: '#soundIcon',
-    buttonSelector: '#soundToggleBtn',
-  });
+  audioManager.audio.volume = bgmVolume;
+
+  // === 뮤트 상태 동기화 ===
+  const isMuted = sessionStorage.getItem('isMuted') === 'true';
+  if (isMuted) {
+    audioManager.audio.pause();
+  } else {
+    audioManager.audio.play();
+  }
 }

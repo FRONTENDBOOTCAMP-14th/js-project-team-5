@@ -5,30 +5,24 @@
     <link rel="icon" href="/assets/icons/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="타이핑 실력은 물론, 상식과 개발 지식을 함께 익힐 수 있는 인터랙티브 웹사이트입니다." />
-    <title>잡았조 - 타자의 세계</title>
-    <link rel="stylesheet" href="/src/styles/common/index.css" />
-    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <title>타자의 세계</title>
     <script type="module" src="/src/main.js"></script>
+    <link rel="stylesheet" href="/fonts/KIMM.css" />
+    <link rel="stylesheet" href="/src/styles/common/index.css" />
+    <link rel="stylesheet" href="/src/components/monitor/monitor.css" />
   </head>
   <body>
-    <h1 lang="ko-KR">잡았조 - 타자의 세계</h1>
-    <ul>
-      <li><a href="/src/pages/test.html">테스트 페이지</a></li>
-      <li><a href="/src/components/modal/modal.html">모달 컴포넌트 페이지</a></li>
-      <li><a href="/src/components/button/button.html">버튼 컴포넌트</a></li>
-      <li><a href="/src/components/slider/slider.html">슬라이더 컴포넌트</a></li>
-      <li><a href="/src/components/header/in-game-header.html">헤더 컴포넌트</a></li>
-      <li><a href="/src/components/game-choice-header/game-choice-header.html">게임 선택 헤더 컴포넌트</a></li>
-      <li><a href="/src/components/card/card.html">카드 컴포넌트</a></li>
-      <li><a href="/src/components/input/input.html">타자 입력 컴포넌트</a></li>
-      <li><a href="/src/pages/game-select/game-select.html">게임 선택 페이지</a></li>
-      <li><a href="/src/pages/main-start-page/main-start-page.html">메인 화면</a></li>
-      <li><a href="/src/pages/game-landing/acidrain-landing.html">산성비 랜딩 페이지</a></li>
-      <li><a href="/src/pages/game-landing/defense-landing.html">디펜스 랜딩 페이지</a></li>
-      <li><a href="/src/pages/game-landing/whack-landing.html">두더지잡기 랜딩 페이지</a></li>
-      <li><a href="/src/pages/game-landing/quiz-landing.html">퀴즈 랜딩 페이지</a></li>
-      <li><a href="/src/pages/mole-game/in-game/in-game.html">두더지 게임</a></li>
-      <li><a href="/src/pages/mole-game/mole-game-result/mole-game-result.html">두더지 게임 - 결과페이지</a></li>
-    </ul>
+    <div class="main-container">
+      <div class="monitor-frame-wrapper">
+        <div class="monitor-frame-group">
+          <div class="monitor-frame">
+            <!-- 내부 콘텐츠 -->
+          </div>
+          <img class="monitor-neck" src="/assets/icons/monitor_neck.png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/components/monitor/controlMonitor.js"></script>
   </body>
 </html>

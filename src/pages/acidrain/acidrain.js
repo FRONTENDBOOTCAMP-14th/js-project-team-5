@@ -1,13 +1,16 @@
-import { loadHTML } from '/src/components/monitor/controlMonitor.js';
-
 //=====================================
 // 🎵 오디오 매니저 설정 (유저 컨트롤 포함)
 // =====================================
 import audioManager from '/src/scripts/audiomanager.js';
 
 // BGM 설정 및 재생 시작
+// 로컬 스토리지에서 볼륨값 가져오기 (없으면 기본값 0.3)
+let bgmVolume = localStorage.getItem('bgmVolume');
+if (bgmVolume === null) bgmVolume = 0.3;
+else bgmVolume = Number(bgmVolume);
+
 audioManager.setSource('/assets/audio/bgm/acidrain-DiscoHeart-Coyote-Hearing.mp3');
-audioManager.audio.volume = 0.1;
+audioManager.audio.volume = bgmVolume;
 audioManager.play();
 
 // 사운드 토글 UI 연결
@@ -365,9 +368,21 @@ function dropWord() {
 // =====================================
 // 단어 제거 효과음 함수
 // =====================================
+let sfxVolume = localStorage.getItem('sfxVolume');
+if (sfxVolume === null) sfxVolume = 0.2;
+else sfxVolume = Number(sfxVolume);
+
 function playPopSound() {
   const popSound = new Audio('/assets/audio/sfx/droplet-sound.mp3'); // 효과음 경로
-  popSound.volume = 0.7;
+
+  popSound.volume = sfxVolume;
+
+  // 효과음의 원래 볼륨 저장
+  popSound.defaultVolume = sfxVolume;
+
+  // audiomanager에 등록
+  audioManager.setSfx({ popSound });
+
   popSound.playbackRate = 2.0; // 더 빠르게 재생 (기본은 1.0)
   popSound.play();
 }
@@ -388,7 +403,6 @@ typingInput.addEventListener('keydown', (e) => {
       wordEl.remove(); // 매칭 단어 제거
 
       playPopSound(); // ✅ 여기서만 효과음 재생
-
       break; // 하나만 처리
     }
   }
@@ -403,7 +417,7 @@ typingInput.addEventListener('keydown', (e) => {
 const goHomeBtn = document.getElementById('goHomeBtn');
 
 goHomeBtn.addEventListener('click', () => {
-  loadHTML('/src/pages/game-landing/acidrain-landing.html'); // ← 산성비 렌딩 페이지 경로
+  window.loadHTML('/src/pages/game-landing/acidrain-landing.html'); // ← 산성비 렌딩 페이지 경로
 });
 
 // Enter 또는 Space로 다시 시작 가능
@@ -431,6 +445,129 @@ document.addEventListener('keydown', (e) => {
     modalButtons[focusedButtonIndex].focus();
   }
 });
+
+// =====================================
+// 일시정지 모달 제어 관련 변수 및 버튼 연결
+// =====================================
+
+// 게임 상태 관리
+let isPaused = false;
+let wasPausedByModal = false;
+
+import { handleAcidRainPause } from '/src/components/modal/pause-modal/acidrain-pause.js';
+
+// 일시정지 버튼 요소 (상단바)
+const pauseOpenBtn = document.querySelector('.modal-open[data-type="pause"]');
+if (pauseOpenBtn) {
+  pauseOpenBtn.addEventListener('click', pauseGame); // 🔧 모달 열기 전에 게임 멈추기
+}
+
+// 일시정지 처리 함수 및 resume/retry/main 핸들러 분리
+function pauseGame() {
+  if (isPaused) return;
+
+  isPaused = true;
+  wasPausedByModal = true;
+
+  clearInterval(dropInterval);
+  clearInterval(timerInterval);
+  fallingIntervals.forEach(clearInterval);
+  typingInput.disabled = true;
+
+  const pauseDialog = document.querySelector('dialog[data-type="pause"]');
+  if (pauseDialog) {
+    handleAcidRainPause(pauseDialog, {
+      continue: () => {
+        resumeGame();
+      },
+      retry: () => {
+        restartFromPause();
+      },
+      main: () => {
+        window.loadHTML('/src/pages/game-landing/acidrain-landing.html');
+      },
+    });
+  }
+}
+
+function resumeGame() {
+  if (!isPaused) return;
+
+  startCountdown(() => {
+    isPaused = false;
+    wasPausedByModal = false;
+    startWordDrop();
+    startTimer();
+    typingInput.disabled = false;
+    typingInput.focus();
+
+    document.querySelectorAll('.falling-word').forEach((wordEl) => {
+      resumeFallingWord(wordEl);
+    });
+  });
+}
+
+function resumeFallingWord(wordEl) {
+  let y = parseInt(wordEl.style.top || '0', 10);
+  let hasFallen = false;
+  const interval = setInterval(() => {
+    if (isPaused || !document.body.contains(wordEl)) {
+      clearInterval(interval);
+      return;
+    }
+    y += 2;
+    wordEl.style.top = `${y}px`;
+    if (y > 700 && !hasFallen) {
+      hasFallen = true;
+      clearInterval(interval);
+      wordEl.remove();
+      time -= 5;
+      if (time < 0) time = 0;
+      updateTime();
+      if (time <= 0) gameOver();
+    }
+  }, 30);
+  fallingIntervals.push(interval);
+}
+
+function restartFromPause() {
+  clearInterval(dropInterval);
+  clearInterval(timerInterval);
+  clearFallingIntervals();
+  typingInput.disabled = true;
+
+  isPaused = true;
+  wasPausedByModal = true;
+
+  startCountdown(() => {
+    isPaused = false;
+    wasPausedByModal = false;
+    startGame();
+  });
+}
+
+// =====================================
+// 단어 낙하 재개 함수 (resume에서 사용)
+// =====================================
+function startWordDrop() {
+  dropInterval = setInterval(() => {
+    dropWord();
+  }, 1000);
+}
+
+// =====================================
+// 시간 타이머 재개 함수 (resume에서 사용)
+// =====================================
+function startTimer() {
+  timerInterval = setInterval(() => {
+    updateTime();
+    if (time <= 0) {
+      gameOver();
+    } else {
+      time--;
+    }
+  }, 1000);
+}
 
 // =====================================
 //   최초 게임 시작

@@ -1,11 +1,22 @@
-import { loadHTML } from '/src/components/monitor/controlMonitor.js';
-
 (() => {
   const audio = document.getElementById('bg-audio');
   const image = document.querySelector('.window-start-image');
   const screen = document.querySelector('.window-screen-wrapper');
 
+  function unmuteAudioOnce() {
+    audio.muted = false;
+    // 모든 이벤트 리스너 제거 (한 번만 실행)
+    document.removeEventListener('click', unmuteAudioOnce);
+    document.removeEventListener('keydown', unmuteAudioOnce);
+    document.removeEventListener('touchstart', unmuteAudioOnce);
+  }
+
   if (audio && image && screen) {
+    audio.muted = true;
+
+    document.addEventListener('click', unmuteAudioOnce);
+    document.addEventListener('keydown', unmuteAudioOnce);
+    document.addEventListener('touchstart', unmuteAudioOnce);
     audio.play().catch((err) => {
       console.warn('자동재생이 차단되었을 수 있습니다:', err);
     });
@@ -44,7 +55,7 @@ document.querySelectorAll('.window-icon-item').forEach((item) => {
     if (role === 'new-tab') {
       window.open(url, '_blank');
     } else if (role === 'new-page') {
-      loadHTML('/src/components/window/window.html');
+      window.loadHTML('/src/pages/main-start-page/main-start-page.html');
     } else {
       console.warn('알 수 없는 역할:', role);
     }

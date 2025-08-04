@@ -1,29 +1,15 @@
-/* 전체 화면 설정 및 배경 */
-body {
-  font-family: 'KIMM', Arial, sans-serif;
-  inline-size: 100vw;
-  block-size: 100vh;
-  background-color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .acidrain-bg {
-  position: relative;
-  inline-size: 1600px;
-  block-size: 800px;
+  inline-size: 100rem;
+  block-size: 50rem;
   background: url('/assets/images/acidrain-background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-/* 상태바 영역*/
-
-.status-bar {
-  padding-top: 3rem; /* 상단 여백 */
+  padding: 2rem;
 }
 
 /* 게임 인풋 영역 */
@@ -34,8 +20,6 @@ body {
   align-items: flex-end; /* 하단 정렬 */
   inline-size: 100%;
   padding-top: 38rem; /* 상단 여백 */
-  padding-block-end: 2.5rem;
-  box-sizing: border-box;
 }
 
 .typing-input {
@@ -133,6 +117,37 @@ body {
   display: none !important;
 }
 
+/* 🔷 일시정지 모달 */
+.pause-modal {
+  padding: 1rem 2rem; /* 기존보다 여유 있는 내부 공간 */
+  font-size: 1.25rem; /* 글자 크기 키움 */
+  font-weight: 600;
+  border-radius: 9999px;
+  border: 2px solid var(--gray-300);
+  background-color: var(--primary-white);
+  color: var(--gray-500);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    border-color 0.3s;
+  min-width: 12rem; /* 버튼 너비 통일 및 확장 */
+}
+
+.pause-modal:hover {
+  background-color: var(--primary-cyan);
+  color: var(--primary-white);
+  border-color: var(--primary-cyan);
+}
+
+.pause-modal:focus-visible {
+  background-color: var(--primary-cyan);
+  color: var(--primary-white);
+  border-color: var(--primary-cyan);
+  outline: none;
+}
+
 .countdown {
   position: absolute;
   top: 50%;
@@ -163,4 +178,28 @@ body {
 
 .countdown {
   animation: pulse 1s ease-in-out;
+}
+
+/* 모달 스타일 */
+dialog.modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  border: none;
+  border-radius: 1rem;
+  background-color: rgb(216, 216, 216) 10%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  z-index: 1000; /* ✅ 모달이 위에 보이게 */
+}
+
+/* 모달의 backdrop 처리 */
+dialog.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.5); /* ✅ 어두운 배경 */
+  backdrop-filter: blur(2px);
+  z-index: 999;
+}
+
+/* 낙하 단어는 모달보다 아래로 */
+.falling-word {
+  z-index: 10; /* ✅ 모달보다 낮게 */
 }
