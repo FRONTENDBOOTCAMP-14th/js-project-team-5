@@ -1,4 +1,3 @@
-import { wordList } from './dict.js';
 import audioManager from '/src/scripts/audiomanager.js';
 import { handleDefensePause } from '/src/components/modal/pause-modal/defense-pause.js';
 
@@ -32,6 +31,22 @@ canvas.height = 800;
 // BGM 파일 경로
 const TITLE_BGM = '/assets/audio/bgm/defense-Komputo-FrancisPreve.mp3';
 const GAME_BGM = '/assets/audio/bgm/defense-play.mp3';
+
+// 문제 데이터 경로 및 상태 변수 선언
+const WORD_LIST_NORMAL = '/data/word-normal.json'; // 일반 모드
+const WORD_LIST_DEV = '/data/word-dev.json'; // 개발자 모드
+
+const savedMode = localStorage.getItem('dev-or-normal') || 'normal';
+const WORD_LIST_SRC = savedMode === 'dev' ? WORD_LIST_DEV : WORD_LIST_NORMAL;
+
+let wordList = [];
+
+// 비동기로 단어 리스트 불러오기
+fetch(WORD_LIST_SRC)
+  .then((res) => res.json())
+  .then((data) => {
+    wordList = data;
+  });
 
 const statusBar = document.querySelector('.status-bar');
 const typingIn = document.querySelector('.typing-input');
