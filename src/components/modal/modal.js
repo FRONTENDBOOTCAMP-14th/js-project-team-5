@@ -38,6 +38,7 @@ export function initModalEvents() {
           break;
         case 'scoreboard':
           handleScoreboardModal(dialog);
+          alert('점수판 기능은 커밍순!');
           break;
         case 'settings':
           handleSettingsModal(dialog);
@@ -47,6 +48,7 @@ export function initModalEvents() {
           break;
         case 'register':
           handleRegisterModal(dialog);
+          alert('점수판 기능은 커밍순!');
           break;
       }
 
