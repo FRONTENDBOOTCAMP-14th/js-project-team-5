@@ -1,5 +1,6 @@
 import { wordList } from './dict.js';
 import audioManager from '/src/scripts/audiomanager.js';
+import { handleDefensePause } from '/src/components/modal/pause-modal/defense-pause.js';
 
 //상태 변수
 let gameState = 'title'; // 'title' | 'fadeout' | 'game' | 'gameover'
@@ -40,11 +41,11 @@ statusBar.style.display = 'none';
 typingIn.style.display = 'none';
 
 // 타이틀 브금 자동 재생 (audioManager 사용)
-(() => {
-  let bgmVolume = localStorage.getItem('bgmVolume');
-  if (bgmVolume === null) bgmVolume = 0.3;
-  else bgmVolume = Number(bgmVolume);
+let bgmVolume = localStorage.getItem('bgmVolume');
+if (bgmVolume === null) bgmVolume = 0.3;
+else bgmVolume = Number(bgmVolume);
 
+(() => {
   audioManager.setSource(TITLE_BGM);
   audioManager.audio.volume = bgmVolume;
   audioManager.play();
@@ -263,8 +264,7 @@ function addScore(pt) {
 
 //게임 오버
 function gameOver(flag) {
-  console.log("테스트")
-  if(flag)gameState = 'gameover';
+  if (flag) gameState = 'gameover';
   finalScore = score;
   finalTime = timer;
   score = 0;
@@ -384,7 +384,7 @@ canvas.addEventListener('click', (e) => {
       gameStart();
     }
     if (mx >= exitButton.x && mx <= exitButton.x + exitButton.width && my >= exitButton.y && my <= exitButton.y + exitButton.height) {
-      alert('게임 종료');
+      window.loadHTML('/src/pages/game-landing/defense-landing.html');
     }
   } else if (gameState === 'gameover') {
     gameOverButtons.forEach((btn) => {
@@ -395,7 +395,7 @@ canvas.addEventListener('click', (e) => {
         if (btn.action === 'main') {
           // 게임 BGM 정지, 타이틀 BGM 재생 (audioManager)
           audioManager.setSource(TITLE_BGM);
-          audioManager.audio.volume = 0.5;
+          audioManager.audio.volume = bgmVolume;
           audioManager.play();
           gameState = 'title';
         }
@@ -406,33 +406,54 @@ canvas.addEventListener('click', (e) => {
 });
 
 export function gameStart() {
-  gameOver(false)
+  gameOver(false);
   gameState = 'fadeout';
   fadeAlpha = 0;
   statusBar.querySelectorAll('span')[1].textContent = `시간: ${timer}초`;
   // 타이틀 BGM 정지, 게임 BGM 재생 (audioManager)
   audioManager.setSource(GAME_BGM);
-  audioManager.audio.volume = 0.5;
+  audioManager.audio.volume = bgmVolume;
   audioManager.play();
 }
 
-export function goToMainMenu() {
-  gameOver(false)
-  audioGame.pause();
-  audioTitle.volume = 0.5;
-  audioTitle.currentTime = 0;
-  audioTitle.play().catch((err) => console.warn('타이틀 브금 재생 실패:', err));
+function goToMainMenu() {
+  gameOver(false);
+  audioManager.setSource(TITLE_BGM);
+  audioManager.audio.volume = bgmVolume;
+  audioManager.audio.currentTime = 0;
+  audioManager.audio.play().catch((err) => console.warn('타이틀 브금 재생 실패:', err));
   gameState = 'title';
 }
 
-export function pauseGame() {
+function pauseGame() {
   clearInterval(timerInterval);
   clearInterval(spawnInterval1);
   clearInterval(spawnInterval2);
   clearInterval(spawnInterval3);
 }
 
-export function resumeGame() {
+function resumeGame() {
   // spawn 루프와 타이머 재시작
   startMonsterSpawnLoop();
 }
+
+document.querySelectorAll('.modal-open[data-type="pause"]').forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    pauseGame();
+    const pauseDialog = document.querySelector('dialog[data-type="pause"]');
+    if (pauseDialog) {
+      handleDefensePause(pauseDialog, {
+        continue: () => {
+          resumeGame();
+        },
+        retry: () => {
+          gameStart();
+        },
+        main: () => {
+          goToMainMenu();
+        },
+      });
+    }
+  });
+});
