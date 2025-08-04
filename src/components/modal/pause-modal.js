@@ -31,10 +31,10 @@ export function handlePauseModal(dialog, handlers) {
       handleWhackPause(dialog, handlers);
       break;
     case 'quiz':
-      handleQuizPause(dialog);
+      handleQuizPause(dialog, handlers);
       break;
     case 'defense':
-      handleDefensePause(dialog);
+      handleDefensePause(dialog, handlers);
       break;
     case 'acidrain':
       handleAcidRainPause(dialog, handlers);
