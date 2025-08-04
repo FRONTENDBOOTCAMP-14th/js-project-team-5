@@ -16,7 +16,9 @@ function setCheckedRadioFromStorage() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', setCheckedRadioFromStorage);
+document.querySelector('.icon-button').addEventListener('click', function () {
+  setCheckedRadioFromStorage();
+});
 
 DEV_RADIO.addEventListener('change', function () {
   if (DEV_RADIO.checked) {
