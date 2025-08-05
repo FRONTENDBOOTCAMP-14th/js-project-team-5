@@ -12,7 +12,8 @@ quizContainer.addEventListener('click', (e) => {
   if (button.classList.contains('quiz-exit-btn')) {
     window.loadHTML('/src/pages/game-landing/quiz-landing.html');
   } else if (button.classList.contains('quiz-focus-on-btn')) {
-    window.loadHTML('/src/pages/game-quiz/quiz-focus-on.html');
+    alert('집중 모드는 곧 찾아옵니다! 커밍순😄');
+    // window.loadHTML('/src/pages/game-quiz/quiz-focus-on.html');
   } else if (button.classList.contains('quiz-time-attack-btn')) {
     window.loadHTML('/src/pages/game-quiz/quiz-time-attack.html');
   }
