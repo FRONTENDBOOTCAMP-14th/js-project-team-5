@@ -155,25 +155,27 @@
 
 ### 💻윈도우xp 부팅 화면 (스플래쉬)
 
-500년대 초반 윈도우 xp 데스크탑을 실제로 켜는 듯한 느낌을 주기 위해 웹 사이트를 로드했을 때 윈도우 xp 부팅화면과 로그온 화면을 구현하였습니다.
+-500년대 초반 윈도우 xp 데스크탑을 실제로 켜는 듯한 느낌을 주기 위해 웹 사이트를 로드했을 때 윈도우 xp 부팅화면과 로그온 화면을 구현하였습니다.
 
-![윈도우xp 부팅](/public/assets/videos/window_loading.mp4)
-![윈도우xp 로그온](/public/assets/images/window-start.jpg)
+> 로그온 화면에서, 화면을 클릭하시면 바탕화면으로 진입 가능합니다 :)
+
+![윈도우xp 부팅](/public/assets/images/window-booting.png)
+![윈도우xp 로그온](/public/assets/images/window-start2.png)
 
 ### 💻윈도우xp 바탕 화면
 
 '타자의 세계' 게임을 구동하기 위해 사용자들로 하여금 윈도우 xp 데스크탑을 사용하는 듯한 느낌을 주기위해 그때 당시의 바탕화면을 구현하였습니다.
-![윈도우 xp 바탕화면](/public/assets/images/readme-window.png)
+![윈도우 xp 바탕화면](/public/assets/images/window-desktop.png)
 
 ### 💻타자의 세계
 
 '타자의 세계' 아이콘 더블 클릭 시 게임에 진입. 전체적인 게임의 분위기를 레트로로 선정해 추억의 타자 게임을 한다는 느낌을 줄 수 있도록 구현하였습니다.
-![타자의 세계 메인 화면](/public/assets/images/readme-main.png)
+![타자의 세계 메인 화면](/public/assets/images/main-start.png)
 
 ### 💻게임 선택
 
 '잡았조' 팀원들이 각각 구현한 4가지의 타자 게임이 준비되어있습니다. 게임 설명을 참고하여 게임을 진행할 수 있습니다.
-![타자의 세계 게임 선택 화면](/public/assets/images/readme-select.png)
+![타자의 세계 게임 선택 화면](/public/assets/images/game-select.png)
 
 👇타자의 게임이 궁금하다면? 아래의 배포 링크를 통해 확인해 보세요!👇
 
