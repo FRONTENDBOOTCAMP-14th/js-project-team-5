@@ -9,33 +9,30 @@
 
 ## 🎮 타자의 세계
 
-웹 기반 타자 게임 사이트 제작 프로젝트입니다.  
-사용자의 타자 실력을 향상시키기 위한 다양한 미니게임을 제작했습니다.
+- 타자 게임 웹 사이트 제작 프로젝트입니다🖥️
+- 사용자의 타자 실력을 기르면서 일상 단어와 개발 관련 단어까지 익힐 수 있는 재미있는 학습 환경 구축을 위해 향상시키기 위한 다양한 타자 게임을 제작했습니다!
 
-- 한글 타자 게임: 4글자 미만의 쉬운 단어
-- 영어 타자 게임: 개발 관련 용어 기반
+- 일반 모드: 일반 상식 기반의 한글 단어 및 문제
+- 개발자 모드: 개발 관련 단어 및 문제
 
 ---
 
 ## 👥 팀 구성 및 역할
 
-| 이름   | 역할          | 제작 게임   |
-| ------ | ------------- | ----------- |
-| 전지연 | 스크럼 마스터 | 퀴즈        |
-| 백창엽 | 팀원          | 두더지 잡기 |
-| 조석근 | 팀원          | 디펜스      |
-| 조선현 | 팀원          | 산성비      |
-
----
+| 잡았조 팀원 | 전지연                                                                                                                                                                                        | 백창엽                                                                                                                                                                                                | 조석근                                                                                                                                                                                    | 조선현                                                                                                                                                                                        |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 역할        | FE, 스크럼 마스터                                                                                                                                                                             | FE, 발표 자료 제작                                                                                                                                                                                    | FE, 발표                                                                                                                                                                                  | FE, 발표 자료 제작                                                                                                                                                                            |
+| 작업        | 총괄, 모달 컴포넌트 및 세부 기능(모달 시스템, 게임 모드, 오디오와 슬라이더 연결), 게임별 랜딩 페이지, 퀴즈 게임                                                                               | 버튼 & 카드 & 슬라이더 컴포넌트, 게임 선택 페이지, 두더지 잡기 게임                                                                                                                                   | 모니터 프레임 제작 & 페이지 스케일링 & 페이지 이동, 디펜스 게임                                                                                                                           | 헤더 & 인풋 컴포넌트, 메인 시작 페이지, 산성비 게임, 오디오 매니저, 발표 자료 제작                                                                                                            |
+| GitHub      | <a href="https://github.com/jeonjyeon" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/jeonjyeon-lightgray?style=plastic&logo=github&labelColor=black"/></a> | <a href="https://github.com/changyeopbaek" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/changyeopbaek-lightgray?style=plastic&logo=github&labelColor=black"/></a> | <a href="https://github.com/IceJack" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/IceJack-lightgray?style=plastic&logo=github&labelColor=black"/></a> | <a href="https://github.com/hana12051" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/hana12051-lightgray?style=plastic&logo=github&labelColor=black"/></a> |
 
 ## 📌 제작 게임 설명
 
 | 게임 이름      | 설명                                        |
 | -------------- | ------------------------------------------- |
-| 🧠 퀴즈        | 문제를 읽고 정답을 빠르게 타이핑            |
-| 🛠️ 두더지 잡기 | 등장하는 단어 두더지를 타이핑으로 제거      |
-| 🛡 디펜스      | 사방에서 몰려오는 적을 타이핑으로 방어      |
 | 🌧 산성비      | 하늘에서 떨어지는 단어를 빠르게 입력해 제거 |
+| 🛡 디펜스      | 사방에서 몰려오는 적을 타이핑으로 방어      |
+| 🛠️ 두더지 잡기 | 등장하는 단어 두더지를 타이핑으로 제거      |
+| 🧠 퀴즈        | 문제를 읽고 정답을 빠르게 입력해서 맞추기   |
 
 ---
 
@@ -81,7 +78,7 @@
 │ ├── 📁 pages/ # 게임별 페이지 구성
 │ │ ├── 📁 acidrain/ # 산성비 게임
 │ │ ├── 📁 game-defence/ # 디펜스 게임
-│ │ ├── 📁 game-landing/ # 랜딩 페이지
+│ │ ├── 📁 game-landing/ # 게임별 랜딩 페이지
 │ │ ├── 📁 game-quiz/ # 퀴즈 게임
 │ │ ├── 📁 game-select/ # 게임 선택 화면
 │ │ ├── 📁 main-start-page/ # 시작 화면
@@ -138,7 +135,7 @@
 | `docs/문서명`        | 문서 작성 및 수정용 브랜치  |
 
 > ✅ 브랜치 네이밍은 **kebab-case**로 통일
-> 예시: `feature/login-page/jiyun`, `refactor/quiz-component/sunhyun`
+> 예시: `feature/login-page/jyeon`, `refactor/quiz-component/sunhyun`
 
 ### 🖍 네이밍 컨벤션
 
@@ -150,7 +147,7 @@
 | JS 상수명    | `UPPER_SNAKE_CASE` | `MAX_SCORE`, `KEY_CODE_ENTER`        |
 | 파일 / 폴더  | `kebab-case`       | `main-start-page/`, `score-board.js` |
 
-> ✅ 일관된 네이밍 규칙은 협업 효율을 높이고 유지 보수를 쉽게 합니다!
+> ✅ 일관된 네이밍 규칙으로 협업 효율을 높이고 유지 보수를 쉽게 할 수 있도록 했습니다!
 
 ---
 
@@ -158,25 +155,27 @@
 
 ### 💻윈도우xp 부팅 화면 (스플래쉬)
 
-2000년대 초반 윈도우 xp 데스크탑을 실제로 켜는 듯한 느낌을 주기 위해 웹 사이트를 로드했을 때 윈도우 xp 부팅화면과 로그온 화면을 구현하였습니다.
+-500년대 초반 윈도우 xp 데스크탑을 실제로 켜는 듯한 느낌을 주기 위해 웹 사이트를 로드했을 때 윈도우 xp 부팅화면과 로그온 화면을 구현하였습니다.
 
-![윈도우xp 부팅](/public/assets/videos/window_loading.mp4)
-![윈도우xp 로그온](/public/assets/images/window-start.jpg)
+> 로그온 화면에서, 화면을 클릭하시면 바탕화면으로 진입 가능합니다 :)
+
+![윈도우xp 부팅](/public/assets/images/window-booting.png)
+![윈도우xp 로그온](/public/assets/images/window-start2.png)
 
 ### 💻윈도우xp 바탕 화면
 
 '타자의 세계' 게임을 구동하기 위해 사용자들로 하여금 윈도우 xp 데스크탑을 사용하는 듯한 느낌을 주기위해 그때 당시의 바탕화면을 구현하였습니다.
-![윈도우 xp 바탕화면](/public/assets/images/readme-window.png)
+![윈도우 xp 바탕화면](/public/assets/images/window-desktop.png)
 
 ### 💻타자의 세계
 
 '타자의 세계' 아이콘 더블 클릭 시 게임에 진입. 전체적인 게임의 분위기를 레트로로 선정해 추억의 타자 게임을 한다는 느낌을 줄 수 있도록 구현하였습니다.
-![타자의 세계 메인 화면](/public/assets/images/readme-main.png)
+![타자의 세계 메인 화면](/public/assets/images/main-start.png)
 
 ### 💻게임 선택
 
 '잡았조' 팀원들이 각각 구현한 4가지의 타자 게임이 준비되어있습니다. 게임 설명을 참고하여 게임을 진행할 수 있습니다.
-![타자의 세계 게임 선택 화면](/public/assets/images/readme-select.png)
+![타자의 세계 게임 선택 화면](/public/assets/images/game-select.png)
 
 👇타자의 게임이 궁금하다면? 아래의 배포 링크를 통해 확인해 보세요!👇
 
@@ -186,8 +185,8 @@
 
 [👉 타자의 세계 - 바로가기](https://typing-world.netlify.app/)
 
-[👉 발표자료 ppt 제출용 - 바로가기](https://docs.google.com/presentation/d/1Puf4EpDCRxE03WppmNRPfL-QeMHW2gdCuGlaGm8Thto/edit?usp=sharing)
+[👉 타자의 세계 디자인 시안 - 바로가기](https://www.figma.com/design/lYMh3zNLpxmA4L7AKQOKf5/%EC%9E%A1%EC%95%98%EC%A1%B0---%EC%9B%B9-%EA%B8%B0%EB%B0%98-%ED%83%80%EC%9E%90-%EC%97%B0%EC%8A%B5-%EA%B2%8C%EC%9E%84-%EC%82%AC%EC%9D%B4%ED%8A%B8-%EC%A0%9C%EC%9E%91?node-id=1-84&t=qacsOTrSYnbgG7Un-0)
+
+[👉 발표 자료 - 바로가기](https://docs.google.com/presentation/d/1Puf4EpDCRxE03WppmNRPfL-QeMHW2gdCuGlaGm8Thto/edit?usp=sharing)
 
 [👉 노션 - 바로가기](https://www.notion.so/5-23273873401a80d4b880cf222f6105ff?source=copy_link)
-
-[👉 잡았조? 피그마 - 바로가기](https://www.figma.com/design/lYMh3zNLpxmA4L7AKQOKf5/%EC%9E%A1%EC%95%98%EC%A1%B0---%EC%9B%B9-%EA%B8%B0%EB%B0%98-%ED%83%80%EC%9E%90-%EC%97%B0%EC%8A%B5-%EA%B2%8C%EC%9E%84-%EC%82%AC%EC%9D%B4%ED%8A%B8-%EC%A0%9C%EC%9E%91?node-id=1-84&t=qacsOTrSYnbgG7Un-0)
