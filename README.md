@@ -81,8 +81,8 @@
 │ │ ├── 📁 game-landing/ # 게임별 랜딩 페이지
 │ │ ├── 📁 game-quiz/ # 퀴즈 게임
 │ │ ├── 📁 game-select/ # 게임 선택 화면
-│ │ ├── 📁 main-start-page/ # 시작 화면
-│ │ ├── 📁 mole-game/ # 모달
+│ │ ├── 📁 main-start-page/ # 메인 시작 화면
+│ │ ├── 📁 mole-game/ # 두더지 잡기 게임
 │ │ └── 📄 index.html/ # 데모 페이지
 │ │
 │ ├── 📁 scripts/ # 공통 스크립트 및 유틸 JS
