@@ -5,7 +5,7 @@
 
   function unmuteAudioOnce() {
     audio.muted = false;
-    // 모든 이벤트 리스너 제거 (한 번만 실행)
+    audio.play().catch(() => {}); // 해제 후 play 재시도
     document.removeEventListener('click', unmuteAudioOnce);
     document.removeEventListener('keydown', unmuteAudioOnce);
     document.removeEventListener('touchstart', unmuteAudioOnce);
@@ -28,6 +28,12 @@
     audio.play().catch((err) => {
       console.warn('자동재생이 차단되었을 수 있습니다:', err);
     });
+
+    // 화면 진행 fallback: 5초 후 화면 강제 전환
+    setTimeout(() => {
+      image.style.display = 'none';
+      screen.style.display = 'flex';
+    }, 5000);
 
     audio.addEventListener('ended', () => {
       image.style.display = 'none';
