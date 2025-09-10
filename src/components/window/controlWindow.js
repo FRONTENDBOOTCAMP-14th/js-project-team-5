@@ -5,10 +5,14 @@
 
   function unmuteAudioOnce() {
     audio.muted = false;
-    // 모든 이벤트 리스너 제거 (한 번만 실행)
+    audio.play().catch(() => {}); // 해제 후 play 재시도
     document.removeEventListener('click', unmuteAudioOnce);
     document.removeEventListener('keydown', unmuteAudioOnce);
     document.removeEventListener('touchstart', unmuteAudioOnce);
+    document.removeEventListener('mousemove', unmuteAudioOnce);
+    document.removeEventListener('wheel', unmuteAudioOnce);
+    document.removeEventListener('touchmove', unmuteAudioOnce);
+    document.removeEventListener('pointerdown', unmuteAudioOnce);
   }
 
   if (audio && image && screen) {
@@ -17,9 +21,19 @@
     document.addEventListener('click', unmuteAudioOnce);
     document.addEventListener('keydown', unmuteAudioOnce);
     document.addEventListener('touchstart', unmuteAudioOnce);
+    document.addEventListener('mousemove', unmuteAudioOnce);
+    document.addEventListener('wheel', unmuteAudioOnce);
+    document.addEventListener('touchmove', unmuteAudioOnce);
+    document.addEventListener('pointerdown', unmuteAudioOnce);
     audio.play().catch((err) => {
       console.warn('자동재생이 차단되었을 수 있습니다:', err);
     });
+
+    // 화면 진행 fallback: 5초 후 화면 강제 전환
+    setTimeout(() => {
+      image.style.display = 'none';
+      screen.style.display = 'flex';
+    }, 5000);
 
     audio.addEventListener('ended', () => {
       image.style.display = 'none';
