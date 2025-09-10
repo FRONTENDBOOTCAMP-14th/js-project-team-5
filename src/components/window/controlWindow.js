@@ -9,6 +9,10 @@
     document.removeEventListener('click', unmuteAudioOnce);
     document.removeEventListener('keydown', unmuteAudioOnce);
     document.removeEventListener('touchstart', unmuteAudioOnce);
+    document.removeEventListener('mousemove', unmuteAudioOnce);
+    document.removeEventListener('wheel', unmuteAudioOnce);
+    document.removeEventListener('touchmove', unmuteAudioOnce);
+    document.removeEventListener('pointerdown', unmuteAudioOnce);
   }
 
   if (audio && image && screen) {
@@ -17,6 +21,10 @@
     document.addEventListener('click', unmuteAudioOnce);
     document.addEventListener('keydown', unmuteAudioOnce);
     document.addEventListener('touchstart', unmuteAudioOnce);
+    document.addEventListener('mousemove', unmuteAudioOnce);
+    document.addEventListener('wheel', unmuteAudioOnce);
+    document.addEventListener('touchmove', unmuteAudioOnce);
+    document.addEventListener('pointerdown', unmuteAudioOnce);
     audio.play().catch((err) => {
       console.warn('자동재생이 차단되었을 수 있습니다:', err);
     });
