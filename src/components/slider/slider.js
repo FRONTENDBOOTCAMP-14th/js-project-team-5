@@ -14,14 +14,21 @@ export function initSliderEvents() {
   // BGM AudioManager 설정
   const BGM_SRC = '/assets/audio/bgm/main-XRayVision-Slynk.mp3';
   const bgmRange = document.getElementById('bgm-range');
-  const progressBgmFill = bgmRange?.closest('.bgm-slider-custom')?.querySelector('.progress-fill');
+  const progressBgmFill = bgmRange
+    ?.closest('.bgm-slider-custom')
+    ?.querySelector('.progress-fill');
 
   let bgmVolume = localStorage.getItem('bgmVolume');
   if (bgmVolume === null) bgmVolume = 0.3;
   else bgmVolume = Number(bgmVolume);
 
   // BGM이 다르거나, 아직 재생 중이 아니면만 setSource/재생
-  if (!audioManager.audio || !audioManager.audio.src.endsWith(BGM_SRC) || audioManager.audio.paused || audioManager.audio.ended) {
+  if (
+    !audioManager.audio ||
+    !audioManager.audio.src.endsWith(BGM_SRC) ||
+    audioManager.audio.paused ||
+    audioManager.audio.ended
+  ) {
     audioManager.setSource(BGM_SRC);
     audioManager.audio.volume = bgmVolume;
     audioManager.play();
@@ -66,7 +73,9 @@ export function initSliderEvents() {
   clickSfx.volume = sfxVolume;
 
   const sfxRange = document.getElementById('sfx-range');
-  const progressSfxFill = sfxRange?.closest('.sfx-slider-custom')?.querySelector('.progress-fill');
+  const progressSfxFill = sfxRange
+    ?.closest('.sfx-slider-custom')
+    ?.querySelector('.progress-fill');
 
   // SFX 볼륨 슬라이더 이벤트
   if (sfxRange) {
@@ -102,7 +111,15 @@ export function initSliderEvents() {
 
   // 인터랙티브 요소 판별 함수
   // TODO: 새로운 interactive 요소가 생기면 이 배열에 추가하기
-  const INTERACTIVE_SELECTOR = ['button', 'a', 'input', 'label', '.card', '.card-wrapper', '[role="button"]'].join(',');
+  const INTERACTIVE_SELECTOR = [
+    'button',
+    'a',
+    'input',
+    'label',
+    '.card',
+    '.card-wrapper',
+    '[role="button"]',
+  ].join(',');
 
   function isInteractiveElement(el) {
     return el.closest(INTERACTIVE_SELECTOR);
@@ -133,7 +150,10 @@ export function initSliderEvents() {
 
   // 키보드로 Enter/Space로 활성화 시 효과음 (뮤트 상태에서는 play() 호출 안 함, AbortError 무시)
   clickTarget.addEventListener('keydown', (e) => {
-    if ((e.key === 'Enter' || e.key === ' ') && isInteractiveElement(e.target)) {
+    if (
+      (e.key === 'Enter' || e.key === ' ') &&
+      isInteractiveElement(e.target)
+    ) {
       if (sessionStorage.getItem('isMuted') === 'true' || isPlaying) return;
       isPlaying = true;
       clickSfx.currentTime = 0;

@@ -157,8 +157,6 @@
 
 -500년대 초반 윈도우 xp 데스크탑을 실제로 켜는 듯한 느낌을 주기 위해 웹 사이트를 로드했을 때 윈도우 xp 부팅화면과 로그온 화면을 구현하였습니다.
 
-> 로그온 화면에서, 화면을 클릭하시면 바탕화면으로 진입 가능합니다 :)
-
 ![윈도우xp 부팅](/public/assets/images/window-booting.png)
 ![윈도우xp 로그온](/public/assets/images/window-start2.png)
 

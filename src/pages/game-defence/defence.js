@@ -97,7 +97,12 @@ toLoad.forEach(([key, src]) => {
 
 //타이틀 버튼 위치
 const button = { x: towerX - 150, y: towerY + 40, width: 300, height: 80 };
-const exitButton = { x: towerX - 100, y: button.y + 100, width: 200, height: 60 };
+const exitButton = {
+  x: towerX - 100,
+  y: button.y + 100,
+  width: 200,
+  height: 60,
+};
 
 //몬스터 클래스
 class Monster {
@@ -174,7 +179,13 @@ class Attack {
   }
   draw(ctx) {
     const size = 32;
-    ctx.drawImage(images.attack, this.x - size / 2, this.y - size / 2, size, size);
+    ctx.drawImage(
+      images.attack,
+      this.x - size / 2,
+      this.y - size / 2,
+      size,
+      size
+    );
   }
 }
 
@@ -206,7 +217,11 @@ function start() {
     if (closest.img === images.m2) {
       const extra = monsters
         .filter((m) => !m.isHit && m.img === images.m1)
-        .sort((a, b) => Math.hypot(a.x - towerX, a.y - towerY) - Math.hypot(b.x - towerX, b.y - towerY))
+        .sort(
+          (a, b) =>
+            Math.hypot(a.x - towerX, a.y - towerY) -
+            Math.hypot(b.x - towerX, b.y - towerY)
+        )
         .slice(0, 1);
       extra.forEach((m) => {
         m.isHit = true;
@@ -218,7 +233,11 @@ function start() {
       currentSpeed += 0.2;
       const extra3 = monsters
         .filter((m) => !m.isHit && m.img === images.m1)
-        .sort((a, b) => Math.hypot(a.x - towerX, a.y - towerY) - Math.hypot(b.x - towerX, b.y - towerY))
+        .sort(
+          (a, b) =>
+            Math.hypot(a.x - towerX, a.y - towerY) -
+            Math.hypot(b.x - towerX, b.y - towerY)
+        )
         .slice(0, 3);
       extra3.forEach((m) => {
         m.isHit = true;
@@ -232,7 +251,10 @@ function start() {
 //몬스터 소환 함수
 function spawnMonster(type) {
   const R = 1000;
-  const ang = Math.random() < 0.5 ? Math.random() * (Math.PI / 2) - Math.PI / 4 : Math.random() * (Math.PI / 2) + (Math.PI * 3) / 4;
+  const ang =
+    Math.random() < 0.5
+      ? Math.random() * (Math.PI / 2) - Math.PI / 4
+      : Math.random() * (Math.PI / 2) + (Math.PI * 3) / 4;
   const x = towerX + Math.cos(ang) * R;
   const y = towerY + Math.sin(ang) * R;
   let word = wordList[Math.floor(Math.random() * wordList.length)];
@@ -243,7 +265,10 @@ function spawnMonster(type) {
     img = images.m2;
   }
   if (type === 3) {
-    word += wordList[Math.floor(Math.random() * wordList.length)] + wordList[Math.floor(Math.random() * wordList.length)] + wordList[Math.floor(Math.random() * wordList.length)];
+    word +=
+      wordList[Math.floor(Math.random() * wordList.length)] +
+      wordList[Math.floor(Math.random() * wordList.length)] +
+      wordList[Math.floor(Math.random() * wordList.length)];
     speed = currentSpeed / 2;
     img = images.m3;
   }
@@ -302,18 +327,34 @@ function render() {
     ctx.clearRect(0, 0, 1600, 800);
     ctx.drawImage(images.background, 0, 0, 1600, 800);
     ctx.drawImage(images.title, 400, -50, 800, 600);
-    ctx.drawImage(images.startBtn, button.x, button.y, button.width, button.height);
-    ctx.drawImage(images.exitBtn, exitButton.x, exitButton.y, exitButton.width, exitButton.height);
+    ctx.drawImage(
+      images.startBtn,
+      button.x,
+      button.y,
+      button.width,
+      button.height
+    );
+    ctx.drawImage(
+      images.exitBtn,
+      exitButton.x,
+      exitButton.y,
+      exitButton.width,
+      exitButton.height
+    );
 
-    if (statusBar && statusBar.style.display !== 'none') statusBar.style.display = 'none';
-    if (statusBar && typingIn.style.display !== 'none') typingIn.style.display = 'none';
+    if (statusBar && statusBar.style.display !== 'none')
+      statusBar.style.display = 'none';
+    if (statusBar && typingIn.style.display !== 'none')
+      typingIn.style.display = 'none';
   } else if (gameState === 'fadeout') {
     fadeAlpha += 0.02;
     if (fadeAlpha >= 1) {
       gameState = 'game';
 
-      if (statusBar && statusBar.style.display !== 'flex') statusBar.style.display = 'flex';
-      if (statusBar && typingIn.style.display !== 'inline-block') typingIn.style.display = 'inline-block';
+      if (statusBar && statusBar.style.display !== 'flex')
+        statusBar.style.display = 'flex';
+      if (statusBar && typingIn.style.display !== 'inline-block')
+        typingIn.style.display = 'inline-block';
       typingIn.focus();
       startMonsterSpawnLoop();
     }
@@ -329,7 +370,12 @@ function render() {
     ctx.fillStyle = 'grey';
     ctx.fillRect(towerX - barW / 2, towerY - 80, barW, barH);
     ctx.fillStyle = 'red';
-    ctx.fillRect(towerX - barW / 2, towerY - 80, barW * (towerHealth / 100), barH);
+    ctx.fillRect(
+      towerX - barW / 2,
+      towerY - 80,
+      barW * (towerHealth / 100),
+      barH
+    );
     // 몬스터
     for (let i = monsters.length - 1; i >= 0; i--) {
       const m = monsters[i];
@@ -382,7 +428,13 @@ function render() {
       ctx.font = 'bold 24px KIMM, sans-serif';
       ctx.fillText(txt, x + btnW / 2, btnY + 38);
     });
-    gameOverButtons = xs.map((x, i) => ({ x, y: btnY, w: btnW, h: btnH, action: i === 0 ? 'leaderboard' : i === 1 ? 'retry' : 'main' }));
+    gameOverButtons = xs.map((x, i) => ({
+      x,
+      y: btnY,
+      w: btnW,
+      h: btnH,
+      action: i === 0 ? 'leaderboard' : i === 1 ? 'retry' : 'main',
+    }));
   }
 
   requestAnimationFrame(render);
@@ -395,15 +447,30 @@ canvas.addEventListener('click', (e) => {
   const my = ((e.clientY - r.top) / r.height) * 800;
 
   if (gameState === 'title') {
-    if (mx >= button.x && mx <= button.x + button.width && my >= button.y && my <= button.y + button.height) {
+    if (
+      mx >= button.x &&
+      mx <= button.x + button.width &&
+      my >= button.y &&
+      my <= button.y + button.height
+    ) {
       gameStart();
     }
-    if (mx >= exitButton.x && mx <= exitButton.x + exitButton.width && my >= exitButton.y && my <= exitButton.y + exitButton.height) {
+    if (
+      mx >= exitButton.x &&
+      mx <= exitButton.x + exitButton.width &&
+      my >= exitButton.y &&
+      my <= exitButton.y + exitButton.height
+    ) {
       window.loadHTML('/src/pages/game-landing/defense-landing.html');
     }
   } else if (gameState === 'gameover') {
     gameOverButtons.forEach((btn) => {
-      if (mx >= btn.x && mx <= btn.x + btn.w && my >= btn.y && my <= btn.y + btn.h) {
+      if (
+        mx >= btn.x &&
+        mx <= btn.x + btn.w &&
+        my >= btn.y &&
+        my <= btn.y + btn.h
+      ) {
         if (btn.action === 'retry') {
           gameStart();
         }
@@ -414,7 +481,8 @@ canvas.addEventListener('click', (e) => {
           audioManager.play();
           gameState = 'title';
         }
-        if (btn.action === 'leaderboard') alert('리더보드 등록 기능은 준비 중입니다.');
+        if (btn.action === 'leaderboard')
+          alert('리더보드 등록 기능은 준비 중입니다.');
       }
     });
   }
@@ -436,7 +504,9 @@ function goToMainMenu() {
   audioManager.setSource(TITLE_BGM);
   audioManager.audio.volume = bgmVolume;
   audioManager.audio.currentTime = 0;
-  audioManager.audio.play().catch((err) => console.warn('타이틀 브금 재생 실패:', err));
+  audioManager.audio
+    .play()
+    .catch((err) => console.warn('타이틀 브금 재생 실패:', err));
   gameState = 'title';
 }
 
