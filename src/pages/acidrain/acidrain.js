@@ -2,6 +2,7 @@
 // 🎵 오디오 매니저 설정 (유저 컨트롤 포함)
 // =====================================
 import audioManager from '/src/scripts/audiomanager.js';
+import { handleAcidRainPause } from '/src/components/modal/pause-modal/acidrain-pause.js';
 
 // BGM 설정 및 재생 시작
 // 로컬 스토리지에서 볼륨값 가져오기 (없으면 기본값 0.3)
@@ -10,7 +11,7 @@ if (bgmVolume === null) bgmVolume = 0.3;
 else bgmVolume = Number(bgmVolume);
 
 audioManager.setSource(
-  '/assets/audio/bgm/acidrain-DiscoHeart-Coyote-Hearing.mp3'
+  '  /assets/audio/bgm/acidrain-DiscoHeart-Coyote-Hearing.mp3'
 );
 audioManager.audio.volume = bgmVolume;
 audioManager.play();
@@ -316,9 +317,8 @@ document.addEventListener('keydown', (e) => {
 
 // 게임 상태 관리
 let isPaused = false;
+// eslint-disable-next-line no-unused-vars
 let wasPausedByModal = false;
-
-import { handleAcidRainPause } from '/src/components/modal/pause-modal/acidrain-pause.js';
 
 // 일시정지 버튼 요소 (상단바)
 const pauseOpenBtn = document.querySelector('.modal-open[data-type="pause"]');

@@ -6,17 +6,20 @@ import prettierPlugin from 'eslint-plugin-prettier';
 
 export default defineConfig([
   {
-    files: ['**/*.{js,mjs,cjs}'],
+    files: ['**/*.{js,mjs,cjs}', 'customLib.js'],
+    ignores: ['**/dist/**'],
     plugins: { js, prettier: prettierPlugin },
     extends: ['js/recommended', prettier],
-    languageOptions: { globals: globals.browser },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+  },
+  {
     rules: {
       'prettier/prettier': 'warn', // Prettier 포맷팅 오류를 ESLint 에러로 표시
     },
-    ignores: ['**/dist/**'],
-  },
-  {
-    files: ['customLib.js'],
-    languageOptions: { globals: globals.node },
   },
 ]);

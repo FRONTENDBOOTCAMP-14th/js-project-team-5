@@ -9,7 +9,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "format:check": "prettier --check \"src/**/*.js\"",
-    "format:write": "prettier --write \"src/**/*.js\""
+    "format:write": "prettier --write \"src/**/*.js\"",
+    "lint": "eslint \"src/**/*.js\"",
+    "lint:fix": "eslint --fix \"src/**/*.js\""
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
