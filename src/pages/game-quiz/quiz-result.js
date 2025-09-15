@@ -5,7 +5,10 @@ const result = JSON.parse(sessionStorage.getItem('quizResult'));
 const gameOverSfx = new Audio('/assets/audio/sfx/quiz-game-over2.mp3');
 
 // 다시하기 버튼 클릭 시, 이동할 페이지 경로 설정
-const LOAD_URL = result.mode === 'time-attack' ? '/src/pages/game-quiz/quiz-time-attack.html' : '/src/pages/game-quiz/quiz-focus-on.html';
+const LOAD_URL =
+  result.mode === 'time-attack'
+    ? '/src/pages/game-quiz/quiz-time-attack.html'
+    : '/src/pages/game-quiz/quiz-focus-on.html';
 
 const quizContainer = document.querySelector('.quiz-container.result');
 const scoreText = document.getElementById('score');

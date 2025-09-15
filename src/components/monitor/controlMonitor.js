@@ -78,7 +78,9 @@ function loadHTML(url, onLoaded) {
     .then((html) => {
       container.innerHTML = html;
       // CSS 파일 동적 로드
-      const cssLinks = Array.from(container.querySelectorAll('link[rel="stylesheet"]'));
+      const cssLinks = Array.from(
+        container.querySelectorAll('link[rel="stylesheet"]')
+      );
       return Promise.all(
         cssLinks.map(
           (link) =>
@@ -95,7 +97,9 @@ function loadHTML(url, onLoaded) {
     })
     .then(() => {
       // JS 파일 동적 로드 (controlMonitor.js 제외)
-      const scriptTags = Array.from(container.querySelectorAll('script')).filter((s) => !s.src.includes('controlMonitor.js'));
+      const scriptTags = Array.from(
+        container.querySelectorAll('script')
+      ).filter((s) => !s.src.includes('controlMonitor.js'));
       return Promise.all(
         scriptTags.map(
           (oldScript) =>
@@ -120,7 +124,11 @@ function loadHTML(url, onLoaded) {
       hookGlobalAPIs();
       if (window.initModalEvents) window.initModalEvents(); // 모달 항상 초기화
       // 인게임/윈도우 페이지 구분
-      const isInGamePage = /\/acidrain\//.test(url) || /\/mole-game\//.test(url) || /\/game-quiz\//.test(url) || /\/game-defence\//.test(url);
+      const isInGamePage =
+        /\/acidrain\//.test(url) ||
+        /\/mole-game\//.test(url) ||
+        /\/game-quiz\//.test(url) ||
+        /\/game-defence\//.test(url);
       const isWindowPage = /\/components\/window\/window.html$/.test(url);
       if (!isInGamePage && !isWindowPage && window.initSliderEvents) {
         window.initSliderEvents();

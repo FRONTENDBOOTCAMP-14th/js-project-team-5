@@ -9,7 +9,9 @@ let bgmVolume = localStorage.getItem('bgmVolume');
 if (bgmVolume === null) bgmVolume = 0.3;
 else bgmVolume = Number(bgmVolume);
 
-audioManager.setSource('/assets/audio/bgm/acidrain-DiscoHeart-Coyote-Hearing.mp3');
+audioManager.setSource(
+  '/assets/audio/bgm/acidrain-DiscoHeart-Coyote-Hearing.mp3'
+);
 audioManager.audio.volume = bgmVolume;
 audioManager.play();
 
@@ -292,12 +294,18 @@ document.addEventListener('keydown', (e) => {
 
   if (e.key === 'ArrowRight') {
     // 처음 누를 경우 첫 번째로
-    focusedButtonIndex = focusedButtonIndex === -1 ? 0 : (focusedButtonIndex + 1) % modalButtons.length;
+    focusedButtonIndex =
+      focusedButtonIndex === -1
+        ? 0
+        : (focusedButtonIndex + 1) % modalButtons.length;
     modalButtons[focusedButtonIndex].focus();
   }
 
   if (e.key === 'ArrowLeft') {
-    focusedButtonIndex = focusedButtonIndex === -1 ? modalButtons.length - 1 : (focusedButtonIndex - 1 + modalButtons.length) % modalButtons.length;
+    focusedButtonIndex =
+      focusedButtonIndex === -1
+        ? modalButtons.length - 1
+        : (focusedButtonIndex - 1 + modalButtons.length) % modalButtons.length;
     modalButtons[focusedButtonIndex].focus();
   }
 });

@@ -11,8 +11,12 @@ const quizContainer = document.querySelector('.quiz-container');
 const scoreText = quizContainer.querySelector('.score-info span:first-child');
 const timeText = quizContainer.querySelector('.score-info span:last-child');
 const bar = quizContainer.querySelector('.progress-bar');
-const questionContainer = quizContainer.querySelector('.quiz-question-container');
-const progressTextQ = quizContainer.querySelector('.progress-text span:first-child');
+const questionContainer = quizContainer.querySelector(
+  '.quiz-question-container'
+);
+const progressTextQ = quizContainer.querySelector(
+  '.progress-text span:first-child'
+);
 const questionText = quizContainer.querySelector('.question-text');
 const currentQ = quizContainer.querySelector('.current-question');
 const typingInput = quizContainer.querySelector('.typing-input');
@@ -197,7 +201,8 @@ function showQuestion() {
     questionText.textContent = '문제 데이터가 없습니다.';
     return;
   }
-  questionText.textContent = generalQuizList[currentQuestion - 1]?.question || '문제 없음';
+  questionText.textContent =
+    generalQuizList[currentQuestion - 1]?.question || '문제 없음';
   updateProgressBar(currentQuestion, totalQuestions);
   if (currentQ) currentQ.textContent = currentQuestion;
 }
@@ -252,7 +257,9 @@ function endGame() {
   sessionStorage.setItem(
     'quizResult',
     JSON.stringify({
-      mode: quizContainer.classList.contains('time-attack') ? 'time-attack' : 'focus-on',
+      mode: quizContainer.classList.contains('time-attack')
+        ? 'time-attack'
+        : 'focus-on',
       score,
       total: currentQuestion - 1,
       correct: correctCount,
@@ -267,7 +274,9 @@ function pauseGame() {
   sessionStorage.setItem(
     'quizMode',
     JSON.stringify({
-      mode: quizContainer.classList.contains('time-attack') ? 'time-attack' : 'focus-on',
+      mode: quizContainer.classList.contains('time-attack')
+        ? 'time-attack'
+        : 'focus-on',
     })
   );
   isGameActive = false;
@@ -358,7 +367,11 @@ function initAudio() {
   if (volume === null) volume = 0.3;
 
   // 이미 같은 곡이 재생 중이면 아무것도 하지 않음
-  if (audioManager.audio && audioManager.audio.src.includes('quiz-WildPogo-Francis-Preve.mp3') && !audioManager.audio.paused) {
+  if (
+    audioManager.audio &&
+    audioManager.audio.src.includes('quiz-WildPogo-Francis-Preve.mp3') &&
+    !audioManager.audio.paused
+  ) {
     audioManager.audio.volume = volume;
     audioManager.setUI({
       iconSelector: '#soundIcon',

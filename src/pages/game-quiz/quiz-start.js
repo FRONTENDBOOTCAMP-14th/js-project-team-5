@@ -21,7 +21,9 @@ quizContainer.addEventListener('click', (e) => {
 
 // 타이틀 애니메이션 끝나면 버튼 페이드인
 const title = quizContainer.querySelector('.quiz-title');
-const buttons = quizContainer.querySelectorAll('.quiz-time-attack-btn, .quiz-focus-on-btn');
+const buttons = quizContainer.querySelectorAll(
+  '.quiz-time-attack-btn, .quiz-focus-on-btn'
+);
 const exitBtn = quizContainer.querySelector('.quiz-exit-btn');
 
 if (title) {

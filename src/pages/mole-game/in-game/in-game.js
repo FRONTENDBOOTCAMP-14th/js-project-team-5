@@ -127,8 +127,10 @@ function positionWordAtMole(i) {
   const scaleX = moleRect.width / moles[i].offsetWidth;
   const scaleY = moleRect.height / moles[i].offsetHeight;
 
-  const left = (moleRect.left - containerRect.left) / scaleX + moles[i].offsetWidth / 2;
-  const bottom = containerRect.height - (moleRect.top - containerRect.top) / scaleY + 10;
+  const left =
+    (moleRect.left - containerRect.left) / scaleX + moles[i].offsetWidth / 2;
+  const bottom =
+    containerRect.height - (moleRect.top - containerRect.top) / scaleY + 10;
 
   words[i].style.left = `${left}px`;
   words[i].style.bottom = `${bottom}px`;
@@ -261,7 +263,9 @@ function showRandomMoles() {
         words[idx].style.opacity = '0';
         moles[idx].hideTimeout = null;
 
-        const frypan = document.querySelector(`.frypan-img[data-mole="${idx}"]`);
+        const frypan = document.querySelector(
+          `.frypan-img[data-mole="${idx}"]`
+        );
         if (frypan) {
           frypan.classList.remove('hit', 'miss');
           frypan.style.opacity = 0;
@@ -331,7 +335,9 @@ function stopGame() {
   localStorage.setItem('moleGameScore', score);
 
   // 결과 페이지 로드
-  window.loadHTML('/src/pages/mole-game/mole-game-result/mole-game-result.html');
+  window.loadHTML(
+    '/src/pages/mole-game/mole-game-result/mole-game-result.html'
+  );
 }
 
 function startTimer() {
@@ -369,7 +375,9 @@ function handleCorrectAnswer(matchedIdx) {
 
   if (visibleMole.hideTimeout) clearTimeout(visibleMole.hideTimeout);
 
-  const frypan = document.querySelector(`.frypan-img[data-mole="${matchedIdx}"]`);
+  const frypan = document.querySelector(
+    `.frypan-img[data-mole="${matchedIdx}"]`
+  );
   const moleImg = visibleMole.querySelector('.mole-img');
 
   if (frypan && moleImg) {
@@ -486,7 +494,9 @@ function onContinueClick() {
         words[idx].style.opacity = '0';
         mole.hideTimeout = null;
 
-        const frypan = document.querySelector(`.frypan-img[data-mole="${idx}"]`);
+        const frypan = document.querySelector(
+          `.frypan-img[data-mole="${idx}"]`
+        );
         if (frypan) {
           frypan.classList.remove('hit', 'miss');
           frypan.style.opacity = 0;

@@ -91,8 +91,17 @@ const trapFocusState = {
  */
 function trapFocus(dialog) {
   // 포커스 가능한 요소 찾기
-  const selector = ['button:not([disabled])', '[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', '[tabindex]:not([tabindex="-1"]):not([disabled])'].join(',');
-  const focusableElements = Array.from(dialog.querySelectorAll(selector)).filter((el) => el.offsetWidth > 0 || el.offsetHeight > 0);
+  const selector = [
+    'button:not([disabled])',
+    '[href]',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"]):not([disabled])',
+  ].join(',');
+  const focusableElements = Array.from(
+    dialog.querySelectorAll(selector)
+  ).filter((el) => el.offsetWidth > 0 || el.offsetHeight > 0);
   if (focusableElements.length === 0) return;
 
   trapFocusState.dialog = dialog;
@@ -131,7 +140,10 @@ function trapFocusKeydownHandler(e) {
     if (isForward && document.activeElement === trapFocusState.lastEl) {
       e.preventDefault();
       trapFocusState.firstEl.focus();
-    } else if (!isForward && document.activeElement === trapFocusState.firstEl) {
+    } else if (
+      !isForward &&
+      document.activeElement === trapFocusState.firstEl
+    ) {
       e.preventDefault();
       trapFocusState.lastEl.focus();
     }
@@ -142,7 +154,10 @@ function trapFocusKeydownHandler(e) {
  * 포커스가 모달 내부에 없으면 강제로 첫 번째 포커스 가능한 요소로 이동시킨다.
  */
 function trapFocusFocusInHandler() {
-  if (trapFocusState.dialog && !trapFocusState.dialog.contains(document.activeElement)) {
+  if (
+    trapFocusState.dialog &&
+    !trapFocusState.dialog.contains(document.activeElement)
+  ) {
     trapFocusState.firstEl.focus();
   }
 }
